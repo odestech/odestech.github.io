@@ -1,0 +1,99 @@
+baseURL = "https://odestech.cn/"
+title = "ODES Technology"
+theme = ["github.com/gethinode/hinode"]
+
+# 默认语言设置
+defaultContentLanguage = "zh"
+defaultContentLanguageInSubdir = true
+enableRobotsTXT = true
+
+# 模块配置
+[module]
+  [[module.imports]]
+    path = "github.com/gethinode/hinode"
+
+# --- 核心参数配置 ---
+[params]
+  description = "Shanghai Odes Technology Co., Ltd. - Overseas. Dedicated Excellent Synergistic"
+  
+
+  # 站点 Logo
+  [params.logo]
+    text = "ODES Technology"
+    icon = "logo.png" # 请确保 assets/images/logo.png 存在
+    favicon = "logo.png"
+  [params.style]
+    # 克莱因蓝 Klein Blue
+    # Hinode 会自动读取这个颜色并重新编译整个网站的按钮、链接颜色
+    primary = "#002FA7" 
+  
+    # 这一行是用来控制深色模式/浅色模式切换按钮的，建议开启
+    themeToggle = true
+  
+  
+  # 页脚
+  [params.footer]
+    copyright = "© 2026 Shanghai Odes Technology Co., Ltd. | OEDS"
+
+# --- 中文配置 (zh) ---
+[languages.zh]
+  languageName = "中文"
+  weight = 1
+  title = "上海奥得斯科技有限公司"
+  contentDir = "content/zh"
+  
+  [languages.zh.params]
+    description = "专注于中美贸易与跨境产业协作的控股公司"
+
+  # 中文菜单
+  [languages.zh.menu]
+    [[languages.zh.menu.main]]
+      name = "首页"
+      url = "/"
+      weight = 10
+    [[languages.zh.menu.main]]
+      name = "关于我们"
+      url = "/about/"
+      weight = 20
+    [[languages.zh.menu.main]]
+      name = "核心业务"
+      url = "/business/"
+      weight = 30
+    [[languages.zh.menu.main]]
+      name = "联系我们"
+      url = "/contact/"
+      weight = 40
+
+# --- 英文配置 (en) ---
+[languages.en]
+  languageName = "English"
+  weight = 2
+  title = "ODES Technology"
+  contentDir = "content/en"
+
+  [languages.en.params]
+    description = "Dedicated to China-US trade and cross-border industrial collaboration."
+
+  # 英文菜单
+  [languages.en.menu]
+    [[languages.en.menu.main]]
+      name = "Home"
+      url = "/"
+      weight = 10
+    [[languages.en.menu.main]]
+      name = "About Us"
+      url = "/about/"
+      weight = 20
+    [[languages.en.menu.main]]
+      name = "Core Business"
+      url = "/business/"
+      weight = 30
+    [[languages.en.menu.main]]
+      name = "Contact"
+      url = "/contact/"
+      weight = 40
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true

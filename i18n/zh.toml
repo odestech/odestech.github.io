@@ -1,0 +1,44 @@
+[shareLink]
+other = "分享到 %s"
+
+[shareSystem]
+other = "复制链接"
+
+[shareMail]
+other = "邮件"
+
+[shareTwitter]
+other = "Twitter"
+
+[shareLinkedIn]
+other = "LinkedIn"
+
+[shareFacebook]
+other = "Facebook"
+
+[backToTop]
+other = "回到顶部"
+
+[search]
+other = "搜索"
+
+[open_main_menu]
+other = "打开主菜单"
+
+[close_main_menu]
+other = "关闭主菜单"
+
+[table_of_contents]
+other = "目录"
+
+[previous]
+other = "上一页"
+
+[next]
+other = "下一页"
+
+[footer_copyright]
+other = "版权所有 {{ .Year }} {{ .Site.Title }}."
+
+[footer_powered_by]
+other = "由 {{ .Hugo.Generator }} 强力驱动 | 主题 - Hinode"
