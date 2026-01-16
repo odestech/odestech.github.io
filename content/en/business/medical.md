@@ -9,8 +9,8 @@ description: "International trade and technical services for the medical industr
 
 ### Medical & Life Sciences
 
-[cite_start]We provide comprehensive international trade and business docking services for pharmaceutical-related products[cite: 11]:
+We provide comprehensive international trade and business docking services for pharmaceutical-related products:
 
-1.  [cite_start]**Import & Export Support**: Covering pharmaceutical raw materials (APIs), preparations, medical consumables, and pharmaceutical packaging materials[cite: 12].
-2.  [cite_start]**Technical & Compliance Services**: Pharmaceutical technology consulting, technology transfer, and compliance path assistance[cite: 13].
-3.  [cite_start]**Market Expansion**: Cross-border cooperation and market expansion for health industry-related projects[cite: 14].
+1. **Import & Export Support**: Covering pharmaceutical raw materials (APIs), preparations, medical consumables, and pharmaceutical packaging materials.
+2. **Technical & Compliance Services**: Pharmaceutical technology consulting, technology transfer, and compliance path assistance.
+3. **Market Expansion**: Cross-border cooperation and market expansion for health industry-related projects.

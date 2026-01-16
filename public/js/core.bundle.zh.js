@@ -6597,7 +6597,7 @@ function initIndex() {
         description: "Industrial Manufacturing \u0026 Advanced Equipment",
         
         
-        content: "工业制造与高端装备 (Industrial Manufacturing \u0026amp; Advanced Equipment) [cite: 21, 22] \u0026nbsp; 专注于工业制造设备及系统的国际贸易：\n[cite_start]高端制造产品：机器人、自动化装备、无人机等 [cite: 24]。 [cite_start]技术服务：工业技术服务、技术咨询与跨境项目对接 [cite: 25]。 [cite_start]供应链整合：工业产品与技术的进出口代理及供应链整合 [cite: 26]。"
+        content: "工业制造与高端装备 (Industrial Manufacturing \u0026amp; Advanced Equipment) \u0026nbsp; 专注于工业制造设备及系统的国际贸易：\n高端制造产品：机器人、自动化装备、无人机等。 技术服务：工业技术服务、技术咨询与跨境项目对接。 供应链整合：工业产品与技术的进出口代理及供应链整合。"
       })
       .add(
       
@@ -6609,10 +6609,10 @@ function initIndex() {
         id: 1,
         href: "/zh/about/",
         title: "公司简介",
-        description: "上海奥得斯科技有限公司公司简介",
+        description: "OEDS (上海奥得斯科技有限公司) \u0026nbsp; OEDS (Shanghai Odes Technology Co., Ltd.) 是一家专注于中美贸易与跨境产业协作的控股公司。公司立足中国，面向美国及其他海外高标准市场，致力于将中国优质制造与技术能力，与全球市场需求高效连接 。\nOEDS 以技术服务与国际贸易为核心，强调合规、专业与长期协同合作。\n核心理念：\nOverseas (海外视角) Dedicated (专注) Excellent (卓越) Synergistic (协同) ",
         
         
-        content: "OEDS (上海奥得斯科技有限公司) \u0026nbsp; [cite_start]OEDS (Shanghai Odes Technology Co., Ltd.) 是一家专注于中美贸易与跨境产业协作的控股公司 [cite: 6]。\n[cite_start]公司立足中国，面向美国及其他海外高标准市场，致力于将中国优质制造与技术能力，与全球市场需求高效连接 [cite: 6]。\n核心理念：\nOverseas (海外视角) Dedicated (专注) Excellent (卓越) [cite_start]Synergistic (协同) [cite: 4] [cite_start]OEDS 以技术服务与国际贸易为核心，强调合规、专业与长期合作 [cite: 6]。"
+        content: "OEDS (上海奥得斯科技有限公司) \u0026nbsp; OEDS (Shanghai Odes Technology Co., Ltd.) 是一家专注于中美贸易与跨境产业协作的控股公司。公司立足中国，面向美国及其他海外高标准市场，致力于将中国优质制造与技术能力，与全球市场需求高效连接 。\nOEDS 以技术服务与国际贸易为核心，强调合规、专业与长期协同合作。\n核心理念：\nOverseas (海外视角) Dedicated (专注) Excellent (卓越) Synergistic (协同)"
       })
       .add(
       
@@ -6624,10 +6624,10 @@ function initIndex() {
         id: 2,
         href: "/zh/contact/",
         title: "联系我们",
-        description: "联系方式 \u0026nbsp; 如果您有任何业务需求或合作意向，欢迎联系我们。\n[cite_start]联系人: 沙路发 Luis SHA (首席执行官 | CEO) [cite: 16, 17] [cite_start]电话: +86 177 1787 6827 [cite: 18] [cite_start]邮箱: info@odestech.cn [cite: 19] 公司地址 \u0026nbsp; 上海奥得斯科技有限公司 [cite_start]上海市黄浦区浙江中路400号 7层712-596室 [cite: 28, 29]\n",
+        description: "联系方式 \u0026nbsp; 如果您有任何业务需求或合作意向，欢迎联系我们。\n邮箱: info@odestech.cn 公司地址 \u0026nbsp; 上海市黄浦区浙江中路400号 7层712-596室\n",
         
         
-        content: "联系方式 \u0026nbsp; 如果您有任何业务需求或合作意向，欢迎联系我们。\n[cite_start]联系人: 沙路发 Luis SHA (首席执行官 | CEO) [cite: 16, 17] [cite_start]电话: +86 177 1787 6827 [cite: 18] [cite_start]邮箱: info@odestech.cn [cite: 19] 公司地址 \u0026nbsp; 上海奥得斯科技有限公司 [cite_start]上海市黄浦区浙江中路400号 7层712-596室 [cite: 28, 29]"
+        content: "联系方式 \u0026nbsp; 如果您有任何业务需求或合作意向，欢迎联系我们。\n邮箱: info@odestech.cn 公司地址 \u0026nbsp; 上海市黄浦区浙江中路400号 7层712-596室"
       })
       .add(
       
@@ -6642,7 +6642,7 @@ function initIndex() {
         description: "Medical \u0026 Life Sciences",
         
         
-        content: "医药与生命科学 (Medical \u0026amp; Life Sciences) [cite: 9, 10] \u0026nbsp; 我们提供全方位的医药相关产品国际贸易与商务对接服务：\n[cite_start]产品进出口支持：涵盖医药原料、制剂、医用耗材及药用包材 [cite: 12]。 [cite_start]技术与合规服务：提供医药技术咨询、技术转移及合规路径协助 [cite: 13]。 [cite_start]市场拓展：健康产业相关项目的跨境合作与市场拓展 [cite: 14]。"
+        content: "医药与生命科学 (Medical \u0026amp; Life Sciences) \u0026nbsp; 我们提供全方位的医药相关产品国际贸易与商务对接服务：\n产品进出口支持：涵盖医药原料、制剂、医用耗材及药用包材。 技术与合规服务：提供医药技术咨询、技术转移及合规路径协助。 市场拓展：健康产业相关项目的跨境合作与市场拓展。"
       })
       ;
   

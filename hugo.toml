@@ -15,13 +15,32 @@ enableRobotsTXT = true
 # --- 核心参数配置 ---
 [params]
   description = "Shanghai Odes Technology Co., Ltd. - Overseas. Dedicated Excellent Synergistic"
+
+  customCSS = ["css/custom.css"]
+  enableGitInfo = false
   
+  showReadingTime = false
+  showWordCount = false
+  showTableOfContents = false
 
   # 站点 Logo
-  [params.logo]
-    text = "ODES Technology"
-    icon = "logo.png" # 请确保 assets/images/logo.png 存在
-    favicon = "logo.png"
+  [params.navigation]
+    # text = "ODES Technology"
+    logo = "/images/logo.png" # 请确保 assets/images/logo.png 存在
+    favicon = "logo.svg"
+    logoHeight = 28
+
+  [params.content]
+    readingTime = false
+    wordCount = false
+    tableOfContents = false    
+
+
+
+
+  [params.sharing]
+    enabled = false
+    
   [params.style]
     # 克莱因蓝 Klein Blue
     # Hinode 会自动读取这个颜色并重新编译整个网站的按钮、链接颜色
@@ -33,7 +52,7 @@ enableRobotsTXT = true
   
   # 页脚
   [params.footer]
-    copyright = "© 2026 Shanghai Odes Technology Co., Ltd. | OEDS"
+    copyright = "© 2026 Shanghai Odes Technology Co., Ltd."
 
 # --- 中文配置 (zh) ---
 [languages.zh]

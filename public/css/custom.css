@@ -1,0 +1,49 @@
+/* static/css/custom.css */
+
+/* 1. 隐藏阅读时间 (时钟图标 + 旁边的文字) */
+.fa-clock, 
+.fa-clock + span {
+    display: none !important;
+}
+
+/* 2. 隐藏发布日期 (日历图标 + 旁边的文字) */
+.fa-calendar, 
+.fa-calendar-alt,
+.fa-calendar-days,
+.fa-calendar + span,
+.fa-calendar-alt + span,
+.fa-calendar-days + span {
+    display: none !important;
+}
+
+/* 3. (可选) 如果隐藏后留下了难看的竖线分隔符，把这个也加上 */
+.vr {
+    display: none !important;
+}
+
+/* 4. 隐藏右侧 TOC 目录栏 ("On this page") */
+aside.bd-toc,
+.bd-toc,
+nav#TableOfContents {
+    display: none !important;
+}
+
+/* 5. (进阶) 如果隐藏目录后右边空出了一大块白，想让文章变宽填满屏幕 */
+/* 注意：这可能会让文字每行太长，阅读体验变差，不喜欢可以删掉下面这几行 */
+.bd-main .bd-content {
+    max-width: 100% !important;
+    flex: 0 0 100% !important;
+}
+
+.navbar-brand img {
+  max-height: 22px;
+  width: auto;
+}
+
+/* assets/css/custom.css */
+.content-meta,
+.reading-time,
+.word-count,
+.toc {
+  display: none !important;
+}

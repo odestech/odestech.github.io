@@ -1,0 +1,8 @@
+{{/* layouts/partials/content/toc.html */}}
+{{- if and (.IsPage) (eq .Section "blog") -}}
+  {{- if .TableOfContents -}}
+    <nav class="toc">
+      {{ .TableOfContents }}
+    </nav>
+  {{- end -}}
+{{- end -}}

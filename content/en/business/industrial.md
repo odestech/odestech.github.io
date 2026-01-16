@@ -9,8 +9,8 @@ description: "Industrial Manufacturing & Advanced Equipment trade and services."
 
 ### Industrial Manufacturing & Advanced Equipment
 
-[cite_start]We specialize in the international trade of industrial manufacturing equipment and systems[cite: 22, 23]:
+We specialize in the international trade of industrial manufacturing equipment and systems:
 
-1.  [cite_start]**High-end Manufacturing Products**: Robots, automation equipment, and drones[cite: 24].
-2.  [cite_start]**Technical Services**: Industrial technology services, technical consulting, and cross-border project docking[cite: 25].
-3.  [cite_start]**Supply Chain Integration**: Import/export agency and supply chain integration for industrial products and technologies[cite: 26].
+1.  **High-end Manufacturing Products**: Robots, automation equipment, and drones.
+2.  **Technical Services**: Industrial technology services, technical consulting, and cross-border project docking.
+3.  **Supply Chain Integration**: Import/export agency and supply chain integration for industrial products and technologies.

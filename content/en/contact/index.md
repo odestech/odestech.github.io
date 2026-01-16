@@ -8,12 +8,11 @@ description: "Get in touch with ODES Technology."
 
 If you have any business inquiries or cooperation proposals, please feel free to contact us.
 
-* [cite_start]**Contact**: Luis SHA (CEO) [cite: 16, 17]
-* [cite_start]**Phone**: +86 177 1787 6827 [cite: 18]
-* [cite_start]**Email**: [info@odestech.cn](mailto:info@odestech.cn) [cite: 19]
+* **Contact**: Luis SHA (CEO) 
+* **Phone**: +86 177 1787 6827 
+* **Email**: [info@odestech.cn](mailto:info@odestech.cn) 
 
 ### Address
 
-**Shanghai Odes Technology Co., Ltd.**
-Room 712-596, Floor 7, 400 Zhejiang Middle Rd,
-[cite_start]Shanghai, China [cite: 28, 29, 30, 31]
+Room 712-596, Floor 7, No.400 Zhejiang Middle Rd,
+Shanghai 200001, China
