@@ -24,10 +24,9 @@ hasCJKLanguage = true
 [params]
   description = "Shanghai Odes Technology Co., Ltd. - Overseas. Dedicated. Excellent. Synergistic"
   customCSS = ["css/custom.css"]
-  
+
   [params.page]
     showMeta = false
-
 
   [params.main]
     separator = "-"
@@ -56,7 +55,6 @@ hasCJKLanguage = true
   [params.logo]
     path = "images/logo.png"
 
-
   [params.pages]
     [params.pages.business]
       metadata = "none"
@@ -65,9 +63,6 @@ hasCJKLanguage = true
     [params.pages.contact]
       metadata = "none"
       sharing = false
-
-  [params.site]
-    favicon = "images/logo.svg"
 
 
   [params.sharing]
