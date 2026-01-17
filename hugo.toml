@@ -1,6 +1,6 @@
-baseURL = "https://odestech.cn/"
+baseURL = "https://www.odestech.cn/"
 title = "ODES Technology"
-copyright = "© 2026 上海奥得斯科技有限公司"
+copyright = "© 2025 上海奥得斯科技有限公司"
 
 defaultContentLanguage = "zh"
 defaultContentLanguageInSubdir = false
@@ -24,6 +24,7 @@ hasCJKLanguage = true
 [params]
   description = "Shanghai Odes Technology Co., Ltd. - Overseas. Dedicated. Excellent. Synergistic"
   customCSS = ["css/custom.css"]
+  search = false
 
   [params.page]
     showMeta = false
@@ -51,6 +52,7 @@ hasCJKLanguage = true
     sidebar = true
     logo = "/images/logo.png"
     logoHeight = 28
+    search.enabled = false
 
   [params.logo]
     path = "images/logo.png"

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://odestech.cn/sitemap.xml
+Sitemap: http://localhost:1313/sitemap.xml
