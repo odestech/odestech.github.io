@@ -1,6 +1,4 @@
 baseURL = "https://www.odestech.cn/"
-title = "ODES Technology"
-copyright = "© 2026 上海奥得斯科技有限公司"
 
 defaultContentLanguage = "zh"
 defaultContentLanguageInSubdir = false
@@ -17,7 +15,7 @@ hasCJKLanguage = true
 
 # 全站级别：禁止 metadata / TOC（Hinode cascade 用法是正确的）
 [[cascade]]
-  [cascade.params]s
+  [cascade.params]
     metadata = "none"
     includeToc = false
 
@@ -82,8 +80,10 @@ hasCJKLanguage = true
 
   [languages.zh]
     languageName = "中文"
+    title = "上海奥得斯科技有限公司"
     weight = 1
     contentDir = "content/zh"
+    copyright = "© 2026 上海奥得斯科技有限公司"
 
     [[languages.zh.menu.main]]
       name = "首页"
