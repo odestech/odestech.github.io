@@ -5,6 +5,7 @@ weight: 1
 thumbnail: "images/business/medical.jpg" 
 icon: "fas fa-flask"
 description: "International trade and technical services for the medical industry."
+showMeta: false
 ---
 
 ### Medical & Life Sciences

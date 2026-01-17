@@ -5,6 +5,7 @@ weight: 2
 thumbnail: "images/business/industrial.jpg"
 icon: "fas fa-industry"
 description: "Industrial Manufacturing & Advanced Equipment trade and services."
+showMeta: false
 ---
 
 ### Industrial Manufacturing & Advanced Equipment

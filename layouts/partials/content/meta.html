@@ -1,0 +1,8 @@
+{{/* 清爽企业站：只在 blog section 显示 meta（如果你不想 blog 显示也可把 if 条件去掉） */}}
+{{- if and .IsPage (eq .Section "blog") -}}
+  {{/* 如果你希望 blog 显示发布日期，可以在这里添加，但当前保持最简：不显示阅读时间/字数/额外meta */}}
+  <div class="content-meta">
+    {{/* 示例：只显示发布日期（如需要），取消注释下一行 */}}
+    {{/* <time datetime="{{ .Date }}">{{ .Date.Format "2006-01-02" }}</time> */}}
+  </div>
+{{- end -}}

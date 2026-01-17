@@ -47,3 +47,13 @@ nav#TableOfContents {
 .toc {
   display: none !important;
 }
+
+/* 兜底：尽量覆盖可能的 follow-block */
+.follow,
+.follow-me,
+.social-follow,
+.widget-follow,
+#follow,
+section.follow {
+  display: none !important;
+}

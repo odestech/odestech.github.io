@@ -1,0 +1,36 @@
+{{/* layouts/shortcodes/home-hero.html 
+   统一的首页 Hero 模块
+   参数:
+     title: 主标题
+     subtitle: 副标题
+     image: 图片路径
+     btnText: 按钮文字
+     btnLink: 按钮链接 (输入相对路径，如 "about")
+*/}}
+
+<div class="card mb-5 border-0">
+  <div class="row g-0 align-items-center">
+    <div class="col-md-6 order-md-2">
+      {{ with .Get "image" }}
+      <img src="{{ . | relURL }}" class="img-fluid rounded-start" alt="{{ $.Get "title" }}">
+      {{ end }}
+    </div>
+    
+    <div class="col-md-6 order-md-1">
+      <div class="card-body p-5">
+        <h1 class="card-title display-5 fw-bold text-primary">{{ .Get "title" }}</h1>
+        <h4 class="card-subtitle mb-3 text-muted">{{ .Get "subtitle" }}</h4>
+        
+        <div class="card-text lead">
+          {{ .Inner | markdownify }}
+        </div>
+
+        {{ with .Get "btnLink" }}
+        <a href="{{ . | relLangURL }}" class="btn btn-primary btn-lg mt-3">
+          {{ $.Get "btnText" }}
+        </a>
+        {{ end }}
+      </div>
+    </div>
+  </div>
+</div>

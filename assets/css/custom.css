@@ -1,0 +1,36 @@
+/* 1. 隐藏 Hinode 默认的社交图标和多余元素 */
+.footer-social, 
+.social-links, 
+.nav-social, 
+.mx-1 {
+    display: none !important;
+}
+
+/* 2. (关键修改) 删除了强制背景色和文字颜色的代码 */
+/* 让 Bootstrap 的 bg-body-tertiary 自动接管颜色 */
+
+/* 3. 确保核心业务页面的卡片在黑夜模式下好看 */
+/* 让卡片背景跟随主题，而不是强制白色 */
+[data-bs-theme="dark"] .card {
+    background-color: var(--bs-body-bg);
+    border-color: var(--bs-border-color);
+}
+
+/* ==================================================
+   自定义鼠标光标 (Custom Cursor)
+   ================================================== */
+
+body {
+    /* url: 图片路径
+       16 16: (可选) 指定光标的“热点”坐标，即点击生效的位置。
+              如果不写默认是左上角(0 0)。对于居中的 Logo，写 16 16 会更准。
+       auto: 必须加上这个 fallback，否则代码无效！
+    */
+    cursor: url('/images/cursor.png'), auto;
+}
+
+/* 可选：如果你希望鼠标悬停在链接/按钮上时也保持你的 Logo (不推荐，建议保留小手) */
+/* a, button, .btn {
+    cursor: url('/images/cursor.png') 16 16, pointer;
+} 
+*/

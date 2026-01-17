@@ -47,3 +47,22 @@ nav#TableOfContents {
 .toc {
   display: none !important;
 }
+
+
+/* 强制隐藏页脚的社交媒体/Follow Me 区域 */
+.footer-social, 
+.social-links, 
+#footer .nav-social {
+    display: none !important;
+}
+
+/* 修复：隐藏页脚版权右侧多余的竖线分隔符 */
+.footer-copyright span::after {
+    content: none !important;
+    display: none !important;
+}
+
+/* 再次确认：强制隐藏英文版可能残留的 Follow Me 区域 */
+.footer-social, .nav-social {
+    display: none !important;
+}

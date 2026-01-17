@@ -1,8 +1,9 @@
-{{/* layouts/partials/content/toc.html */}}
-{{- if and (.IsPage) (eq .Section "blog") -}}
+{{/* 只为 blog section 渲染 TOC */}}
+{{- if and .IsPage (eq .Section "blog") -}}
   {{- if .TableOfContents -}}
     <nav class="toc">
       {{ .TableOfContents }}
     </nav>
   {{- end -}}
 {{- end -}}
+

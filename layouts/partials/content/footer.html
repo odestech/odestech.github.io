@@ -1,0 +1,20 @@
+{{/* Minimal multilingual footer (覆盖主题默认) 
+   - 去除富豪榜、去除 Powered by Hinode
+   - 根据语言显示不同文字
+   - 不渲染 Follow 块（如果你想保留，可将 showFollow 参数设为 true）
+*/}}
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        {{ $lang := .Site.Language.Lang | default .Site.LanguageCode }}
+        {{ if or (eq $lang "zh") (eq $lang "zh-cn") (eq $lang "zh_CN") }}
+          <p>© {{ now.Format "2006" }} {{ .Site.Params.companyName | default .Site.Title }}。保留所有权利。</p>
+        {{ else }}
+          <p>© {{ now.Format "2006" }} {{ .Site.Params.companyName | default .Site.Title }}. All rights reserved.</p>
+        {{ end }}
+      </div>
+    </div>
+  </div>
+</footer>

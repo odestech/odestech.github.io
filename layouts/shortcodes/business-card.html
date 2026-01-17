@@ -1,0 +1,28 @@
+{{/* layouts/shortcodes/business-card.html */}}
+<div class="col-md-6 mb-4">
+  <div class="card h-100 shadow-sm">
+    
+    {{ with .Get "img" }}
+      <img src="{{ . | relURL }}" class="card-img-top" alt="{{ $.Get "title" }}">
+    {{ end }}
+
+    <div class="card-body">
+      <h5 class="card-title">{{ .Get "title" }}</h5>
+      
+      {{ with .Get "subtitle" }}
+        <p class="card-text text-muted">{{ . }}</p>
+      {{ end }}
+      
+      {{ with .Get "href" }}
+        <a href="{{ . | relURL }}" class="btn btn-outline-primary mt-3">
+            {{/* 🔴 核心修复：根据当前语言自动切换按钮文字 */}}
+            {{ if eq site.Language.Lang "zh" }}
+                了解更多
+            {{ else }}
+                Learn More
+            {{ end }}
+        </a>
+      {{ end }}
+    </div>
+  </div>
+</div>

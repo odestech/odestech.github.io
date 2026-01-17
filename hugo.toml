@@ -1,118 +1,182 @@
-baseURL = "https://odestech.cn/"
+baseURL = "https://www.odestech.cn/"
 title = "ODES Technology"
-theme = ["github.com/gethinode/hinode"]
+copyright = "© 2026 上海奥得斯科技有限公司"
 
-# 默认语言设置
 defaultContentLanguage = "zh"
-defaultContentLanguageInSubdir = true
+defaultContentLanguageInSubdir = false
 enableRobotsTXT = true
+enableGitInfo = false
+hasCJKLanguage = true
 
-# 模块配置
+[pagination]
+  pagerSize = 9
+
 [module]
   [[module.imports]]
     path = "github.com/gethinode/hinode"
 
-# --- 核心参数配置 ---
+# 全站级别：禁止 metadata / TOC（Hinode cascade 用法是正确的）
+[[cascade]]
+  [cascade.params]
+    metadata = "none"
+    includeToc = false
+
 [params]
-  description = "Shanghai Odes Technology Co., Ltd. - Overseas. Dedicated Excellent Synergistic"
-
+  description = "Shanghai Odes Technology Co., Ltd. - Overseas. Dedicated. Excellent. Synergistic"
   customCSS = ["css/custom.css"]
-  enableGitInfo = false
   
-  showReadingTime = false
-  showWordCount = false
-  showTableOfContents = false
+  [params.page]
+    showMeta = false
 
-  # 站点 Logo
+
+  [params.main]
+    separator = "-"
+    endorse = false
+    footerBelowFold = false
+    breakpoint = "md"
+
+    [params.main.colorMode]
+      enabled = true
+      modes = ["light", "dark"]
+      toggle = false
+      iconLight = "fas sun"
+      iconDark = "fas moon"
+
+  [params.style]
+    primary = "#002FA7"
+    themeOpacity = 10
+
   [params.navigation]
-    # text = "ODES Technology"
-    logo = "/images/logo.png" # 请确保 assets/images/logo.png 存在
-    favicon = "logo.svg"
+    toc = false
+    breadcrumb = true
+    sidebar = true
+    logo = "/images/logo.png"
     logoHeight = 28
 
-  [params.content]
-    readingTime = false
-    wordCount = false
-    tableOfContents = false    
+  [params.logo]
+    path = "images/logo.png"
 
 
+  [params.pages]
+    [params.pages.business]
+      metadata = "none"
+      sharing = false
+
+    [params.pages.contact]
+      metadata = "none"
+      sharing = false
+
+  [params.favicon]
+    href = "/images/logo.png"
+    type = "image/png"
 
 
   [params.sharing]
     enabled = false
-    
-  [params.style]
-    # 克莱因蓝 Klein Blue
-    # Hinode 会自动读取这个颜色并重新编译整个网站的按钮、链接颜色
-    primary = "#002FA7" 
-  
-    # 这一行是用来控制深色模式/浅色模式切换按钮的，建议开启
-    themeToggle = true
-  
-  
-  # 页脚
-  [params.footer]
-    copyright = "© 2026 Shanghai Odes Technology Co., Ltd."
 
-# --- 中文配置 (zh) ---
-[languages.zh]
-  languageName = "中文"
-  weight = 1
-  title = "上海奥得斯科技有限公司"
-  contentDir = "content/zh"
-  
-  [languages.zh.params]
-    description = "专注于中美贸易与跨境产业协作的控股公司"
+# =========================
+# 多语言配置（关键修复点）
+# =========================
 
-  # 中文菜单
-  [languages.zh.menu]
+defaultContentLanguage = "zh"
+defaultContentLanguageInSubdir = false
+hasCJKLanguage = true
+
+[languages]
+
+  [languages.zh]
+    languageName = "中文"
+    weight = 1
+    contentDir = "content/zh"
+
     [[languages.zh.menu.main]]
       name = "首页"
       url = "/"
       weight = 10
+
     [[languages.zh.menu.main]]
       name = "关于我们"
       url = "/about/"
       weight = 20
+
     [[languages.zh.menu.main]]
       name = "核心业务"
       url = "/business/"
       weight = 30
+
     [[languages.zh.menu.main]]
       name = "联系我们"
       url = "/contact/"
       weight = 40
 
-# --- 英文配置 (en) ---
-[languages.en]
-  languageName = "English"
-  weight = 2
-  title = "ODES Technology"
-  contentDir = "content/en"
 
-  [languages.en.params]
-    description = "Dedicated to China-US trade and cross-border industrial collaboration."
+  [languages.en]
+    languageName = "English"
+    weight = 2
+    contentDir = "content/en"
+    
+    # 【修复1】直接在语言根目录下声明版权，覆盖全局设置
+    copyright = "© 2026 ODES Technology"
+    title = "ODES Technology"
 
-  # 英文菜单
-  [languages.en.menu]
+    # 英文参数区
+    [languages.en.params]
+      # 覆盖默认描述，防止出现 "I work on coding..."
+      description = "Dedicated to China-US trade and cross-border collaboration"
+      
+      [languages.en.params.head]
+        tagline = "Overseas. Dedicated. Excellent. Synergistic"
+
+      # 【修复2】显式关闭社交模块
+      [languages.en.params.social]
+        title = ""
+        caption = ""
+        enabled = false
+
+      # 【修复3】双重保险：在 params.footer 里也写一遍版权
+      [languages.en.params.footer]
+        copyright = "© 2026 ODES Technology"
+        endorse = false
+        showSocial = false  # 尝试关闭社交显示
+
+    # 英文菜单配置
     [[languages.en.menu.main]]
       name = "Home"
-      url = "/"
+      url = "/"           
       weight = 10
+
     [[languages.en.menu.main]]
       name = "About Us"
-      url = "/about/"
+      url = "/about/"    
       weight = 20
+
     [[languages.en.menu.main]]
       name = "Core Business"
       url = "/business/"
       weight = 30
+
     [[languages.en.menu.main]]
       name = "Contact"
       url = "/contact/"
       weight = 40
 
+# =========================
+# 渲染与输出配置 (保持不变)
+# =========================
 [markup]
   [markup.goldmark]
     [markup.goldmark.renderer]
       unsafe = true
+
+  [markup.highlight]
+    style = "monokai"
+    lineNos = false
+
+
+[minify]
+  [minify.tdewolff.html]
+    keepWhitespace = true
+
+[outputs]
+  home = ["HTML", "RSS"]
+  section = ["HTML", "RSS"]

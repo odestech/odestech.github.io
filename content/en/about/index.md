@@ -1,7 +1,5 @@
 ---
 title : "About Us"
-type : "page"
-layout : "page"
 toc : false
 showReadingTime : false
 showWordCount : false
