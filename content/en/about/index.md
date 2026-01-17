@@ -1,8 +1,10 @@
 ---
-title: "Company Introduction"
-date: 2026-01-14
-description: "Introduction of ODES Technology"
-layout: page
+title : "About Us"
+type : "page"
+layout : "page"
+toc : false
+showReadingTime : false
+showWordCount : false
 ---
 
 ### ODES (Shanghai Odes Technology Co., Ltd.)

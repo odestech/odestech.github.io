@@ -1,8 +1,10 @@
 ---
-title: "公司简介"
-# date: 2026-01-14
-# description: "上海奥得斯科技有限公司公司简介"
-layout: page
+title: "关于我们"
+type : "page"
+layout : "page"
+toc : false
+showReadingTime : false
+showWordCount : false
 ---
 
 ### ODES (上海奥得斯科技有限公司)

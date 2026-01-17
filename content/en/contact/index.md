@@ -2,13 +2,16 @@
 title: "Contact Us"
 layout: page
 description: "Get in touch with ODES Technology."
+toc: false
+showReadingTime: false
+showWordCount: false
 ---
 
 ### Contact Information
 
 If you have any business inquiries or cooperation proposals, please feel free to contact us.
 
-* **Contact**: Luis SHA (CEO) 
+* **Contact**: Luis(CEO) 
 * **Phone**: +86 177 1787 6827 
 * **Email**: [info@odestech.cn](mailto:info@odestech.cn) 
 
