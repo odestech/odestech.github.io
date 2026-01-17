@@ -66,9 +66,8 @@ hasCJKLanguage = true
       metadata = "none"
       sharing = false
 
-  [params.favicon]
-    href = "/images/logo.png"
-    type = "image/png"
+  [params.site]
+    favicon = "images/logo.svg"
 
 
   [params.sharing]
