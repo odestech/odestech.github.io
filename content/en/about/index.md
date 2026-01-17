@@ -5,9 +5,9 @@ description: "Introduction of ODES Technology"
 layout: page
 ---
 
-### OEDS (Shanghai Odes Technology Co., Ltd.)
+### ODES (Shanghai Odes Technology Co., Ltd.)
 
-**OEDS** is a holding company focused on China-US trade and cross-border industrial collaboration.
+**ODES** is a holding company focused on China-US trade and cross-border industrial collaboration.
 
 Based in China and facing the US and other high-standard overseas markets, we are dedicated to efficiently connecting China's high-quality manufacturing and technical capabilities with global market demands.
 
