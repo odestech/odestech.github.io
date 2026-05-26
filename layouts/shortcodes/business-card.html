@@ -14,7 +14,7 @@
       {{ end }}
       
       {{ with .Get "href" }}
-        <a href="{{ . | relURL }}" class="btn btn-outline-primary mt-3">
+        <a href="{{ . | relLangURL }}" class="btn btn-outline-primary mt-3">
             {{/* 🔴 核心修复：根据当前语言自动切换按钮文字 */}}
             {{ if eq site.Language.Lang "zh" }}
                 了解更多
