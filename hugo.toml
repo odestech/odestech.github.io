@@ -1,6 +1,6 @@
 baseURL = "https://www.odestech.cn/"
 
-defaultContentLanguage = "zh"
+defaultContentLanguage = "en"
 defaultContentLanguageInSubdir = false
 enableRobotsTXT = true
 enableGitInfo = false
@@ -81,7 +81,7 @@ hasCJKLanguage = true
   [languages.zh]
     languageName = "中文"
     title = "上海奥得斯科技有限公司"
-    weight = 1
+    weight = 2
     contentDir = "content/zh"
     copyright = "© 2026 上海奥得斯科技有限公司"
 
@@ -108,7 +108,7 @@ hasCJKLanguage = true
 
   [languages.en]
     languageName = "English"
-    weight = 2
+    weight = 1
     contentDir = "content/en"
     
     # 【修复1】直接在语言根目录下声明版权，覆盖全局设置
