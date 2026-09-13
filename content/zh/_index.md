@@ -8,7 +8,7 @@ layout: index
 {{< home-hero 
     title="上海奥得斯科技有限公司" 
     subtitle="Overseas Dedicated Excellent Synergistic"
-    image="/images/banner.jpg"
+    image="images/banner.jpg"
     btnText="关于我们"
     btnLink="about" 
 >}}

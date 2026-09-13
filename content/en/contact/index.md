@@ -14,6 +14,7 @@ If you have any business inquiries or cooperation proposals, please feel free to
 * **Contact**: Luis(CEO) 
 * **Phone**: +86 177 1787 6827 
 * **Email**: [info@odestech.cn](mailto:info@odestech.cn) 
+* **LinkedIn**: [ODES Technology](https://www.linkedin.com/company/112375931/)
 
 {{< contact-form >}}
 

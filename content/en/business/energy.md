@@ -2,7 +2,7 @@
 title: "Energy, Chemicals & Refining Additives"
 date: 2026-01-14
 weight: 2
-thumbnail: "images/business/energy.svg"
+thumbnail: "images/business/energy.jpg"
 icon: "fas fa-industry"
 description: "Refining additives, process chemicals and process-plant components."
 aliases:

@@ -1,0 +1,42 @@
+{{/* layouts/_partials/utilities/GetSearchConfig.html
+
+   Project override of the mod-flexsearch partial of the same name.
+
+   Upstream reads the navbar's own `search` argument first:
+
+       {{ $searchArg := .search | default false }}
+       {{ $search := $searchArg | default $searchDefault }}
+
+   and data/structures/navbar.yml declares that argument with `default: true`.
+   baseof.html never passes it, so InitArgs fills in true, `$searchArg` wins,
+   and params.navigation.search.enabled can never turn search off - setting it
+   to false only flipped the modal button into an inline search box.
+
+   This site has no search. Site configuration decides, and the caller's
+   argument can narrow that but not widen it, so setting
+   params.navigation.search.enabled back to true restores upstream behaviour.
+*/}}
+
+{{- $enabled := true -}}
+{{- $modal := true -}}
+{{- $icon := "fas magnifying-glass" -}}
+
+{{- $cfg := site.Params.navigation.search -}}
+{{- if eq (printf "%T" $cfg) "bool" -}}
+  {{- $enabled = $cfg -}}
+  {{- $modal = site.Params.navigation.searchModal | default false -}}
+{{- else -}}
+  {{- $enabled = $cfg.enabled | default false -}}
+  {{- $modal = $cfg.modal | default false -}}
+  {{- $icon = $cfg.icon | default $icon -}}
+{{- end -}}
+
+{{/* An explicit `search=false` from the caller still wins; a default-on
+     argument cannot re-enable what the site turned off. */}}
+{{- if and (isset . "search") (eq .search false) -}}
+  {{- $enabled = false -}}
+{{- end -}}
+
+{{- $modal = and $enabled $modal -}}
+
+{{ return (dict "enabled" $enabled "modal" $modal "icon" $icon) }}

@@ -1,26 +1,56 @@
-{{/* layouts/shortcodes/home-hero.html 
-   统一的首页 Hero 模块
-   参数:
-     title: 主标题
-     subtitle: 副标题
-     image: 图片路径
-     btnText: 按钮文字
-     btnLink: 按钮链接 (输入相对路径，如 "about")
+{{/* layouts/shortcodes/home-hero.html
+   Home page hero.
+
+   Parameters:
+     title, subtitle - headings
+     image           - path under assets/ (not a URL under static/)
+     btnText/btnLink - call to action; btnLink is relative, e.g. "about"
+
+   The hero image is the largest thing above the fold, so it is loaded eagerly
+   with a high fetch priority rather than lazily: it is almost certainly the
+   Largest Contentful Paint element, and deferring it would delay that metric
+   rather than improve it.
 */}}
+
+{{- $title := .Get "title" -}}
+{{- $image := .Get "image" -}}
+{{- $res := "" -}}
+{{- with $image -}}
+  {{- $res = resources.Get . -}}
+  {{- if not $res -}}
+    {{- errorf "home-hero: no asset %q. Give a path under assets/, e.g. images/banner.jpg (called from %s)." . $.Page.File.Path -}}
+  {{- end -}}
+{{- end -}}
 
 <div class="card mb-5 border-0">
   <div class="row g-0 align-items-center">
     <div class="col-md-6 order-md-2">
-      {{ with .Get "image" }}
-      <img src="{{ . | relURL }}" class="img-fluid rounded-start" alt="{{ $.Get "title" }}">
-      {{ end }}
+      {{- with $res }}
+        {{- if eq .MediaType.SubType "svg" }}
+          <img src="{{ .RelPermalink }}" class="img-fluid rounded-start" alt="{{ $title }}">
+        {{- else }}
+          {{- $srcset := slice -}}
+          {{- range slice 576 768 992 1200 1600 -}}
+            {{- $srcset = $srcset | append (printf "%s %dw" (($res.Resize (printf "%dx webp q80" .)).RelPermalink) .) -}}
+          {{- end -}}
+          {{- $fallback := $res.Resize "992x jpg q82" -}}
+          <picture>
+            <source type="image/webp"
+                    srcset="{{ delimit $srcset ", " }}"
+                    sizes="(min-width: 768px) 50vw, 100vw">
+            <img src="{{ $fallback.RelPermalink }}" class="img-fluid rounded-start"
+                 width="{{ $fallback.Width }}" height="{{ $fallback.Height }}"
+                 alt="{{ $title }}" fetchpriority="high" decoding="async">
+          </picture>
+        {{- end }}
+      {{- end }}
     </div>
-    
+
     <div class="col-md-6 order-md-1">
       <div class="card-body p-5">
-        <h1 class="card-title display-5 fw-bold text-primary">{{ .Get "title" }}</h1>
+        <h1 class="card-title display-5 fw-bold text-primary">{{ $title }}</h1>
         <h4 class="card-subtitle mb-3 text-muted">{{ .Get "subtitle" }}</h4>
-        
+
         <div class="card-text lead">
           {{ .Inner | markdownify }}
         </div>

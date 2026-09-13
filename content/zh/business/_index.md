@@ -11,14 +11,14 @@ description: "医药与生命科学、能源化工与炼化助剂"
   {{< business-card 
       title="医药与生命科学" 
       subtitle="原料药、耗材进出口、合规咨询与技术转移" 
-      img="/images/medical.jpg" 
+      img="images/business/medical.jpg" 
       href="business/medical" 
   >}}
 
   {{< business-card 
       title="能源化工与炼化助剂" 
       subtitle="炼化助剂、工艺化学品，以及阀门、泵、密封件等装置零部件的进出口与供应链服务" 
-      img="/images/energy.svg" 
+      img="images/business/energy.jpg" 
       href="business/energy" 
   >}}
 

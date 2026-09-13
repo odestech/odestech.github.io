@@ -12,14 +12,14 @@ showMeta: false
   {{< business-card 
       title="Pharma & Life Sciences" 
       subtitle="APIs, medical consumables, compliance consulting & cross-border sourcing" 
-      img="/images/medical.jpg" 
+      img="images/business/medical.jpg" 
       href="business/medical" 
   >}}
 
   {{< business-card 
       title="Energy, Chemicals & Refining Additives" 
       subtitle="Refining additives, process chemicals, valves, pumps, seals & plant spares" 
-      img="/images/energy.svg" 
+      img="images/business/energy.jpg" 
       href="business/energy" 
   >}}
 
