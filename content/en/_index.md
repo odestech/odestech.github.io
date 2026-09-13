@@ -8,7 +8,7 @@ draft: false
 {{< home-hero 
     title="ODES Technology" 
     subtitle="Overseas Dedicated Excellent Synergistic"
-    image="/images/banner.jpg"
+    image="images/banner.jpg"
     btnText="About Us"
     btnLink="about" 
 >}}

@@ -1,26 +1,66 @@
-{{/* layouts/shortcodes/business-card.html */}}
+{{/* layouts/shortcodes/business-card.html
+
+   One sector card. `img` is a path under assets/, not a URL under static/,
+   so Hugo can derive sized versions of it.
+
+   The cards sit side by side, so every thumbnail is cropped to the same 16:10
+   box; otherwise a portrait-ish photo next to a landscape one leaves the two
+   cards at different heights. A raster source is cropped by Hugo and shipped
+   as WebP with a srcset, with a JPEG left as the fallback src. An SVG is
+   passed through untouched, since Hugo cannot resize vectors, and
+   .business-card-img crops it to the same box in CSS.
+*/}}
+
+{{- $title := .Get "title" -}}
+{{- $subtitle := .Get "subtitle" -}}
+{{- $href := .Get "href" -}}
+{{- $img := .Get "img" -}}
+
+{{- $res := "" -}}
+{{- with $img -}}
+  {{- $res = resources.Get . -}}
+  {{- if not $res -}}
+    {{- errorf "business-card: no asset %q. Give a path under assets/, e.g. images/business/medical.jpg (called from %s)." . $.Page.File.Path -}}
+  {{- end -}}
+{{- end -}}
+
 <div class="col-md-6 mb-4">
   <div class="card h-100 shadow-sm">
-    
-    {{ with .Get "img" }}
-      <img src="{{ . | relURL }}" class="card-img-top" alt="{{ $.Get "title" }}">
-    {{ end }}
+
+    {{- with $res }}
+      {{- if eq .MediaType.SubType "svg" }}
+        <img src="{{ .RelPermalink }}" class="card-img-top business-card-img"
+             alt="{{ $title }}" loading="lazy" decoding="async">
+      {{- else }}
+        {{/* 480/720/960/1280 covers a half-container card at 1x and 2x. */}}
+        {{- $srcset := slice -}}
+        {{- range slice 480 720 960 1280 -}}
+          {{- $w := . -}}
+          {{- $h := div (mul $w 10) 16 -}}
+          {{- $srcset = $srcset | append (printf "%s %dw" (($res.Fill (printf "%dx%d Center webp q80" $w $h)).RelPermalink) $w) -}}
+        {{- end -}}
+        {{- $fallback := $res.Fill "960x600 Center jpg q82" -}}
+        <picture>
+          <source type="image/webp"
+                  srcset="{{ delimit $srcset ", " }}"
+                  sizes="(min-width: 768px) 45vw, 92vw">
+          <img src="{{ $fallback.RelPermalink }}" class="card-img-top business-card-img"
+               width="{{ $fallback.Width }}" height="{{ $fallback.Height }}"
+               alt="{{ $title }}" loading="lazy" decoding="async">
+        </picture>
+      {{- end }}
+    {{- end }}
 
     <div class="card-body">
-      <h5 class="card-title">{{ .Get "title" }}</h5>
-      
-      {{ with .Get "subtitle" }}
+      <h5 class="card-title">{{ $title }}</h5>
+
+      {{ with $subtitle }}
         <p class="card-text text-muted">{{ . }}</p>
       {{ end }}
-      
-      {{ with .Get "href" }}
+
+      {{ with $href }}
         <a href="{{ . | relLangURL }}" class="btn btn-outline-primary mt-3">
-            {{/* 🔴 核心修复：根据当前语言自动切换按钮文字 */}}
-            {{ if eq site.Language.Lang "zh" }}
-                了解更多
-            {{ else }}
-                Learn More
-            {{ end }}
+            {{ if eq site.Language.Lang "zh" }}了解更多{{ else }}Learn More{{ end }}
         </a>
       {{ end }}
     </div>

@@ -49,3 +49,41 @@
         }
     }
 }
+
+// Carried over from the former assets/css/custom.css, which Hinode never
+// loaded: it is wired up through params.customCSS, a setting the theme does
+// not read (grep the theme for "customCSS" - nothing consumes it). The rest of
+// that file was dead by the time it was found:
+//
+//   .footer-social/.social-links/.nav-social  the footer renders a copyright
+//                                             line and nothing else
+//   .mx-1                                     a Bootstrap spacing utility, and
+//                                             a display:none on it would have
+//                                             hidden unrelated elements
+//   .nav-search/#search-input/.search-modal    the search button is now turned
+//                                             off in hugo.toml instead
+//   [data-bs-theme="dark"] .card              Bootstrap already resolves
+//                                             --bs-card-bg to --bs-body-bg
+//
+// Only the pointer survived. Links, buttons and text fields keep their own
+// cursors; this replaces the default arrow.
+body {
+    cursor: url("/images/cursor.png"), auto;
+}
+
+// The two sector cards sit side by side, and their source images do not share
+// a shape: the lab photo is roughly 5:4 and the plant illustration 16:10, which
+// left one card noticeably taller than the other. Crop every thumbnail to the
+// same box. Hugo already crops raster sources to 16:10, so this mainly fixes
+// the SVG, which it cannot resize - and it keeps the pair aligned whatever
+// image is dropped in later.
+.business-card-img {
+    width: 100%;
+    // The width/height attributes on the <img> stay, so the browser reserves
+    // the right box before the image arrives and the page does not jump. They
+    // also land as a presentational height, though, which would pin the box and
+    // make aspect-ratio a no-op - hence the explicit auto.
+    height: auto;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+}
