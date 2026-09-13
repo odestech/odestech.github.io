@@ -1,7 +1,7 @@
 ---
 title: "Core Business"
 draft: false
-description: "Pharma & Life Sciences, Industrial Manufacturing"
+description: "Pharma & Life Sciences, Energy & Refining Chemicals"
 showMeta: false
 ---
 
@@ -17,10 +17,10 @@ showMeta: false
   >}}
 
   {{< business-card 
-      title="Industrial Manufacturing" 
-      subtitle="Robotics, automation, drones & industrial supply chain integration" 
-      img="/images/industrial.jpg" 
-      href="business/industrial" 
+      title="Energy, Chemicals & Refining Additives" 
+      subtitle="Refining additives, process chemicals, valves, pumps, seals & plant spares" 
+      img="/images/energy.svg" 
+      href="business/energy" 
   >}}
 
 </div>

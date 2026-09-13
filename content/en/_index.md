@@ -16,5 +16,5 @@ ODES (Shanghai Odes Technology Co., Ltd.) is a holding company dedicated to Chin
 
 Based in China and targeting the US and other high-standard overseas markets, we are committed to efficiently connecting China's premium manufacturing and technical capabilities with global market demands.
 
-With technical services and international trade at our core, ODES emphasizes compliance, professionalism, and long-term synergistic cooperation.
+With technical services and international trade at our core, ODES emphasizes compliance, professionalism, and long-term synergistic cooperation across the pharmaceutical & life sciences and energy & chemical sectors.
 {{< /home-hero >}}

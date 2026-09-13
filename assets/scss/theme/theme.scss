@@ -1,0 +1,10 @@
+// Project style overrides. Hinode includes this file last in the build pipeline.
+
+// Hinode inlines an SVG page thumbnail as a bare <svg> element instead of
+// emitting an <img>, so the theme's `.img-wrap img` sizing rule never matches.
+// Without it the SVG keeps its intrinsic width and is clipped by the wrapper's
+// `overflow: hidden`. Size it the same way the theme sizes a raster thumbnail.
+.img-wrap > svg {
+    width: 100%;
+    height: auto;
+}
