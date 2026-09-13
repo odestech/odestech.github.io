@@ -87,3 +87,19 @@ body {
     aspect-ratio: 16 / 10;
     object-fit: cover;
 }
+
+// LinkedIn link in the footer. Muted until hovered so it sits beside the
+// copyright line without competing with it.
+.odes-social {
+    color: var(--bs-body-color);
+    font-size: 1.4rem;
+    line-height: 1;
+    opacity: 0.6;
+    transition: opacity 0.15s ease-in-out;
+
+    &:hover,
+    &:focus-visible {
+        color: var(--bs-primary);
+        opacity: 1;
+    }
+}

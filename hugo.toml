@@ -25,6 +25,11 @@ hasCJKLanguage = true
   # Consumed by layouts/shortcodes/contact-form.html
   formspreeEndpoint = "https://formspree.io/f/xyeyqznk"
 
+  [params.company]
+    # Public company page. The /admin/ URL is the owner's own console view and
+    # shows visitors a permissions error, so it must not be linked publicly.
+    linkedin = "https://www.linkedin.com/company/112375931/"
+
   [params.page]
     showMeta = false
 

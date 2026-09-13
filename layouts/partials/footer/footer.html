@@ -2,6 +2,13 @@
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-12 text-center">
+                {{- with site.Params.company.linkedin }}
+                <a class="odes-social d-inline-block mb-2" href="{{ . }}"
+                   target="_blank" rel="noopener me"
+                   aria-label="{{ if eq site.Language.Lang "zh" }}在领英上关注 ODES{{ else }}Follow ODES on LinkedIn{{ end }}">
+                    {{ partial "assets/icon.html" (dict "icon" "fab linkedin") }}
+                </a>
+                {{- end }}
                 <span class="copyright text-body-secondary fw-bold" style="display: block; width: 100%;">
                     {{ .Site.Copyright | markdownify }}
                 </span>
