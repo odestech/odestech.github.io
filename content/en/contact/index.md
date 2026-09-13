@@ -15,6 +15,8 @@ If you have any business inquiries or cooperation proposals, please feel free to
 * **Phone**: +86 177 1787 6827 
 * **Email**: [info@odestech.cn](mailto:info@odestech.cn) 
 
+{{< contact-form >}}
+
 ### Address
 
 Room 712-596, Floor 7, No.400 Zhejiang Middle Rd,

@@ -1,0 +1,179 @@
+{{/* layouts/shortcodes/contact-form.html
+   Formspree-backed enquiry form, shared by the zh and en contact pages.
+
+   The endpoint comes from site.Params.formspreeEndpoint so it can be swapped
+   without touching this template; pass endpoint="..." to override per page.
+   Labels switch on site.Language.Lang, the same way business-card.html does,
+   so one template serves both languages.
+
+   The form posts natively when JavaScript is unavailable; the script below
+   upgrades it to a fetch() submit that reports the result in place.
+*/}}
+
+{{- $endpoint := .Get "endpoint" | default site.Params.formspreeEndpoint -}}
+{{- if not $endpoint -}}
+  {{- errorf "contact-form: no endpoint. Set params.formspreeEndpoint in hugo.toml, or pass endpoint=\"...\" to the shortcode (called from %s)." .Page.File.Path -}}
+{{- end -}}
+
+{{- $zh := eq site.Language.Lang "zh" -}}
+{{- $id := printf "odes-enquiry-%s" site.Language.Lang -}}
+{{- $t := dict
+      "heading"      (cond $zh "在线咨询" "Send an Enquiry")
+      "intro"        (cond $zh "填写下表，我们会在一个工作日内回复。带 * 的为必填项。" "Fill in the form below and we will reply within one business day. Fields marked * are required.")
+      "name"         (cond $zh "姓名" "Name")
+      "company"      (cond $zh "公司名称" "Company")
+      "country"      (cond $zh "国家 / 地区" "Country / Region")
+      "email"        (cond $zh "邮箱" "Email")
+      "phone"        (cond $zh "电话 / WhatsApp" "Phone / WhatsApp")
+      "sector"       (cond $zh "感兴趣的业务板块" "Business sector")
+      "sectorNone"   (cond $zh "请选择" "Please select")
+      "sectorMed"    (cond $zh "医药与生命科学" "Pharma & Life Sciences")
+      "sectorEnergy" (cond $zh "能源化工与炼化助剂" "Energy, Chemicals & Refining Additives")
+      "sectorOther"  (cond $zh "其他" "Other")
+      "message"      (cond $zh "咨询内容" "Message")
+      "optional"     (cond $zh "选填" "optional")
+      "consent"      (cond $zh "我同意 ODES 为回复本次询盘处理上述信息。本表单经由 Formspree（美国）传输与存储。" "I agree that ODES may process the information above in order to respond to this enquiry. This form is transmitted and stored by Formspree (United States).")
+      "submit"       (cond $zh "提交询盘" "Send enquiry")
+      "sending"      (cond $zh "提交中…" "Sending…")
+      "required"     (cond $zh "此项为必填。" "This field is required.")
+      "emailBad"     (cond $zh "请填写有效的邮箱地址。" "Please enter a valid email address.")
+      "consentBad"   (cond $zh "请先勾选同意。" "Please tick the box to continue.")
+      "ok"           (cond $zh "已收到，谢谢。我们会尽快与您联系。" "Thank you — your enquiry has been received. We will be in touch shortly.")
+      "fail"         (cond $zh "提交失败。请稍后重试，或直接发邮件至 info@odestech.cn。" "Submission failed. Please try again later, or email us directly at info@odestech.cn.")
+      "subject"      (cond $zh "ODES 网站询盘" "ODES website enquiry")
+-}}
+
+<div class="odes-enquiry my-5">
+  <h3>{{ $t.heading }}</h3>
+  <p class="text-muted" data-enquiry-intro>{{ $t.intro }}</p>
+
+  <div class="alert alert-success d-none" role="status" data-enquiry-success>{{ $t.ok }}</div>
+  <div class="alert alert-danger d-none" role="alert" data-enquiry-error>{{ $t.fail }}</div>
+
+  <form id="{{ $id }}" action="{{ $endpoint }}" method="POST" data-enquiry-form>
+    <div class="row g-3">
+
+      <div class="col-md-6">
+        <label class="form-label" for="{{ $id }}-name">{{ $t.name }} *</label>
+        <input class="form-control" type="text" id="{{ $id }}-name" name="name" autocomplete="name" required>
+        <div class="invalid-feedback">{{ $t.required }}</div>
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label" for="{{ $id }}-company">{{ $t.company }} *</label>
+        <input class="form-control" type="text" id="{{ $id }}-company" name="company" autocomplete="organization" required>
+        <div class="invalid-feedback">{{ $t.required }}</div>
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label" for="{{ $id }}-email">{{ $t.email }} *</label>
+        <input class="form-control" type="email" id="{{ $id }}-email" name="email" autocomplete="email" required>
+        <div class="invalid-feedback">{{ $t.emailBad }}</div>
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label" for="{{ $id }}-country">{{ $t.country }} <span class="text-muted">({{ $t.optional }})</span></label>
+        <input class="form-control" type="text" id="{{ $id }}-country" name="country" autocomplete="country-name">
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label" for="{{ $id }}-phone">{{ $t.phone }} <span class="text-muted">({{ $t.optional }})</span></label>
+        <input class="form-control" type="tel" id="{{ $id }}-phone" name="phone" autocomplete="tel">
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label" for="{{ $id }}-sector">{{ $t.sector }} <span class="text-muted">({{ $t.optional }})</span></label>
+        <select class="form-select" id="{{ $id }}-sector" name="sector">
+          <option value="">{{ $t.sectorNone }}</option>
+          <option value="{{ $t.sectorMed }}">{{ $t.sectorMed }}</option>
+          <option value="{{ $t.sectorEnergy }}">{{ $t.sectorEnergy }}</option>
+          <option value="{{ $t.sectorOther }}">{{ $t.sectorOther }}</option>
+        </select>
+      </div>
+
+      <div class="col-12">
+        <label class="form-label" for="{{ $id }}-message">{{ $t.message }} *</label>
+        <textarea class="form-control" id="{{ $id }}-message" name="message" rows="5" required></textarea>
+        <div class="invalid-feedback">{{ $t.required }}</div>
+      </div>
+
+      <div class="col-12">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="{{ $id }}-consent" name="consent" value="yes" required>
+          <label class="form-check-label small text-muted" for="{{ $id }}-consent">{{ $t.consent }}</label>
+          <div class="invalid-feedback">{{ $t.consentBad }}</div>
+        </div>
+      </div>
+
+      <div class="col-12">
+        <button class="btn btn-primary" type="submit" data-enquiry-submit>
+          <span class="spinner-border spinner-border-sm me-2 d-none" aria-hidden="true" data-enquiry-spinner></span>
+          <span data-enquiry-label>{{ $t.submit }}</span>
+        </button>
+      </div>
+
+    </div>
+
+    {{/* Formspree control fields. _gotcha is a honeypot: Formspree silently
+         drops any submission where it is filled in, so it must stay in the
+         DOM and out of sight rather than be display:none (bots read that). */}}
+    <input class="odes-hp" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
+    <input type="hidden" name="_subject" value="{{ $t.subject }}">
+    <input type="hidden" name="page_lang" value="{{ site.Language.Lang }}">
+  </form>
+</div>
+
+<script>
+(function () {
+  var form = document.getElementById({{ $id }});
+  if (!form || !window.fetch) return;
+
+  var wrap = form.closest('.odes-enquiry');
+  var ok = wrap.querySelector('[data-enquiry-success]');
+  var err = wrap.querySelector('[data-enquiry-error]');
+  var btn = form.querySelector('[data-enquiry-submit]');
+  var spinner = form.querySelector('[data-enquiry-spinner]');
+  var label = form.querySelector('[data-enquiry-label]');
+  var subject = form.elements._subject;
+  var baseSubject = subject ? subject.value : '';
+
+  // Only suppress the browser's own bubbles once we know we can replace them
+  // with the Bootstrap styling below; without JS native validation still runs.
+  form.setAttribute('novalidate', 'novalidate');
+
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+    form.classList.add('was-validated');
+    if (!form.checkValidity()) return;
+
+    // Make each notification identifiable in the inbox without opening it.
+    var company = (form.elements.company.value || '').trim();
+    if (subject) subject.value = company ? baseSubject + ' — ' + company : baseSubject;
+
+    err.classList.add('d-none');
+    btn.disabled = true;
+    spinner.classList.remove('d-none');
+    label.textContent = {{ $t.sending }};
+
+    fetch(form.action, {
+      method: 'POST',
+      body: new FormData(form),
+      headers: { 'Accept': 'application/json' }
+    }).then(function (response) {
+      if (!response.ok) throw new Error('HTTP ' + response.status);
+      form.classList.add('d-none');
+      var intro = wrap.querySelector('[data-enquiry-intro]');
+      if (intro) intro.classList.add('d-none');
+      ok.classList.remove('d-none');
+      ok.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }).catch(function () {
+      // Keep what the visitor typed so a retry costs them nothing.
+      err.classList.remove('d-none');
+    }).then(function () {
+      btn.disabled = false;
+      spinner.classList.add('d-none');
+      label.textContent = {{ $t.submit }};
+    });
+  });
+})();
+</script>

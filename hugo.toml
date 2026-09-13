@@ -23,6 +23,8 @@ hasCJKLanguage = true
   description = "Shanghai Odes Technology Co., Ltd. - Overseas. Dedicated. Excellent. Synergistic"
   customCSS = ["css/custom.css"]
   search = false
+  # Consumed by layouts/shortcodes/contact-form.html
+  formspreeEndpoint = "https://formspree.io/f/xyeyqznk"
 
   [params.page]
     showMeta = false
