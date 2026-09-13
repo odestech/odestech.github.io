@@ -2,7 +2,7 @@
 title: "能源化工与炼化助剂"
 date: 2026-01-14
 weight: 2
-thumbnail: "images/business/energy.svg"
+thumbnail: "images/business/energy.jpg"
 icon: "fas fa-industry"
 description: "Energy, Chemicals & Refining Additives"
 aliases:
