@@ -8,3 +8,44 @@
     width: 100%;
     height: auto;
 }
+
+// Formspree honeypot on the enquiry form. It has to stay in the layout tree and
+// remain fillable by a bot, so it is moved off-screen rather than hidden with
+// display:none or the hidden attribute, which bots skip.
+.odes-hp {
+    position: absolute;
+    left: -5000px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+// Bootstrap's .was-validated marks every non-required field as :valid, so an
+// untouched optional input gets a green tick that reads as "correctly filled
+// in". Only the error state carries information on this form, so keep the
+// invalid styling and drop the success styling.
+.odes-enquiry .was-validated {
+    .form-control:valid,
+    .form-select:valid {
+        border-color: var(--bs-border-color);
+        background-image: none;
+
+        &:focus {
+            border-color: var(--bs-primary);
+            box-shadow: none;
+        }
+    }
+
+    .form-check-input:valid {
+        border-color: var(--bs-border-color);
+
+        &:checked {
+            background-color: var(--bs-primary);
+            border-color: var(--bs-primary);
+        }
+
+        ~ .form-check-label {
+            color: inherit;
+        }
+    }
+}

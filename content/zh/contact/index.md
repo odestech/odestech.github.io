@@ -12,6 +12,8 @@ showWordCount: false
 * **电话**: +86 17717876827
 * **邮箱**: [info@odestech.cn](mailto:info@odestech.cn) 
 
+{{< contact-form >}}
+
 ### 公司地址
 
 上海市黄浦区浙江中路400号 7层712-596室 
