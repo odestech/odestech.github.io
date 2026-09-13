@@ -19,7 +19,7 @@ showMeta: false
   {{< business-card 
       title="Energy, Chemicals & Refining Additives" 
       subtitle="Refining additives, process chemicals, valves, pumps, seals & plant spares" 
-      img="images/business/energy.svg" 
+      img="images/business/energy.jpg" 
       href="business/energy" 
   >}}
 

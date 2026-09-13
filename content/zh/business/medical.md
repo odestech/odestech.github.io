@@ -2,7 +2,7 @@
 title: "医药与生命科学"
 date: 2026-01-14
 weight: 1
-thumbnail: "images/business/medical.jpg" # 建议后续找一张相关图片放进去
+thumbnail: "images/business/medical.jpg"
 icon: "fas fa-flask"
 description: "Medical & Life Sciences"
 

@@ -32,12 +32,16 @@
         <img src="{{ .RelPermalink }}" class="card-img-top business-card-img"
              alt="{{ $title }}" loading="lazy" decoding="async">
       {{- else }}
-        {{/* 480/720/960/1280 covers a half-container card at 1x and 2x. */}}
+        {{/* 480/720/960/1280 covers a half-container card at 1x and 2x.
+             q72 rather than q80: the refinery aerial is dense enough that q80
+             cost 267 KB at the 1280 tier, and the curve flattens below 72 -
+             80 to 72 saves a fifth, 72 to 64 saves a further 8%% for visible
+             mush at this size. */}}
         {{- $srcset := slice -}}
         {{- range slice 480 720 960 1280 -}}
           {{- $w := . -}}
           {{- $h := div (mul $w 10) 16 -}}
-          {{- $srcset = $srcset | append (printf "%s %dw" (($res.Fill (printf "%dx%d Center webp q80" $w $h)).RelPermalink) $w) -}}
+          {{- $srcset = $srcset | append (printf "%s %dw" (($res.Fill (printf "%dx%d Center webp q72" $w $h)).RelPermalink) $w) -}}
         {{- end -}}
         {{- $fallback := $res.Fill "960x600 Center jpg q82" -}}
         <picture>
