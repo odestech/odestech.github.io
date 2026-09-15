@@ -1,7 +1,7 @@
 ---
 title: "核心业务"
 draft: false
-description: "医药与生命科学、能源化工与炼化助剂"
+description: "医药与生命科学、能源化工与材料"
 ---
 
 ### 主要业务板块
@@ -16,8 +16,8 @@ description: "医药与生命科学、能源化工与炼化助剂"
   >}}
 
   {{< business-card 
-      title="能源化工与炼化助剂" 
-      subtitle="炼化助剂、工艺化学品，以及阀门、泵、密封件等装置零部件的进出口与供应链服务" 
+      title="能源化工与材料" 
+      subtitle="催化剂、炼化助剂与工艺化学品，以及阀门、泵、密封件等装置零部件的进出口与供应链服务" 
       img="images/business/energy.jpg" 
       href="business/energy" 
   >}}

@@ -1,7 +1,7 @@
 ---
 title: "Core Business"
 draft: false
-description: "Pharma & Life Sciences, Energy & Refining Chemicals"
+description: "Pharma & Life Sciences, Energy, Chemicals & Materials"
 showMeta: false
 ---
 
@@ -17,8 +17,8 @@ showMeta: false
   >}}
 
   {{< business-card 
-      title="Energy, Chemicals & Refining Additives" 
-      subtitle="Refining additives, process chemicals, valves, pumps, seals & plant spares" 
+      title="Energy, Chemicals & Materials" 
+      subtitle="Catalysts, refining additives, process chemicals, valves, pumps, seals & plant spares" 
       img="images/business/energy.jpg" 
       href="business/energy" 
   >}}
