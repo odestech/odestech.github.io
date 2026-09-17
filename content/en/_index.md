@@ -1,20 +1,24 @@
 ---
 title: "Home"
-description: "ODES Technology - China-US Trade & Cross-Border Cooperation"
+description: "ODES sources refinery catalysts, process chemicals, APIs and plant spare parts from Chinese manufacturers for buyers in the US and overseas."
+meta:
+  title: "China Sourcing for Refinery Chemicals, APIs and Plant Spares"
 layout: index
 draft: false
 ---
 
 {{< home-hero 
     title="ODES Technology" 
-    subtitle="Overseas Dedicated Excellent Synergistic"
+    subtitle="China sourcing and export for refining, chemicals and pharma"
     image="images/banner.jpg"
     btnText="About Us"
     btnLink="about" 
 >}}
-ODES (Shanghai Odes Technology Co., Ltd.) is a holding company dedicated to China–US trade and cross-border industrial collaboration. 
+ODES (Shanghai Odes Technology Co., Ltd.) is a Shanghai-based trading and technical services company. We source from Chinese manufacturers for refiners, chemical plants, pharmaceutical companies and procurement agents in the United States and other high-standard markets.
 
-Based in China and targeting the US and other high-standard overseas markets, we are committed to efficiently connecting China's premium manufacturing and technical capabilities with global market demands.
+We work in two sectors. **Pharma and life sciences**: APIs, excipients, medical consumables and pharmaceutical packaging. **Energy, chemicals and materials**: refining catalysts, process chemicals, functional materials, valves, pumps, seals and plant spares.
 
-With technical services and international trade at our core, ODES emphasizes compliance, professionalism, and long-term synergistic cooperation across the pharmaceutical & life sciences and energy, chemicals & materials sectors.
+Export documentation is part of the scope, not an afterthought — SDS and GHS labelling, UN dangerous goods classification and packaging certification, EN 10204 material certificates, and third-party inspection by SGS, BV or TÜV where the destination market requires it.
+
+**O**verseas · **D**edicated · **E**xcellent · **S**ynergistic
 {{< /home-hero >}}

@@ -1,13 +1,13 @@
 ---
 title: "首页"
 date: 2026-01-14
-description: "上海奥得斯科技有限公司 - 连接中国制造与全球市场"
+description: "上海奥得斯科技有限公司：面向炼油、石化与医药行业，提供催化剂、炼化助剂、原料药与装置备件的进出口与跨境供应链服务。"
 draft: false
 layout: index
 ---
 {{< home-hero 
     title="上海奥得斯科技有限公司" 
-    subtitle="Overseas Dedicated Excellent Synergistic"
+    subtitle="炼化助剂、原料药与装置备件的进出口与跨境供应链服务"
     image="images/banner.jpg"
     btnText="关于我们"
     btnLink="about" 

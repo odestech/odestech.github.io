@@ -1,17 +1,21 @@
 ---
-title: "医药与生命科学"
+title: "原料药与医用耗材进出口"
 date: 2026-01-14
 weight: 1
-thumbnail: "images/business/medical.jpg"
 icon: "fas fa-flask"
-description: "Medical & Life Sciences"
-
+description: "原料药、药用辅料、医用耗材与药包材的进出口与跨境采购，并提供医药技术咨询、技术转移与合规路径协助。"
 toc: false 
 share: false
 sidebar: false
+linkTitle: "医药与生命科学"
+serviceType: "原料药、药用辅料、医用耗材与药包材的进出口与供应链服务"
+catalog:
+  - "原料药与医药中间体"
+  - "药用辅料与制剂"
+  - "医用耗材与器械"
+  - "药用包装材料"
+  - "注册与合规支持"
 ---
-
-### 医药与生命科学 (Medical & Life Sciences)
 
 我们提供全方位的医药相关产品国际贸易与商务对接服务：
 
