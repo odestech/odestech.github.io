@@ -45,14 +45,19 @@ disableKinds = ["taxonomy", "term"]
   # Single source of truth for the company facts that layouts/_partials/head/
   # structured-data.html publishes as schema.org Organization data.
   [params.organization]
-    legalName = "Shanghai Odes Technology Co., Ltd."
+    # The legal name and street address are emitted in the language of the page
+    # being rendered, so a Chinese result carries the registered Chinese name.
+    legalName = "SHANGHAI ODES TECHNOLOGY CO., LTD."
     legalNameZh = "上海奥得斯科技有限公司"
     alternateName = "ODES"
     email = "info@odestech.cn"
     telephone = "+86-177-1787-6827"
-    streetAddress = "Room 712-596, Floor 7, No.400 Zhejiang Middle Road"
+    streetAddress = "Room 712-596, Floor 7, No. 400 Zhejiang Middle Rd, Huangpu District"
+    streetAddressZh = "黄浦区浙江中路 400 号 7 楼 712-596 室"
     addressLocality = "Shanghai"
+    addressLocalityZh = "上海市"
     addressRegion = "Shanghai"
+    addressRegionZh = "上海市"
     postalCode = "200001"
     addressCountry = "CN"
 

@@ -27,6 +27,16 @@
 
 {{- $locale := $s.locale | default .Site.Language.Lang -}}
 
+{{/* A Chinese result should carry the registered Chinese name and address; an
+     English one the romanised pair. The other name stays as alternateName so
+     both resolve to the same entity. */}}
+{{- $zh := eq .Site.Language.Lang "zh" -}}
+{{- $legalName := cond $zh $o.legalNameZh $o.legalName -}}
+{{- $otherName := cond $zh $o.legalName $o.legalNameZh -}}
+{{- $street := cond $zh $o.streetAddressZh $o.streetAddress -}}
+{{- $locality := cond $zh $o.addressLocalityZh $o.addressLocality -}}
+{{- $region := cond $zh $o.addressRegionZh $o.addressRegion -}}
+
 {{/* ---------------------------------------------------------------- Organization */}}
 
 {{- $sameAs := slice -}}
@@ -51,8 +61,8 @@
         "@type" "Organization"
         "@id" $orgID
         "name" $s.name
-        "legalName" $o.legalName
-        "alternateName" (slice $o.alternateName $o.legalNameZh)
+        "legalName" $legalName
+        "alternateName" (slice $o.alternateName $otherName)
         "url" $baseURL
         "logo" $logo
         "image" (dict "@id" $logoID)
@@ -61,9 +71,9 @@
         "areaServed" $areaServed
         "address" (dict
             "@type" "PostalAddress"
-            "streetAddress" $o.streetAddress
-            "addressLocality" $o.addressLocality
-            "addressRegion" $o.addressRegion
+            "streetAddress" $street
+            "addressLocality" $locality
+            "addressRegion" $region
             "postalCode" $o.postalCode
             "addressCountry" $o.addressCountry)
         "contactPoint" (dict

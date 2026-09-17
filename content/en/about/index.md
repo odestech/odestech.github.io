@@ -26,8 +26,8 @@ International trade and technical services across two sectors — pharmaceutical
 
 | | |
 |---|---|
-| Registered name | Shanghai Odes Technology Co., Ltd. (上海奥得斯科技有限公司) |
-| Registered office | Room 712-596, Floor 7, No.400 Zhejiang Middle Road, Shanghai 200001, China |
+| Registered name | SHANGHAI ODES TECHNOLOGY CO., LTD. (上海奥得斯科技有限公司) |
+| Registered office | Room 712-596, Floor 7, No. 400 Zhejiang Middle Rd, Huangpu District, Shanghai 200001, China |
 | Sectors | Pharmaceuticals and life sciences; energy, chemicals and materials |
 | Working languages | English, Chinese |
 | Contact | [info@odestech.cn](mailto:info@odestech.cn) · [LinkedIn](https://www.linkedin.com/company/112375931/) |

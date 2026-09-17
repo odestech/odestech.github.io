@@ -22,6 +22,6 @@ If you have a business enquiry or a cooperation proposal, contact us directly or
 
 ## Address
 
-Shanghai Odes Technology Co., Ltd.  
-Room 712-596, Floor 7, No.400 Zhejiang Middle Road,  
-Shanghai 200001, China
+SHANGHAI ODES TECHNOLOGY CO., LTD.  
+Room 712-596, Floor 7, No. 400 Zhejiang Middle Rd,  
+Huangpu District, Shanghai 200001, China
