@@ -1,0 +1,30 @@
+{{/*
+    Canonical and hreflang links.
+
+    Hinode's head/seo.html emits rel=canonical only for paginated list pages, so
+    every real page shipped without one. Aliases (layouts/alias.html) emit their
+    own canonical and never reach this partial.
+
+    x-default points at the default content language (English), which is the
+    site's target market. site.Home resolves per language, so the default has to
+    come from site.Sites.Default.
+*/}}
+{{- if ne .Kind "404" -}}
+    {{- $paginator := $.Store.Get "paginator" -}}
+    {{- if not $paginator }}
+    <link rel="canonical" href="{{ .Permalink }}">
+    {{- end }}
+
+    {{- if gt (len .Site.Languages) 1 }}
+        {{- $default := site.Sites.Default.Language.Lang -}}
+        {{- $pages := slice . | append .Translations }}
+        {{- range $pages }}
+    <link rel="alternate" hreflang="{{ .Language.Lang }}" href="{{ .Permalink }}">
+        {{- end }}
+        {{- range $pages }}
+            {{- if eq .Language.Lang $default }}
+    <link rel="alternate" hreflang="x-default" href="{{ .Permalink }}">
+            {{- end }}
+        {{- end }}
+    {{- end }}
+{{- end -}}
