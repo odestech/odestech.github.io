@@ -9,7 +9,7 @@ showReadingTime : false
 showWordCount : false
 ---
 
-**ODES** —— 上海奥得斯科技有限公司（SHANGHAI ODES TECHNOLOGY CO., LTD.）—— 是一家专注于中美贸易与跨境产业协作的控股公司。
+**ODES** —— 上海奥得斯科技有限公司（Shanghai Odes Technology Co., Ltd.）—— 是一家专注于中美贸易与跨境产业协作的控股公司。
 
 公司立足上海，面向美国及其他高标准海外市场，把中国的制造与技术能力对接给需要一个在地对手方的买家：能审厂、能读懂规格书、能拿出进口方报关行会索要的那套单证。
 
@@ -28,7 +28,7 @@ showWordCount : false
 
 | | |
 |---|---|
-| 注册名称 | 上海奥得斯科技有限公司（SHANGHAI ODES TECHNOLOGY CO., LTD.） |
+| 注册名称 | 上海奥得斯科技有限公司（Shanghai Odes Technology Co., Ltd.） |
 | 注册地址 | 上海市黄浦区浙江中路 400 号 7 楼 712-596 室（邮编 200001） |
 | 业务板块 | 医药与生命科学；能源化工与材料 |
 | 工作语言 | 中文、英文 |

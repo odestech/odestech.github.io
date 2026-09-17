@@ -47,7 +47,7 @@ disableKinds = ["taxonomy", "term"]
   [params.organization]
     # The legal name and street address are emitted in the language of the page
     # being rendered, so a Chinese result carries the registered Chinese name.
-    legalName = "SHANGHAI ODES TECHNOLOGY CO., LTD."
+    legalName = "Shanghai Odes Technology Co., Ltd."
     legalNameZh = "上海奥得斯科技有限公司"
     alternateName = "ODES"
     email = "info@odestech.cn"
