@@ -1,10 +1,22 @@
 baseURL = "https://www.odestech.cn/"
 
+# English is served from the site root, Chinese from /zh/. This key used to be
+# declared twice (en, then zh); the parser happened to keep the first, but a
+# parser change would have silently moved every URL on the site.
 defaultContentLanguage = "en"
 defaultContentLanguageInSubdir = false
 enableRobotsTXT = true
 enableGitInfo = false
 hasCJKLanguage = true
+
+# The flexsearch module ships a content adapter that generates a /_modals/search/
+# page even though site search is disabled. It was the only Hugo content adapter
+# reaching this build, and it put two dead URLs in the sitemap.
+ignoreFiles = ['_modals/search/_content\.gotmpl$']
+
+# No page uses tags or categories, so the taxonomy and term pages were empty
+# listings that Search Console reports as crawled-but-not-indexed.
+disableKinds = ["taxonomy", "term"]
 
 [pagination]
   pagerSize = 9
@@ -30,11 +42,55 @@ hasCJKLanguage = true
     # shows visitors a permissions error, so it must not be linked publicly.
     linkedin = "https://www.linkedin.com/company/112375931/"
 
+  # Single source of truth for the company facts that layouts/_partials/head/
+  # structured-data.html publishes as schema.org Organization data.
+  [params.organization]
+    # The legal name and street address are emitted in the language of the page
+    # being rendered, so a Chinese result carries the registered Chinese name.
+    legalName = "Shanghai Odes Technology Co., Ltd."
+    legalNameZh = "上海奥得斯科技有限公司"
+    alternateName = "ODES"
+    email = "info@odestech.cn"
+    telephone = "+86-177-1787-6827"
+    streetAddress = "Room 712-596, Floor 7, No. 400 Zhejiang Middle Rd, Huangpu District"
+    streetAddressZh = "黄浦区浙江中路 400 号 7 楼 712-596 室"
+    addressLocality = "Shanghai"
+    addressLocalityZh = "上海市"
+    addressRegion = "Shanghai"
+    addressRegionZh = "上海市"
+    postalCode = "200001"
+    addressCountry = "CN"
+
+  # Overrides the Hinode defaults, which otherwise publish an Organization named
+  # "Hinode" linking to the theme's GitHub repository on every page.
+  [params.schema]
+    type = "Organization"
+    name = "ODES Technology"
+    locale = "en-US"
+    linkedin = "https://www.linkedin.com/company/112375931/"
+    github = ""
+    twitter = ""
+    [params.schema.logo]
+      url = "images/logo.png"
+      width = 1024
+      height = 1024
+    [params.schema.image]
+      url = "images/og-default.jpg"
+      width = 1200
+      height = 630
+
+  [params.opengraph]
+    images = ["images/og-default.jpg"]
+    locale = "en_US"
+
   [params.page]
     showMeta = false
 
   [params.main]
     separator = "-"
+    # head/seo.html falls back to this when a page has no description of its own
+    # (the 404 page, for one); the theme default describes Hinode itself.
+    description = "Shanghai-based sourcing and export partner for refinery chemicals, catalysts, APIs and plant spare parts."
     endorse = false
     footerBelowFold = false
     breakpoint = "md"
@@ -78,12 +134,8 @@ hasCJKLanguage = true
     enabled = false
 
 # =========================
-# 多语言配置（关键修复点）
+# 多语言配置
 # =========================
-
-defaultContentLanguage = "zh"
-defaultContentLanguageInSubdir = false
-hasCJKLanguage = true
 
 [languages]
 
@@ -93,6 +145,21 @@ hasCJKLanguage = true
     weight = 2
     contentDir = "content/zh"
     copyright = "© 2026 上海奥得斯科技有限公司"
+
+    [languages.zh.params]
+      description = "上海奥得斯科技有限公司：面向炼油、石化与医药行业的进出口与跨境供应链服务商"
+
+      [languages.zh.params.main]
+        description = "上海奥得斯科技有限公司：面向炼油、石化与医药行业的进出口与跨境供应链服务商"
+
+      [languages.zh.params.head]
+        tagline = "炼化助剂、原料药与装置备件进出口"
+
+      [languages.zh.params.schema]
+        locale = "zh-CN"
+
+      [languages.zh.params.opengraph]
+        locale = "zh_CN"
 
     [[languages.zh.menu.main]]
       name = "首页"
@@ -119,32 +186,25 @@ hasCJKLanguage = true
     languageName = "English"
     weight = 1
     contentDir = "content/en"
-    
-    # 【修复1】直接在语言根目录下声明版权，覆盖全局设置
     copyright = "© 2026 ODES Technology"
     title = "ODES Technology"
 
-    # 英文参数区
     [languages.en.params]
-      # 覆盖默认描述，防止出现 "I work on coding..."
-      description = "Dedicated to China-US trade and cross-border collaboration"
-      
-      [languages.en.params.head]
-        tagline = "Overseas. Dedicated. Excellent. Synergistic"
+      description = "Shanghai-based sourcing and export partner for refinery chemicals, catalysts, APIs and plant spare parts."
 
-      # 【修复2】显式关闭社交模块
+      [languages.en.params.head]
+        tagline = "China Sourcing for Refinery Chemicals and APIs"
+
       [languages.en.params.social]
         title = ""
         caption = ""
         enabled = false
 
-      # 【修复3】双重保险：在 params.footer 里也写一遍版权
       [languages.en.params.footer]
         copyright = "© 2026 ODES Technology"
         endorse = false
-        showSocial = false  # 尝试关闭社交显示
+        showSocial = false
 
-    # 英文菜单配置
     [[languages.en.menu.main]]
       name = "Home"
       url = "/"           
@@ -166,7 +226,7 @@ hasCJKLanguage = true
       weight = 40
 
 # =========================
-# 渲染与输出配置 (保持不变)
+# 渲染与输出配置
 # =========================
 [markup]
   [markup.goldmark]

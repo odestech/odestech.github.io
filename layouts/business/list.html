@@ -1,5 +1,8 @@
 {{ define "main" }}
 <div class="container-fluid">
+    {{/* The section page had no h1: this template rendered .Content only, and
+         the content file starts at a lower heading level. */}}
+    <h1>{{ .Title }}</h1>
     {{ .Content }}
 </div>
 {{ end }}

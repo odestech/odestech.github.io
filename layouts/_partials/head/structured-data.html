@@ -1,0 +1,201 @@
+{{/*
+    Project replacement for Hinode's head/structured-data.html.
+
+    The theme's version is generic doks boilerplate: it published an
+    Organization named after whatever params.schema held (the theme default is
+    "Hinode"), emitted `"sameAs": [null, ...]` when twitter/linkedin were unset,
+    and built breadcrumb labels by humanising URL segments. This version builds
+    the graph from data structures and jsonify, so the output is always valid
+    JSON, and sources the company facts from params.organization.
+
+    Per-page front matter hooks:
+      schemaType   - overrides the WebPage subtype (AboutPage, ContactPage, ...)
+      serviceType  - when set, adds a Service node offered by the Organization
+      catalog      - list of category names rendered as a nested OfferCatalog
+*/}}
+
+{{- $baseURL := "/" | absURL -}}
+{{- $o := site.Params.organization -}}
+{{- $s := site.Params.schema -}}
+
+{{- $orgID := printf "%s#organization" $baseURL -}}
+{{- $siteID := printf "%s#website" $baseURL -}}
+{{- $logoID := printf "%s#logo" $baseURL -}}
+{{- $pageID := printf "%s#webpage" .Permalink -}}
+{{- $crumbID := printf "%s#breadcrumb" .Permalink -}}
+{{- $imageID := printf "%s#primaryimage" .Permalink -}}
+
+{{- $locale := $s.locale | default .Site.Language.Lang -}}
+
+{{/* A Chinese result should carry the registered Chinese name and address; an
+     English one the romanised pair. The other name stays as alternateName so
+     both resolve to the same entity. */}}
+{{- $zh := eq .Site.Language.Lang "zh" -}}
+{{- $legalName := cond $zh $o.legalNameZh $o.legalName -}}
+{{- $otherName := cond $zh $o.legalName $o.legalNameZh -}}
+{{- $street := cond $zh $o.streetAddressZh $o.streetAddress -}}
+{{- $locality := cond $zh $o.addressLocalityZh $o.addressLocality -}}
+{{- $region := cond $zh $o.addressRegionZh $o.addressRegion -}}
+
+{{/* ---------------------------------------------------------------- Organization */}}
+
+{{- $sameAs := slice -}}
+{{- range (slice $s.linkedin $s.twitter $s.github) -}}
+    {{- with . }}{{ $sameAs = $sameAs | append . }}{{ end -}}
+{{- end -}}
+
+{{- $logo := dict
+        "@type" "ImageObject"
+        "@id" $logoID
+        "url" (printf "%s%s" $baseURL $s.logo.url)
+        "contentUrl" (printf "%s%s" $baseURL $s.logo.url)
+        "width" $s.logo.width
+        "height" $s.logo.height
+        "caption" $s.name -}}
+
+{{- $areaServed := slice
+        (dict "@type" "Country" "name" "United States")
+        (dict "@type" "Country" "name" "China") -}}
+
+{{- $org := dict
+        "@type" "Organization"
+        "@id" $orgID
+        "name" $s.name
+        "legalName" $legalName
+        "alternateName" (slice $o.alternateName $otherName)
+        "url" $baseURL
+        "logo" $logo
+        "image" (dict "@id" $logoID)
+        "email" $o.email
+        "telephone" $o.telephone
+        "areaServed" $areaServed
+        "address" (dict
+            "@type" "PostalAddress"
+            "streetAddress" $street
+            "addressLocality" $locality
+            "addressRegion" $region
+            "postalCode" $o.postalCode
+            "addressCountry" $o.addressCountry)
+        "contactPoint" (dict
+            "@type" "ContactPoint"
+            "contactType" "sales"
+            "email" $o.email
+            "telephone" $o.telephone
+            "areaServed" (slice "US" "CN")
+            "availableLanguage" (slice "en" "zh"))
+        "knowsAbout" (slice
+            "Hydrotreating and hydrocracking catalysts"
+            "FCC catalysts and additives"
+            "Refining process chemicals"
+            "Amine gas treating solvents"
+            "Industrial water treatment chemicals"
+            "Fuel and lubricant additives"
+            "Industrial valves and mechanical seals"
+            "Active pharmaceutical ingredients"
+            "Medical consumables and pharmaceutical packaging"
+            "SDS and GHS authoring"
+            "UN dangerous goods classification"
+            "Export compliance and third-party inspection") -}}
+{{- with $sameAs }}{{ $org = merge $org (dict "sameAs" .) }}{{ end -}}
+
+{{/* ---------------------------------------------------------------- WebSite */}}
+
+{{- $website := dict
+        "@type" "WebSite"
+        "@id" $siteID
+        "url" $baseURL
+        "name" site.Title
+        "inLanguage" $locale
+        "publisher" (dict "@id" $orgID) -}}
+{{- with site.Params.description }}{{ $website = merge $website (dict "description" .) }}{{ end -}}
+
+{{/* ---------------------------------------------------------------- WebPage */}}
+
+{{- $pageType := "WebPage" -}}
+{{- if eq .Kind "section" }}{{ $pageType = "CollectionPage" }}{{ end -}}
+{{- with .Params.schemaType }}{{ $pageType = . }}{{ end -}}
+
+{{- $webpage := dict
+        "@type" $pageType
+        "@id" $pageID
+        "url" .Permalink
+        "name" ($.Scratch.Get "title")
+        "isPartOf" (dict "@id" $siteID)
+        "about" (dict "@id" $orgID)
+        "inLanguage" $locale
+        "potentialAction" (slice (dict "@type" "ReadAction" "target" (slice .Permalink))) -}}
+{{- with $.Scratch.Get "description" }}{{ $webpage = merge $webpage (dict "description" .) }}{{ end -}}
+{{- if not .Date.IsZero }}{{ $webpage = merge $webpage (dict "datePublished" (.Date.Format "2006-01-02T15:04:05Z07:00")) }}{{ end -}}
+{{- if not .Lastmod.IsZero }}{{ $webpage = merge $webpage (dict "dateModified" (.Lastmod.Format "2006-01-02T15:04:05Z07:00")) }}{{ end -}}
+
+{{- $graph := slice $org $website -}}
+
+{{/* ---------------------------------------------------------------- Primary image */}}
+
+{{- $thumbnail := $.Scratch.Get "thumbnail" -}}
+{{- if $thumbnail -}}
+    {{- $webpage = merge $webpage (dict "primaryImageOfPage" (dict "@id" $imageID)) -}}
+{{- end -}}
+
+{{/* ---------------------------------------------------------------- Breadcrumbs */}}
+
+{{- $crumbs := slice -}}
+{{- $position := 0 -}}
+{{- range .Ancestors.Reverse -}}
+    {{- $position = add $position 1 -}}
+    {{- $crumbs = $crumbs | append (dict
+            "@type" "ListItem"
+            "position" $position
+            "name" .LinkTitle
+            "item" .Permalink) -}}
+{{- end -}}
+{{- if gt $position 0 -}}
+    {{- $position = add $position 1 -}}
+    {{- $crumbs = $crumbs | append (dict "@type" "ListItem" "position" $position "name" .LinkTitle) -}}
+    {{- $webpage = merge $webpage (dict "breadcrumb" (dict "@id" $crumbID)) -}}
+{{- end -}}
+
+{{- $graph = $graph | append $webpage -}}
+
+{{- if gt $position 0 -}}
+    {{- $graph = $graph | append (dict
+            "@type" "BreadcrumbList"
+            "@id" $crumbID
+            "itemListElement" $crumbs) -}}
+{{- end -}}
+
+{{- if $thumbnail -}}
+    {{- $graph = $graph | append (dict
+            "@type" "ImageObject"
+            "@id" $imageID
+            "url" $thumbnail
+            "contentUrl" $thumbnail
+            "caption" ($.Scratch.Get "title")) -}}
+{{- end -}}
+
+{{/* ---------------------------------------------------------------- Service */}}
+
+{{- with .Params.serviceType -}}
+    {{- $service := dict
+            "@type" "Service"
+            "@id" (printf "%s#service" $.Permalink)
+            "name" $.Title
+            "serviceType" .
+            "provider" (dict "@id" $orgID)
+            "areaServed" $areaServed -}}
+    {{- with $.Scratch.Get "description" }}{{ $service = merge $service (dict "description" .) }}{{ end -}}
+    {{- with $.Params.catalog -}}
+        {{- $items := slice -}}
+        {{- range . -}}
+            {{- $items = $items | append (dict "@type" "OfferCatalog" "name" .) -}}
+        {{- end -}}
+        {{- $service = merge $service (dict "hasOfferCatalog" (dict
+                "@type" "OfferCatalog"
+                "name" $.Title
+                "itemListElement" $items)) -}}
+    {{- end -}}
+    {{- $graph = $graph | append $service -}}
+{{- end -}}
+
+{{- $ld := dict "@context" "https://schema.org" "@graph" $graph -}}
+<script type="application/ld+json">{{ $ld | jsonify (dict "indent" "") | safeJS }}</script>
