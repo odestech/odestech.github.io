@@ -2,6 +2,8 @@
 
 **Goal**: Find and fix the errors Ahrefs Site Audit reports for odestech.cn (email received 2026-11-25), then verify on a preview build.
 
+**Status: DONE (2026-11-25)** — Ahrefs Health 100 % on both projects, 0 errors.
+
 ## Stages
 - ✅ 1. Collect data: crawl live site (apex + www) like Ahrefs — 144 internal URLs, 0 timeouts
 - ✅ 2. Diagnose: issue list mapped to Ahrefs issue names + root cause (below)
@@ -40,7 +42,7 @@ Checked OK: no 3XX/4XX internal pages (except #1), no redirect chains, canonical
 Verified 2026-11-25 12:15 UTC after Luis's dashboard changes:
 1. ✅ Image cache purged: www/images/energy-1024.jpg = 99,982 bytes
 2. ✅ WebMCP off: no tag in HTML, /.webmcp/bridge.js → 404
-3. ⬜ Ahrefs Webmaster Tools → Site Audit → new crawl; send the issue CSV if anything is left
+3. ✅ Ahrefs re-crawl by Luis (2026-11-25 ~12:25–12:38 UTC): both projects Health 100 % and AI score 100 %. odestech.cn/: 55 → 100 %, URLs with errors 38 → 0 (34 URLs crawled). www.odestech.cn/: 45 → 100 %, 22 → 0 (31 URLs). Page exports: 0 4XX/5XX, 30 HTML pages 200, only 301s = http→https and apex→www, no image >100 kB (energy-1024.jpg 99,982 B), max load 263 ms. Next scheduled crawl: 2 Dec, 19–20 h (Luis's local time).
 4. ✅ GitHub Pages unpublished and custom domain removed by Luis; odestech.github.io/ and /zh/ → 404 at 12:26 UTC (/about/ still a cached 301 at 12:27, expires on its own)
 5. ✅ Cloudflare Redirect Rule "Redirect from root to WWW" (https://odestech.cn/* → https://www.odestech.cn/${1}, 301, query kept): images, assets, robots 301; old apex URLs = 2 hops (accepted); www 200, no loop
 Final live crawl (89 URLs): 0 4XX/5XX, 0 broken links, 0 hreflang errors; left only accepted items (ZH length by char count, PT pt vs pt-BR, srcset/OG images >100 kB, JS bundle 351 kB raw).
