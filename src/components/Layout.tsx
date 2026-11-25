@@ -1,4 +1,4 @@
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import type { Dict } from "../content";
 import { LANGS, LANG_META, ORG, pathFor, type Lang, type PageKey } from "../site";
 import { IconArrow, IconMail, IconMenu, IconPhone, IconX } from "./Icons";
@@ -24,23 +24,23 @@ function Logo({ invert = false }: { invert?: boolean }) {
   );
 }
 
-/** EN · 中文 · ES — links to the same page in each language. */
+/** EN · ES · FR · PT · 中文 as a row of buttons (mobile menu). */
 function LangSwitch({ lang, page, dark = false }: { lang: Lang; page: PageKey; dark?: boolean }) {
   const target = page === "notfound" ? "home" : page;
   return (
-    <ul className={`flex items-center rounded-full p-0.5 text-sm font-medium border ${dark ? "border-white/20" : "border-brand/25"}`}>
+    <ul className={`flex items-center rounded-full p-0.5 text-sm font-medium border ${dark ? "border-white/20 w-full" : "border-brand/25"}`}>
       {LANGS.map((l) => {
         const cur = l === lang;
         const m = LANG_META[l];
         return (
-          <li key={l}>
+          <li key={l} className={dark ? "flex-1" : undefined}>
             <a
               href={pathFor(l, target)}
               hrefLang={m.hreflang}
               lang={m.hreflang}
               aria-label={m.switchAria}
               aria-current={cur ? "true" : undefined}
-              className={`block px-2.5 py-1 rounded-full whitespace-nowrap transition-colors ${
+              className={`block text-center px-2.5 py-1.5 rounded-full whitespace-nowrap transition-colors ${
                 cur ? (dark ? "bg-white text-ink" : "bg-brand text-white") : dark ? "text-white/80 hover:text-white" : "text-brand hover:bg-brand-pale"
               }`}
             >
@@ -50,6 +50,66 @@ function LangSwitch({ lang, page, dark = false }: { lang: Lang; page: PageKey; d
         );
       })}
     </ul>
+  );
+}
+
+/**
+ * Desktop language menu: the current language with a dropdown of the others.
+ * A native <details> element, so it opens without JavaScript; once hydrated
+ * it also closes on outside click and Escape.
+ */
+function LangMenu({ lang, page }: { lang: Lang; page: PageKey }) {
+  const ref = useRef<HTMLDetailsElement>(null);
+  const target = page === "notfound" ? "home" : page;
+  useEffect(() => {
+    const close = (e: Event) => {
+      const el = ref.current;
+      if (!el?.open) return;
+      if (e instanceof KeyboardEvent ? e.key === "Escape" : !el.contains(e.target as Node)) el.open = false;
+    };
+    document.addEventListener("click", close);
+    document.addEventListener("keydown", close);
+    return () => {
+      document.removeEventListener("click", close);
+      document.removeEventListener("keydown", close);
+    };
+  }, []);
+  return (
+    <details ref={ref} className="relative group">
+      <summary
+        className="list-none [&::-webkit-details-marker]:hidden flex items-center gap-1.5 text-sm font-medium px-3 py-1.5 rounded-full text-brand border border-brand/30 hover:bg-brand-pale whitespace-nowrap"
+        aria-label={`Language: ${LANG_META[lang].name}`}
+      >
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden="true">
+          <circle cx="12" cy="12" r="10" />
+          <path d="M12 2a14.5 14.5 0 0 0 0 20A14.5 14.5 0 0 0 12 2M2 12h20" />
+        </svg>
+        {LANG_META[lang].label}
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true" className="transition-transform group-open:rotate-180">
+          <path d="m6 9 6 6 6-6" />
+        </svg>
+      </summary>
+      <ul className="absolute right-0 mt-2 w-44 rounded-xl bg-white border border-line shadow-lg py-1.5 z-50">
+        {LANGS.map((l) => {
+          const m = LANG_META[l];
+          const cur = l === lang;
+          return (
+            <li key={l}>
+              <a
+                href={pathFor(l, target)}
+                hrefLang={m.hreflang}
+                lang={m.hreflang}
+                aria-current={cur ? "true" : undefined}
+                className={`flex items-center justify-between px-4 py-2 text-sm ${cur ? "text-brand font-semibold bg-brand-pale/60" : "text-ink hover:bg-brand-pale/60"}`}
+              >
+                <span>{m.name}</span>
+                <span className="text-xs text-muted">{m.label}</span>
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+    </details>
   );
 }
 
@@ -138,7 +198,7 @@ export default function Layout({
             ))}
           </nav>
           <div className="hidden lg:flex items-center gap-3">
-            <LangSwitch lang={lang} page={page} />
+            <LangMenu lang={lang} page={page} />
             <a href={contactHref} className="btn-primary !py-2 !text-sm whitespace-nowrap !hidden xl:!inline-flex">
               {t.cta}
             </a>
@@ -208,7 +268,7 @@ export default function Layout({
             </a>
           ))}
         </nav>
-        <div className="px-5 pb-10 pt-5 border-t border-white/10 flex items-center justify-between">
+        <div className="px-5 pb-10 pt-5 border-t border-white/10 flex flex-col items-stretch gap-4">
           <LangSwitch lang={lang} page={page} dark />
           <a href={contactHref} onClick={() => setOpen(false)} className="btn-primary">
             {t.cta}

@@ -6,27 +6,32 @@
 
 export const SITE_URL = "https://www.odestech.cn";
 
-export type Lang = "en" | "zh" | "es";
-export const LANGS: Lang[] = ["en", "zh", "es"];
+export type Lang = "en" | "es" | "fr" | "pt" | "zh";
+/** Display order everywhere (switcher, sitemap, llms.txt): Chinese last. */
+export const LANGS: Lang[] = ["en", "es", "fr", "pt", "zh"];
 
 /**
  * hreflang uses plain "es": Google only accepts ISO 3166-1 alpha-2 regions, so
  * "es-419" (Latin America) is ignored there. The page itself declares es-419.
+ * Portuguese is written for Brazil (html lang pt-BR) but uses hreflang "pt",
+ * so Portugal and other Portuguese speakers are not sent to the English page.
  */
 export const LANG_META: Record<Lang, { label: string; name: string; hreflang: string; switchAria: string; siteLink: string }> = {
   en: { label: "EN", name: "English", hreflang: "en", switchAria: "English version", siteLink: "English site" },
   zh: { label: "中文", name: "中文", hreflang: "zh-CN", switchAria: "中文版", siteLink: "中文网站" },
   es: { label: "ES", name: "Español", hreflang: "es", switchAria: "Versión en español", siteLink: "Sitio en español" },
+  fr: { label: "FR", name: "Français", hreflang: "fr", switchAria: "Version française", siteLink: "Site en français" },
+  pt: { label: "PT", name: "Português", hreflang: "pt", switchAria: "Versão em português", siteLink: "Site em português" },
 };
 
 export const ORG = {
   brand: "ODES Technology",
   shortName: "ODES",
-  legalName: { en: "Shanghai Odes Technology Co., Ltd.", zh: "上海奥得斯科技有限公司", es: "Shanghai Odes Technology Co., Ltd." },
+  legalName: { en: "Shanghai Odes Technology Co., Ltd.", zh: "上海奥得斯科技有限公司", es: "Shanghai Odes Technology Co., Ltd.", fr: "Shanghai Odes Technology Co., Ltd.", pt: "Shanghai Odes Technology Co., Ltd." },
   email: "info@odestech.cn",
   phone: "+86-177-1787-6827",
   phoneDisplay: "+86 177 1787 6827",
-  contactPerson: { en: "Luis (CEO)", zh: "Luis（CEO）", es: "Luis (CEO)" },
+  contactPerson: { en: "Luis (CEO)", zh: "Luis（CEO）", es: "Luis (CEO)", fr: "Luis (CEO)", pt: "Luis (CEO)" },
   linkedin: "https://www.linkedin.com/company/112375931/",
   formspree: "https://formspree.io/f/xyeyqznk",
   address: {
@@ -41,6 +46,18 @@ export const ORG = {
       locality: "Shanghai",
       region: "Shanghai",
       oneLine: "Room 712-596, Floor 7, No. 400 Zhejiang Middle Rd, Huangpu District, Shanghái 200001, China",
+    },
+    fr: {
+      street: "Room 712-596, Floor 7, No. 400 Zhejiang Middle Rd, Huangpu District",
+      locality: "Shanghai",
+      region: "Shanghai",
+      oneLine: "Room 712-596, Floor 7, No. 400 Zhejiang Middle Rd, Huangpu District, Shanghai 200001, Chine",
+    },
+    pt: {
+      street: "Room 712-596, Floor 7, No. 400 Zhejiang Middle Rd, Huangpu District",
+      locality: "Shanghai",
+      region: "Shanghai",
+      oneLine: "Room 712-596, Floor 7, No. 400 Zhejiang Middle Rd, Huangpu District, Xangai 200001, China",
     },
     zh: {
       street: "黄浦区浙江中路 400 号 7 楼 712-596 室",
@@ -92,7 +109,7 @@ export function resolveRoute(pathname: string): Route {
 
 /**
  * Language whose headings appear as the italic subtitle under each section
- * heading (the original EN/中文 bilingual design). Spanish pages pair with
- * themselves, which suppresses the subtitle.
+ * heading (the original EN/中文 bilingual design). ES, FR and PT pages pair
+ * with themselves, which suppresses the subtitle.
  */
 export const altLang = (lang: Lang): Lang => (lang === "en" ? "zh" : lang === "zh" ? "en" : lang);

@@ -47,19 +47,19 @@ jobs:
       - name: Verify output
         run: |
           set -e
-          for l in "" zh/ es/; do
+          for l in "" es/ fr/ pt/ zh/; do
             for p in index.html about/index.html business/index.html business/medical/index.html business/energy/index.html contact/index.html 404.html; do
               test -s "dist/$l$p" || { echo "missing dist/$l$p"; exit 1; }
             done
           done
-          for f in sitemap.xml robots.txt llms.txt llms-full.txt _redirects _headers _routes.json index.md zh/index.md es/index.md; do
+          for f in sitemap.xml robots.txt llms.txt llms-full.txt _redirects _headers _routes.json index.md es/index.md fr/index.md pt/index.md zh/index.md; do
             test -s "dist/$f" || { echo "missing dist/$f"; exit 1; }
           done
           # Every page must ship its content as HTML, not an empty root div.
           for f in $(find dist -name index.html); do
             grep -q '<h1' "$f" || { echo "no <h1> in $f"; exit 1; }
             grep -q 'rel="canonical"' "$f" || { echo "no canonical in $f"; exit 1; }
-            test "$(grep -o 'hreflang=' "$f" | wc -l)" -ge 4 || { echo "missing hreflang in $f"; exit 1; }
+            test "$(grep -o 'hreflang=' "$f" | wc -l)" -ge 6 || { echo "missing hreflang in $f"; exit 1; }
           done
           grep -q '^Content-Signal: ' dist/robots.txt || { echo "robots.txt lacks Content-Signal"; exit 1; }
           if grep -rqi 'manus' dist --include=*.html; then echo "Manus leftovers in output"; exit 1; fi

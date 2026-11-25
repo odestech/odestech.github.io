@@ -4,7 +4,7 @@ Cloudflare Pages 直接连接本仓库，每次推送由 Cloudflare 自己构建
 `main` = 正式站；其他分支 = 预览站 `<分支名>.<项目名>.pages.dev`（已设 noindex）。
 GitHub Actions（`.github/workflows/deploy.yml`）只做构建检查，不发布任何东西。
 
-站点语言：英文 `/`、中文 `/zh/`、西班牙语（拉美）`/es/`。
+站点语言（显示顺序）：英文 `/`、西班牙语（拉美）`/es/`、法语 `/fr/`、葡萄牙语（巴西）`/pt/`、中文 `/zh/`。
 
 ## 合并到 main 之前必须核对（否则构建会失败）
 
@@ -76,4 +76,4 @@ npm run dev
 npm run build
 ```
 
-文案：`src/content/en.ts`、`zh.ts`、`es.ts`；公司信息只在 `src/site.ts` 改一处。
+文案：`src/content/en.ts`、`es.ts`、`fr.ts`、`pt.ts`、`zh.ts`；公司信息只在 `src/site.ts` 改一处。

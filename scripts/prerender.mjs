@@ -2,8 +2,8 @@
  * Build step 3 of 3: render every route to static HTML and write the files
  * Cloudflare Pages serves alongside them.
  *
- *   dist/<path>/index.html   one per route and language (EN at /, ZH at /zh/)
- *   dist/404.html, dist/zh/404.html, dist/es/404.html   Pages serves the nearest 404.html with status 404
+ *   dist/<path>/index.html   one per route and language (EN at /, then /es/ /fr/ /pt/ /zh/)
+ *   dist/404.html, dist/<lang>/404.html   Pages serves the nearest 404.html with status 404
  *   dist/sitemap.xml         with hreflang alternates
  *   dist/robots.txt          search and AI crawlers allowed, sitemap linked
  *   dist/llms.txt            short company brief for AI answer engines (llmstxt.org)
@@ -181,9 +181,15 @@ write(
 );
 
 // ── llms.txt / llms-full.txt ────────────────────────────────────────────────
+const LLMS_HEADING = {
+  en: "Pages (English)",
+  es: "Páginas en español (Latinoamérica)",
+  fr: "Pages en français",
+  pt: "Páginas em português (Brasil)",
+  zh: "中文页面",
+};
+const FULL_TITLE = { en: "full site text", es: "texto completo del sitio", fr: "texte intégral du site", pt: "texto completo do site", zh: "网站全文" };
 const en = DICTS.en;
-const zh = DICTS.zh;
-const es = DICTS.es;
 const page = (l, k) => `${SITE_URL}${pathFor(l, k)}`;
 const facts = [
   `- Legal name: ${ORG.legalName.en} (${ORG.legalName.zh})`,
@@ -196,7 +202,7 @@ const facts = [
   `- Third-party inspection: SGS, Bureau Veritas or TÜV where required`,
   `- Regulatory filings: ODES does not hold DMF/CEP filings; it identifies which manufacturer holds them and confirms in writing`,
   `- Working languages: English, Chinese (enquiries in Spanish accepted)`,
-  `- Site languages: English (/), Chinese (/zh/), Spanish for Latin America (/es/)`,
+  `- Site languages: English (/), Spanish for Latin America (/es/), French (/fr/), Portuguese for Brazil (/pt/), Chinese (/zh/)`,
   `- Email: ${ORG.email} · Phone: ${ORG.phoneDisplay} · LinkedIn: ${ORG.linkedin}`,
 ];
 write(
@@ -209,30 +215,17 @@ write(
     "## Key facts",
     ...facts,
     "",
-    "## Pages (English)",
-    `- [Home](${page("en", "home")}): ${en.pages.home.meta.description}`,
-    `- [Core business](${page("en", "business")}): ${en.pages.business.meta.description}`,
-    `- [Pharma & life sciences](${page("en", "pharma")}): ${en.pages.pharma.meta.description}`,
-    `- [Energy, chemicals & materials](${page("en", "energy")}): ${en.pages.energy.meta.description}`,
-    `- [About](${page("en", "about")}): ${en.pages.about.meta.description}`,
-    `- [Contact](${page("en", "contact")}): ${en.pages.contact.meta.description}`,
-    "",
-    "## 中文页面",
-    `- [首页](${page("zh", "home")}): ${zh.pages.home.meta.description}`,
-    `- [核心业务](${page("zh", "business")}): ${zh.pages.business.meta.description}`,
-    `- [医药与生命科学](${page("zh", "pharma")}): ${zh.pages.pharma.meta.description}`,
-    `- [能源化工与材料](${page("zh", "energy")}): ${zh.pages.energy.meta.description}`,
-    `- [关于我们](${page("zh", "about")}): ${zh.pages.about.meta.description}`,
-    `- [联系我们](${page("zh", "contact")}): ${zh.pages.contact.meta.description}`,
-    "",
-    "## Páginas en español (Latinoamérica)",
-    `- [Inicio](${page("es", "home")}): ${es.pages.home.meta.description}`,
-    `- [Negocio](${page("es", "business")}): ${es.pages.business.meta.description}`,
-    `- [Farmacéutica y ciencias de la vida](${page("es", "pharma")}): ${es.pages.pharma.meta.description}`,
-    `- [Energía, químicos y materiales](${page("es", "energy")}): ${es.pages.energy.meta.description}`,
-    `- [Nosotros](${page("es", "about")}): ${es.pages.about.meta.description}`,
-    `- [Contacto](${page("es", "contact")}): ${es.pages.contact.meta.description}`,
-    "",
+    ...LANGS.flatMap((l) => {
+      const t = DICTS[l];
+      return [
+        `## ${LLMS_HEADING[l]}`,
+        ...["home", "business", "pharma", "energy", "about", "contact"].map((k) => {
+          const label = k === "home" ? t.common.home : t.pages[k].crumb;
+          return `- [${label}](${page(l, k)}): ${t.pages[k].meta.description}`;
+        }),
+        "",
+      ];
+    }),
     "## Optional",
     `- [Full site text](${SITE_URL}/llms-full.txt): every page's content in one Markdown file`,
     "",
@@ -242,7 +235,7 @@ write(
 const md = (t) => {
   const out = [];
   const p = t.pages;
-  out.push(`# ${ORG.brand} — ${{ en: "full site text", zh: "网站全文", es: "texto completo del sitio" }[t.lang]}`, "");
+  out.push(`# ${ORG.brand} — ${FULL_TITLE[t.lang]}`, "");
   out.push(`> ${p.home.meta.description}`, "");
   out.push(`## ${p.about.hero.title}`, "", p.about.hero.lead, "", ...p.about.body.flatMap((b) => [b, ""]));
   out.push(`### ${p.about.details.title}`, "", ...p.about.details.rows.map(([k, v]) => `- ${k}: ${v}`), "");
@@ -271,7 +264,7 @@ const md = (t) => {
   out.push(`## ${p.contact.crumb}`, "", `- ${t.common.labels.email}: ${ORG.email}`, `- ${t.common.labels.phone}: ${ORG.phoneDisplay}`, `- ${t.common.labels.address}: ${ORG.legalName[t.lang]}, ${ORG.address[t.lang].oneLine}`, `- ${t.common.labels.linkedin}: ${ORG.linkedin}`, `- ${page(t.lang, "contact")}`, "");
   return out.join("\n");
 };
-write("llms-full.txt", [en, zh, es].map(md).join("\n---\n\n"));
+write("llms-full.txt", LANGS.map((l) => md(DICTS[l])).join("\n---\n\n"));
 
 // ── _redirects (Cloudflare Pages) ───────────────────────────────────────────
 write("_redirects", ["# Old Hugo URLs (also applied by functions/_middleware.js)", ...REDIRECTS.map(([from, to]) => `${from} ${to} 301`), "/en/* /:splat 301", ""].join("\n"));
