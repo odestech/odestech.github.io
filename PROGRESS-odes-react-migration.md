@@ -44,7 +44,7 @@ Finding: the Pages project had NO custom domain — www.odestech.cn is not serve
 ## Phase 3 — GEO/SEO hardening on Cloudflare free plan (2026-11-25)
 - ✅ 16. Content-Signal in robots.txt + per-page Markdown (index.md) + Pages Function for Accept: text/markdown negotiation
 - ✅ 17. Middleware unit tests 20/20 pass; preview 4719b927 built (Worker compiled); merged to main b9ec15d→b4cbe5e (Luis approved); production deployment f05db8ea success
-- ✅ 19. Proxy/VPN visitors: Security Level medium→low via API (Luis approved, 2026-11-25). Browser Integrity Check left on. Bot Fight Mode: token has no permission — Luis to switch off in Security → Bots.
+- ✅ 19. Proxy/VPN visitors: Security Level medium→low via API (Luis approved, 2026-11-25). Browser Integrity Check left on. Bot Fight Mode switched off by Luis (not API-verifiable: token lacks Bot Management read).
 - ⬜ 18. Luis: Rescan Agent Readiness; Crawler Hints (IndexNow) on; Bing Webmaster sitemap; apex→www Redirect Rule; content plan (product/guide pages)
 Decisions: Formspree unchanged; no China network; hreflang "es" (Google does not accept es-419), html lang es-419.
 
