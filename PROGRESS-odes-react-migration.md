@@ -35,8 +35,8 @@ Check Cloudflare build settings (docs/DEPLOY.md, "合并到 main 之前") → me
 - ✅ 8. Switch deploy to Cloudflare Git integration (Actions = build check only), update docs
 - ✅ 9. QA + push (branch)
 - ✅ 10. Cloudflare Pages project `odestech-github-io` build settings changed via API (2026-11-25): build `npm run build`, output `dist`, env vars GO_VERSION/HUGO_VERSION removed, NODE_VERSION=22 (production + preview). Preview build of branch succeeded: deployment 6988c996, https://6988c996.odestech-github-io.pages.dev ("prerendered 18 pages + 3 not-found pages").
-- ⬜ 11. Merge to main (awaiting Luis)
-- ⬜ 12. Attach custom domain www.odestech.cn to the Pages project + switch DNS from GitHub Pages (awaiting Luis; token has no DNS permission)
+- ✅ 11. Merged to main (fast-forward b1b8f02→b9ec15d, Luis approved). Production build succeeded: deployment 533db11d, live at https://odestech-github-io.pages.dev
+- ⏳ 12. Attach custom domain www.odestech.cn to the Pages project + switch DNS from GitHub Pages (awaiting Luis; token has no DNS permission)
 Finding: the Pages project had NO custom domain — www.odestech.cn is not served by Cloudflare Pages yet.
 Decisions: Formspree unchanged; no China network; hreflang "es" (Google does not accept es-419), html lang es-419.
 
