@@ -49,9 +49,9 @@ Finding: the Pages project had NO custom domain — www.odestech.cn is not serve
 ## Phase 4 — 5 languages EN · ES · FR · PT · 中文 (2026-11-25)
 - ✅ 20. Language order + /fr/ and /pt/ routing; dropdown switcher for 5 languages
 - ✅ 21. French copy (fr.ts) and Brazilian Portuguese copy (pt.ts)
-- ⏳ 22. Build, QA (hydration, header widths, forms, markdown), push branch, preview build
+- ✅ 22. Build, QA (hydration, header widths, forms, markdown), push branch, preview build
 - ⬜ 23. Merge to main after Luis confirms
-Build: 30 pages + 5 not-found pages, 30 Markdown variants (success).
+Build: 30 pages + 5 not-found pages, 30 Markdown variants (success). QA: 30/30 pages hydrate, 0 console errors, 6 hreflang each; header no overflow at 1024/1280 in all 5 languages; dropdown closes on outside click; mobile 360px no overflow; middleware 20/20 + FR/PT markdown; FR/PT forms OK (mocked); sitemap 30 URLs; FR titles shortened to ≤60.
 Decisions: label PT (not "PO": ISO 639-1 is pt); hreflang fr / pt (pt-BR would exclude Portugal), html lang fr / pt-BR; x-default stays EN.
 Decisions: Formspree unchanged; no China network; hreflang "es" (Google does not accept es-419), html lang es-419.
 

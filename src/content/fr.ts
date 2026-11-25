@@ -203,7 +203,7 @@ const fr: Dict = {
   pages: {
     home: {
       meta: {
-        title: "Chimie de raffinage, principes actifs et pièces depuis la Chine | ODES",
+        title: "Catalyseurs, chimie de raffinage et principes actifs | ODES",
         description:
           "ODES, basée à Shanghai, approvisionne catalyseurs de raffinage, produits chimiques de procédé, principes actifs et pièces de rechange auprès de fabricants chinois qualifiés, documents d'export inclus.",
       },
@@ -291,7 +291,7 @@ const fr: Dict = {
 
     business: {
       meta: {
-        title: "Chimie de raffinage, principes actifs et pièces — Activités | ODES",
+        title: "Raffinage, principes actifs et pièces — Activités | ODES",
         description:
           "Deux secteurs d'approvisionnement : pharmacie et sciences de la vie, et catalyseurs de raffinage, produits chimiques de procédé, matériaux fonctionnels et composants d'installation.",
       },
@@ -305,7 +305,7 @@ const fr: Dict = {
 
     pharma: {
       meta: {
-        title: "Principes actifs et consommables médicaux depuis la Chine | ODES",
+        title: "Principes actifs et consommables médicaux de Chine | ODES",
         description:
           "Principes actifs (API), excipients, consommables médicaux et conditionnement pharmaceutique de fabricants chinois pour l'export, avec vérification CoA, BPF et DMF/CEP.",
       },
@@ -362,7 +362,7 @@ const fr: Dict = {
 
     energy: {
       meta: {
-        title: "Catalyseurs et produits chimiques de raffinage de Chine | ODES",
+        title: "Catalyseurs et chimie de raffinage de Chine | ODES",
         description:
           "Catalyseurs d'hydrotraitement et de FCC, solvants aminés, traitement des eaux, additifs carburants, vannes, pompes et garnitures depuis la Chine, avec FDS, classement ONU et EN 10204.",
       },
@@ -427,7 +427,7 @@ const fr: Dict = {
 
     contact: {
       meta: {
-        title: "Contact — Devis chimie de raffinage et principes actifs | ODES",
+        title: "Contact — Devis raffinage et principes actifs | ODES",
         description:
           "Contactez ODES Technology à Shanghai pour un devis en chimie de raffinage, principes actifs et pièces de rechange. Écrivez à info@odestech.cn ou utilisez le formulaire.",
       },
