@@ -8,8 +8,8 @@
 - ✅ 3. Code fixes (#2–#8; #1 code part = robots.txt `Disallow: /cdn-cgi/`)
 - ✅ 4. Build + QA: tsc OK; build 30 pages + 5 404s; check:seo 0 problems (old main build: 171); middleware tests 12/12; Playwright 10 pages × 2 viewports: hydrated, 0 console errors, 0 empty alt, no overflow
 - ✅ 5. Pushed c2fe379, 50b0851, 7d528da. Preview 27ad2e37 deploy success; crawl of branch preview: 0 broken links, 0 empty alt, 0 long titles/descriptions, html lang es, robots Disallow /cdn-cgi/. Left: noindex (pages.dev only), ZH short by char count (by design), PT hreflang pt vs lang pt-BR (same language), srcset/OG images >100 kB (Ahrefs checks img src only). GitHub build check was already failing on main since run 34 ("manuseio" matched the Manus check) — fixed in 7d528da.
-- ⏳ 6. Luis approves: merge to main (rollback = deployment d647403c) + Email Obfuscation off via API; then live re-crawl
-- ⬜ 7. Report
+- ✅ 6. Luis approved both (2026-11-25): main c003777→e0a2a0d (fast-forward), production deployment f06cb092 success (rollback target d647403c); email_obfuscation on→off via API 11:48 UTC, read-back off. Cache purge via API refused (token lacks Cache Purge).
+- ✅ 7. Live re-crawl (90 URLs): apex 301 → www with path + query, old URLs one hop; 0 broken links, 0 hreflang errors, 0 non-canonical, 0 long titles/descriptions, 0 empty alt, html lang es. Left: energy-1024.jpg still 146 kB from Cloudflare edge cache (origin serves 98 kB) → Luis purges URL; ZH short by char count, PT pt vs pt-BR (accepted); srcset/OG images >100 kB (Ahrefs checks src); JS bundle 351 kB raw.
 
 ## Findings (live crawl 2026-11-25, Ahrefs issue names)
 | # | Ahrefs issue | Count | Root cause | Fix | Where |
@@ -36,8 +36,12 @@ Checked OK: no 3XX/4XX internal pages (except #1), no redirect chains, canonical
 ## Last step + result
 - Preview verified (stage 5). Cloudflare token: zone settings editable (email_obfuscation), Redirect Rules = not authorized.
 
-## Next action
-Ask Luis: (a) merge to main, (b) Email Obfuscation off via API. Luis in dashboards: WebMCP off, GitHub Pages unpublish, then re-crawl in Ahrefs.
+## Next action (Luis)
+1. Cloudflare → Caching → Purge Cache → Custom Purge: https://www.odestech.cn/images/energy-1024.jpg
+2. Cloudflare → Agent Readiness → WebMCP → off
+3. Ahrefs Webmaster Tools → Site Audit → new crawl; send the issue CSV if anything is left
+4. GitHub → Settings → Pages → unpublish (odestech.github.io → 301 http://odestech.cn/)
+5. Optional: Cloudflare Redirect Rule apex → www (also covers /images, /assets)
 
 ## Key decisions
 - Luis offered Google login to Ahrefs: not possible from the cloud container and not used (no password handling; API plan is the blocker anyway). Asked Luis for the CSV export or email text to cross-check.

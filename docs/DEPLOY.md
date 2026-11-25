@@ -45,6 +45,10 @@ Node 版本由仓库里的 `.node-version`（22）指定，Cloudflare 构建镜�
 | Email Address Obfuscation | Security → Settings（Scrape Shield） | 关闭 | 开启时把每个 mailto 链接改写成 `/cdn-cgi/l/email-protection`，该地址对爬虫返回 404，Ahrefs 报“Page has links to broken page” |
 | WebMCP | Agent Readiness → WebMCP | 关闭（站点没有 `/mcp` 服务） | 开启时每页注入 75 kB 的 `/.webmcp/bridge.js`，并请求 `/mcp`（404） |
 
+## 替换图片后要清缓存
+
+`/images/*` 在 Cloudflare 边缘缓存 30 天，文件名不带版本号。替换 `public/images/` 里同名文件并上线后，到 Caching → Configuration → Purge Cache → Custom Purge 清掉该图片的 URL，否则访客和爬虫最长 30 天仍拿到旧文件。
+
 ## AI 代理（GEO）相关机制
 
 - `robots.txt` 第一组写了 `Content-Signal: search=yes, ai-input=yes, ai-train=yes`（Cloudflare Content Signals Policy）。若不想被用于模型训练，把 `scripts/prerender.mjs` 和 `functions/_middleware.js` 里的 `ai-train` 改为 `no`。
