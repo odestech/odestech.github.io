@@ -1,0 +1,30 @@
+{
+  "name": "odes-website",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "description": "ODES Technology website: React pages prerendered to static HTML for Cloudflare Pages.",
+  "scripts": {
+    "dev": "vite --host",
+    "build": "vite build && vite build --ssr src/entry-server.tsx --outDir dist-ssr && node scripts/prerender.mjs",
+    "preview": "wrangler pages dev dist --port 8788",
+    "check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "react": "19.2.0",
+    "react-dom": "19.2.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "4.1.14",
+    "@types/node": "22.18.8",
+    "@types/react": "19.2.2",
+    "@types/react-dom": "19.2.1",
+    "@vitejs/plugin-react": "5.0.4",
+    "tailwindcss": "4.1.14",
+    "typescript": "5.9.3",
+    "vite": "7.1.9"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

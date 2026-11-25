@@ -1,5 +1,0 @@
-comment: >-
-  Displays text in subscript.
-arguments:
-  text:
-    position: 0

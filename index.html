@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="__HTML_LANG__">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#ffffff" />
+    <meta name="format-detection" content="telephone=no" />
+    <!--app-head-->
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="alternate" type="text/plain" title="LLM summary" href="/llms.txt" />
+    <script>
+      // Hide below-the-fold sections for the scroll reveal only when JS runs,
+      // and show everything again if the bundle has not hydrated within 3.5 s.
+      document.documentElement.classList.add("js");
+      setTimeout(function () {
+        if (!window.__odesHydrated) document.documentElement.classList.remove("js");
+      }, 3500);
+    </script>
+  </head>
+  <body>
+    <div id="root"><!--app-html--></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

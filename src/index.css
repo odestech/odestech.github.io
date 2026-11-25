@@ -1,0 +1,323 @@
+@import "tailwindcss";
+
+/*
+ * ODES design tokens, carried over from the Manus "Apple-inspired light" draft.
+ * Brand blue matches the logo family; system fonts only — Google Fonts is
+ * unreliable from mainland China, and the draft rendered in system fonts anyway.
+ */
+@theme {
+  --color-brand: oklch(0.42 0.22 264);
+  --color-brand-dark: oklch(0.36 0.22 264);
+  --color-brand-pale: oklch(0.95 0.04 264);
+  --color-brand-wash: oklch(0.975 0.012 264);
+  --color-ink: oklch(0.13 0.01 255);
+  --color-body: oklch(0.38 0.01 255);
+  --color-muted: oklch(0.5 0.01 255);
+  --color-line: oklch(0.91 0.008 264);
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", "Segoe UI", Arial, "PingFang SC",
+    "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+}
+
+:root {
+  color-scheme: light;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    background: #fff;
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+  :lang(zh) {
+    letter-spacing: 0;
+  }
+  a,
+  button,
+  select,
+  summary {
+    cursor: pointer;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-brand);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+  [id] {
+    scroll-margin-top: 5rem;
+  }
+}
+
+@layer components {
+  .container {
+    width: 100%;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+    max-width: 1320px;
+  }
+  @media (min-width: 640px) {
+    .container {
+      padding-inline: 2rem;
+    }
+  }
+  @media (min-width: 1024px) {
+    .container {
+      padding-inline: 3rem;
+    }
+  }
+
+  .section-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    color: var(--color-brand);
+    text-transform: uppercase;
+  }
+  .blue-rule {
+    width: 2rem;
+    height: 2px;
+    background: var(--color-brand);
+    flex-shrink: 0;
+    border-radius: 1px;
+  }
+  .h-display {
+    font-size: clamp(2.3rem, 5.6vw, 4.6rem);
+    font-weight: 700;
+    line-height: 1.06;
+    letter-spacing: -0.035em;
+  }
+  .h-page {
+    font-size: clamp(2rem, 4.4vw, 3.4rem);
+    font-weight: 700;
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+  }
+  .h-section {
+    font-size: clamp(1.75rem, 3.4vw, 2.6rem);
+    font-weight: 700;
+    line-height: 1.12;
+    letter-spacing: -0.03em;
+  }
+  :lang(zh) .h-display,
+  :lang(zh) .h-page,
+  :lang(zh) .h-section {
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+  }
+  .alt-line {
+    margin-top: 0.35rem;
+    font-size: 0.95rem;
+    font-weight: 300;
+    font-style: italic;
+    color: oklch(0.42 0.22 264 / 0.7);
+  }
+
+  .btn-primary,
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 0.7rem 1.45rem;
+    border-radius: 100px;
+    letter-spacing: -0.01em;
+    transition:
+      background 0.15s,
+      border-color 0.15s,
+      transform 0.1s;
+    text-decoration: none;
+  }
+  .btn-primary {
+    background: var(--color-brand);
+    color: #fff;
+    border: 1.5px solid var(--color-brand);
+  }
+  .btn-primary:hover {
+    background: var(--color-brand-dark);
+  }
+  .btn-primary:disabled {
+    opacity: 0.6;
+    cursor: progress;
+  }
+  .btn-ghost {
+    background: transparent;
+    color: var(--color-brand);
+    border: 1.5px solid oklch(0.42 0.22 264 / 0.35);
+  }
+  .btn-ghost:hover {
+    background: var(--color-brand-pale);
+    border-color: var(--color-brand);
+  }
+  .btn-primary:active,
+  .btn-ghost:active {
+    transform: scale(0.97);
+  }
+
+  .nav-link {
+    font-size: 0.875rem;
+    color: oklch(0.35 0.01 255);
+    transition: color 0.15s;
+    text-decoration: none;
+  }
+  .nav-link:hover,
+  .nav-link[aria-current="page"] {
+    color: var(--color-brand);
+  }
+  .nav-link[aria-current="page"] {
+    font-weight: 600;
+  }
+
+  .icon-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-brand-pale);
+    color: var(--color-brand);
+    border-radius: 0.75rem;
+    width: 2.75rem;
+    height: 2.75rem;
+    flex-shrink: 0;
+  }
+  .card {
+    background: #fff;
+    border: 1.5px solid var(--color-line);
+    border-radius: 1.25rem;
+    padding: 1.75rem;
+    transition:
+      border-color 0.2s,
+      box-shadow 0.2s,
+      transform 0.2s;
+  }
+  @media (min-width: 1024px) {
+    .card {
+      padding: 2rem;
+    }
+  }
+  .card-hover:hover {
+    border-color: oklch(0.42 0.22 264 / 0.4);
+    box-shadow: 0 8px 32px oklch(0.42 0.22 264 / 0.08);
+    transform: translateY(-2px);
+  }
+  .bullet-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.625rem;
+    font-size: 0.875rem;
+    color: oklch(0.35 0.01 255);
+    line-height: 1.5;
+  }
+  .bullet-dot {
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: 50%;
+    background: var(--color-brand-pale);
+    color: var(--color-brand);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+  }
+  .badge-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.35rem 0.875rem;
+    border-radius: 100px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    background: var(--color-brand-pale);
+    color: var(--color-brand);
+    border: 1px solid oklch(0.42 0.22 264 / 0.2);
+  }
+  .grid-bg {
+    background-image:
+      linear-gradient(oklch(0.42 0.22 264 / 0.045) 1px, transparent 1px),
+      linear-gradient(90deg, oklch(0.42 0.22 264 / 0.045) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  .input-field {
+    width: 100%;
+    padding: 0.7rem 0.9rem;
+    border: 1.5px solid oklch(0.88 0.01 255);
+    border-radius: 0.625rem;
+    font-size: 0.9rem;
+    background: #fff;
+    color: var(--color-ink);
+    outline: none;
+    transition: border-color 0.15s;
+    font-family: inherit;
+  }
+  .input-field:focus {
+    border-color: var(--color-brand);
+  }
+  .input-field[aria-invalid="true"] {
+    border-color: oklch(0.58 0.22 27);
+  }
+
+  .faq-item summary {
+    list-style: none;
+  }
+  .faq-item summary::-webkit-details-marker {
+    display: none;
+  }
+  .faq-item[open] .faq-chevron {
+    transform: rotate(45deg);
+  }
+
+  .prose-odes p + p {
+    margin-top: 1rem;
+  }
+
+  /* Hero copy animates with CSS alone so the LCP text never waits for JS. */
+  .hero-in {
+    animation: hero-in 0.7s cubic-bezier(0.23, 1, 0.32, 1) both;
+  }
+  .hero-in-2 {
+    animation-delay: 90ms;
+  }
+  .hero-in-3 {
+    animation-delay: 180ms;
+  }
+  @keyframes hero-in {
+    from {
+      opacity: 0;
+      transform: translateY(18px);
+    }
+  }
+
+  /* Below-the-fold reveal: only hidden once the inline head script has marked
+     the page as JS-capable, and un-hidden again if hydration never happens. */
+  .js .reveal {
+    opacity: 0;
+    transform: translateY(22px);
+    transition:
+      opacity 0.65s cubic-bezier(0.23, 1, 0.32, 1),
+      transform 0.65s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  .js .reveal.revealed {
+    opacity: 1;
+    transform: none;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    .hero-in {
+      animation: none;
+    }
+    .js .reveal {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+}

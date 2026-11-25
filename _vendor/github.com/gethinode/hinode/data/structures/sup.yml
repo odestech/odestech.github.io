@@ -1,5 +1,0 @@
-comment: >-
-  Displays text in superscript.
-arguments:
-  text:
-    position: 0
