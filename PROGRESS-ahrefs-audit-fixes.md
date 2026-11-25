@@ -41,7 +41,7 @@ Verified 2026-11-25 12:15 UTC after Luis's dashboard changes:
 1. ✅ Image cache purged: www/images/energy-1024.jpg = 99,982 bytes
 2. ✅ WebMCP off: no tag in HTML, /.webmcp/bridge.js → 404
 3. ⬜ Ahrefs Webmaster Tools → Site Audit → new crawl; send the issue CSV if anything is left
-4. ⬜ GitHub Pages: odestech.github.io still 301 → http://odestech.cn/ (GitHub CDN cache HIT, age 51 min) — recheck; unpublish in GitHub → Settings → Pages if not done
+4. ✅ GitHub Pages unpublished and custom domain removed by Luis; odestech.github.io/ and /zh/ → 404 at 12:26 UTC (/about/ still a cached 301 at 12:27, expires on its own)
 5. ✅ Cloudflare Redirect Rule "Redirect from root to WWW" (https://odestech.cn/* → https://www.odestech.cn/${1}, 301, query kept): images, assets, robots 301; old apex URLs = 2 hops (accepted); www 200, no loop
 Final live crawl (89 URLs): 0 4XX/5XX, 0 broken links, 0 hreflang errors; left only accepted items (ZH length by char count, PT pt vs pt-BR, srcset/OG images >100 kB, JS bundle 351 kB raw).
 
