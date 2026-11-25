@@ -68,5 +68,6 @@ jobs:
             test "$(grep -o 'hreflang=' "$f" | wc -l)" -ge 6 || { echo "missing hreflang in $f"; exit 1; }
           done
           grep -q '^Content-Signal: ' dist/robots.txt || { echo "robots.txt lacks Content-Signal"; exit 1; }
-          if grep -rqi 'manus' dist --include=*.html; then echo "Manus leftovers in output"; exit 1; fi
+          # Whole word only: Portuguese "manuseio" (handling) is not a leftover.
+          if grep -rqiw 'manus' dist --include=*.html; then echo "Manus leftovers in output"; exit 1; fi
           echo "output OK: $(find dist -name '*.html' | wc -l) HTML files"
