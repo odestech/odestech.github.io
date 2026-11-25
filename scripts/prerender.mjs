@@ -17,12 +17,16 @@
 import { mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
-import { REDIRECTS } from "./redirects.mjs";
+import { CANONICAL_HOST, REDIRECTS } from "./redirects.mjs";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const dist = join(root, "dist");
 const ssr = await import(pathToFileURL(join(root, "dist-ssr", "entry-server.js")).href);
 const { render, notFoundRoute, ROUTES, DICTS, ORG, SITE_URL, pathFor, LANGS, LANG_META } = ssr;
+
+if (new URL(SITE_URL).host !== CANONICAL_HOST) {
+  throw new Error(`SITE_URL (${SITE_URL}) and CANONICAL_HOST (${CANONICAL_HOST}) in scripts/redirects.mjs must name the same host`);
+}
 
 const template = readFileSync(join(dist, "index.html"), "utf8");
 if (!template.includes("<!--app-html-->") || !template.includes("<!--app-head-->")) {
@@ -166,15 +170,19 @@ const aiBots = [
 // index, ai-input = use in AI answers / grounding (what GEO needs),
 // ai-train = model training. All three "yes": the site is marketing copy and
 // being known to models is the goal. Change ai-train to "no" to opt out of training.
+// /cdn-cgi/ holds Cloudflare's own endpoints (email decoding, challenges,
+// analytics); Cloudflare asks crawlers to skip it, and the rule is repeated in
+// every group because a crawler with its own group ignores the * group.
 write(
   "robots.txt",
   [
     "User-agent: *",
     "Content-Signal: search=yes, ai-input=yes, ai-train=yes",
     "Allow: /",
+    "Disallow: /cdn-cgi/",
     "",
     "# Search and AI answer engines are welcome to read and cite this site.",
-    ...aiBots.flatMap((b) => [`User-agent: ${b}`, "Allow: /", ""]),
+    ...aiBots.flatMap((b) => [`User-agent: ${b}`, "Allow: /", "Disallow: /cdn-cgi/", ""]),
     `Sitemap: ${SITE_URL}/sitemap.xml`,
     "",
   ].join("\n"),

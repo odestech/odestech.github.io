@@ -31,7 +31,7 @@ Node 版本由仓库里的 `.node-version`（22）指定，Cloudflare 构建镜�
 | 2 | 用西语表单提交一条测试询盘 | `/es/contact/` | Formspree 邮件标题含 "(ES)" |
 | 3 | 访问 `/business/industrial/` | 浏览器 | 301 跳到 `/business/energy/` |
 | 4 | 关闭 GitHub Pages（如果还开着） | GitHub → Settings → Pages | 不再有第二个站点 |
-| 5 | 根域跳转 `odestech.cn/*` → `https://www.odestech.cn/$1`（301） | 域名 → Rules → Redirect Rules | 根域跳到 www |
+| 5 | 根域跳转 `odestech.cn/*` → `https://www.odestech.cn/$1`（301） | 已由 `functions/_middleware.js` 实现；可选再加 Rules → Redirect Rules（图片和 /assets 也跳转） | `curl -I https://odestech.cn/about/` 返回 301 到 www |
 
 ## 影响 SEO / GEO 的 Cloudflare 开关
 
@@ -42,6 +42,8 @@ Node 版本由仓库里的 `.node-version`（22）指定，Cloudflare 构建镜�
 | Bot Fight Mode | Security → Bots | 关闭，或确认不拦截已验证爬虫 | 防止误伤 Googlebot / Bingbot |
 | Always Use HTTPS | SSL/TLS → Edge Certificates | 开 | canonical 全部是 https |
 | Web Analytics | 项目 → Metrics | 开 | 免代码访问统计 |
+| Email Address Obfuscation | Security → Settings（Scrape Shield） | 关闭 | 开启时把每个 mailto 链接改写成 `/cdn-cgi/l/email-protection`，该地址对爬虫返回 404，Ahrefs 报“Page has links to broken page” |
+| WebMCP | Agent Readiness → WebMCP | 关闭（站点没有 `/mcp` 服务） | 开启时每页注入 75 kB 的 `/.webmcp/bridge.js`，并请求 `/mcp`（404） |
 
 ## AI 代理（GEO）相关机制
 
@@ -59,7 +61,7 @@ Node 版本由仓库里的 `.node-version`（22）指定，Cloudflare 构建镜�
 
 ## 说明
 
-- hreflang 用 `es` 而不是 `es-419`：Google 只认 ISO 3166-1 两位国家码，`es-419` 会被忽略。页面本身的 `lang` 是 `es-419`（拉美西语）。
+- hreflang 和页面 `lang` 都用 `es`，不用 `es-419`：Google 只认 ISO 3166-1 两位国家码，`es-419` 会被忽略；Ahrefs 把 `lang="es-419"` 报为 “HTML lang attribute invalid” 错误。文案仍是拉美西语。
 - 询盘表单沿用 Formspree，三种语言共用同一个地址；邮件标题分别为 "ODES website enquiry"、"ODES 网站询盘"、"Consulta desde el sitio web de ODES (ES)"。
 
 ## 本地开发

@@ -205,7 +205,7 @@ const fr: Dict = {
       meta: {
         title: "Catalyseurs, chimie de raffinage et principes actifs | ODES",
         description:
-          "ODES, basée à Shanghai, approvisionne catalyseurs de raffinage, produits chimiques de procédé, principes actifs et pièces de rechange auprès de fabricants chinois qualifiés, documents d'export inclus.",
+          "ODES (Shanghai) fournit catalyseurs, chimie de raffinage, principes actifs et pièces de rechange de fabricants chinois qualifiés, avec documents d'export.",
       },
       hero: {
         eyebrow: "SHANGHAI · APPROVISIONNEMENT ET EXPORT DEPUIS LA CHINE",
@@ -252,7 +252,7 @@ const fr: Dict = {
       meta: {
         title: "À propos — Shanghai Odes Technology Co., Ltd. | ODES",
         description:
-          "Shanghai Odes Technology Co., Ltd. est une société holding basée à Shanghai, spécialisée dans le négoce, l'approvisionnement et la coopération industrielle internationale depuis la Chine.",
+          "Shanghai Odes Technology Co., Ltd. est une holding de Shanghai dédiée au négoce, à l'approvisionnement et à la coopération industrielle internationale.",
       },
       crumb: "À propos",
       hero: {
@@ -293,7 +293,7 @@ const fr: Dict = {
       meta: {
         title: "Raffinage, principes actifs et pièces — Activités | ODES",
         description:
-          "Deux secteurs d'approvisionnement : pharmacie et sciences de la vie, et catalyseurs de raffinage, produits chimiques de procédé, matériaux fonctionnels et composants d'installation.",
+          "Deux secteurs : pharmacie et sciences de la vie ; catalyseurs de raffinage, produits chimiques de procédé, matériaux fonctionnels et composants d'usine.",
       },
       crumb: "Activités",
       hero: {
@@ -307,7 +307,7 @@ const fr: Dict = {
       meta: {
         title: "Principes actifs et consommables médicaux de Chine | ODES",
         description:
-          "Principes actifs (API), excipients, consommables médicaux et conditionnement pharmaceutique de fabricants chinois pour l'export, avec vérification CoA, BPF et DMF/CEP.",
+          "Principes actifs (API), excipients, consommables médicaux et conditionnements de fabricants chinois pour l'export, avec vérification CoA, BPF et DMF/CEP.",
       },
       crumb: "Pharmacie et sciences de la vie",
       serviceType: "Approvisionnement et exportation de principes actifs, d'excipients, de consommables médicaux et de conditionnement pharmaceutique",
@@ -364,7 +364,7 @@ const fr: Dict = {
       meta: {
         title: "Catalyseurs et chimie de raffinage de Chine | ODES",
         description:
-          "Catalyseurs d'hydrotraitement et de FCC, solvants aminés, traitement des eaux, additifs carburants, vannes, pompes et garnitures depuis la Chine, avec FDS, classement ONU et EN 10204.",
+          "Catalyseurs d'hydrotraitement et FCC, solvants aminés, traitement d'eau, additifs, vannes, pompes et garnitures de Chine, avec FDS, ONU et EN 10204.",
       },
       crumb: "Énergie, chimie et matériaux",
       serviceType: "Approvisionnement et exportation de catalyseurs de raffinage, de produits chimiques de procédé et de composants d'installation",
@@ -429,7 +429,7 @@ const fr: Dict = {
       meta: {
         title: "Contact — Devis raffinage et principes actifs | ODES",
         description:
-          "Contactez ODES Technology à Shanghai pour un devis en chimie de raffinage, principes actifs et pièces de rechange. Écrivez à info@odestech.cn ou utilisez le formulaire.",
+          "Contactez ODES à Shanghai pour un devis : chimie de raffinage, principes actifs, pièces de rechange. Écrivez à info@odestech.cn ou via le formulaire.",
       },
       crumb: "Contact",
       hero: {

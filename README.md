@@ -13,6 +13,8 @@ Website of ODES Technology (Shanghai Odes Technology Co., Ltd.).
 | Title, meta, hreflang, Open Graph, JSON-LD | `src/seo.ts` |
 | Sitemap, robots.txt, llms.txt, `_redirects`, `_headers` | `scripts/prerender.mjs` |
 | Images (pre-sized WebP + JPEG) | `public/images/` |
+| Apex → www 301, old-URL 301s, Markdown for agents | `functions/_middleware.js`, `scripts/redirects.mjs` |
+| SEO regression check (Ahrefs rules) / middleware tests | `scripts/check-seo.mjs` / `scripts/test-middleware.mjs` |
 
 ```bash
 npm install
@@ -20,4 +22,8 @@ npm install
 
 ```bash
 npm run build
+```
+
+```bash
+npm test && npm run check:seo
 ```

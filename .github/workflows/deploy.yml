@@ -41,8 +41,14 @@ jobs:
       - name: Type-check
         run: npm run check
 
+      - name: Middleware tests (redirects, Markdown negotiation)
+        run: npm test
+
       - name: Build (Vite client + SSR prerender)
         run: npm run build
+
+      - name: SEO check (Ahrefs Site Audit rules)
+        run: npm run check:seo
 
       - name: Verify output
         run: |

@@ -207,9 +207,9 @@ const en = {
   pages: {
     home: {
       meta: {
-        title: "China Sourcing: Refinery Chemicals, APIs & Plant Spares | ODES",
+        title: "Refinery Chemicals, APIs & Plant Spares from China | ODES",
         description:
-          "Shanghai-based ODES sources refinery catalysts, process chemicals, APIs and plant spare parts from qualified Chinese manufacturers, with export documents included.",
+          "Shanghai-based ODES sources refinery catalysts, process chemicals, APIs and plant spares from qualified Chinese manufacturers, export documents included.",
       },
       hero: {
         eyebrow: "SHANGHAI · CHINA SOURCING & EXPORT",
@@ -311,7 +311,7 @@ const en = {
       meta: {
         title: "API & Medical Consumables Sourcing from China | ODES",
         description:
-          "Active pharmaceutical ingredients, excipients, medical consumables and pharmaceutical packaging sourced from Chinese manufacturers for export, with CoA, GMP and DMF/CEP checks.",
+          "APIs, excipients, medical consumables and pharmaceutical packaging from Chinese manufacturers for export, with CoA, GMP and DMF/CEP checks.",
       },
       crumb: "Pharma & Life Sciences",
       serviceType: "Sourcing and export of active pharmaceutical ingredients, excipients, medical consumables and pharmaceutical packaging",
@@ -368,7 +368,7 @@ const en = {
       meta: {
         title: "Refinery Catalysts & Process Chemicals from China | ODES",
         description:
-          "Hydrotreating and FCC catalysts, amine solvents, water treatment chemicals, fuel additives, valves, pumps and seals sourced from China, with SDS, UN DG and EN 10204 documents.",
+          "Hydrotreating & FCC catalysts, amine solvents, water treatment, fuel additives, valves, pumps and seals from China, with SDS, UN DG and EN 10204 documents.",
       },
       crumb: "Energy, Chemicals & Materials",
       serviceType: "Sourcing and export of refining catalysts, process chemicals and plant components",

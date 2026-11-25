@@ -206,7 +206,7 @@ const pt: Dict = {
       meta: {
         title: "Químicos de refino, IFA e peças de reposição da China | ODES",
         description:
-          "A ODES, com sede em Xangai, fornece catalisadores de refino, químicos de processo, IFA e peças de reposição de fabricantes chineses qualificados, com documentos de exportação.",
+          "A ODES, em Xangai, fornece catalisadores e químicos de refino, IFA e peças de reposição de fabricantes chineses qualificados, com documentos de exportação.",
       },
       hero: {
         eyebrow: "XANGAI · SUPRIMENTO E EXPORTAÇÃO A PARTIR DA CHINA",
@@ -253,7 +253,7 @@ const pt: Dict = {
       meta: {
         title: "Sobre nós — Shanghai Odes Technology Co., Ltd. | ODES",
         description:
-          "A Shanghai Odes Technology Co., Ltd. é uma holding com sede em Xangai dedicada ao comércio, ao suprimento e à cooperação industrial internacional a partir da China.",
+          "A Shanghai Odes Technology Co., Ltd. é uma holding com sede em Xangai dedicada ao comércio, ao suprimento e à cooperação industrial internacional.",
       },
       crumb: "Sobre nós",
       hero: {
@@ -308,7 +308,7 @@ const pt: Dict = {
       meta: {
         title: "Suprimento de IFA e insumos médicos da China | ODES",
         description:
-          "Insumos farmacêuticos ativos (IFA/API), excipientes, insumos médicos e embalagens farmacêuticas de fabricantes chineses para exportação, com verificação de CoA, BPF e DMF/CEP.",
+          "IFA/API, excipientes, insumos médicos e embalagens farmacêuticas de fabricantes chineses para exportação, com verificação de CoA, BPF e DMF/CEP.",
       },
       crumb: "Farmacêutico e Ciências da Vida",
       serviceType: "Suprimento e exportação de insumos farmacêuticos ativos, excipientes, insumos médicos e embalagens farmacêuticas",
@@ -365,7 +365,7 @@ const pt: Dict = {
       meta: {
         title: "Catalisadores e químicos de refino da China | ODES",
         description:
-          "Catalisadores de hidrotratamento e FCC, solventes amínicos, tratamento de água, aditivos de combustíveis, válvulas, bombas e selos da China, com FDS, ONU e EN 10204.",
+          "Catalisadores de hidrotratamento e FCC, solventes amínicos, tratamento de água, aditivos, válvulas, bombas e selos da China, com FDS, ONU e EN 10204.",
       },
       crumb: "Energia, Química e Materiais",
       serviceType: "Suprimento e exportação de catalisadores de refino, químicos de processo e componentes de planta",
@@ -430,7 +430,7 @@ const pt: Dict = {
       meta: {
         title: "Contato — Cotação de químicos de refino e IFA | ODES",
         description:
-          "Fale com a ODES Technology em Xangai para cotar químicos de refino, IFA e peças de reposição. Escreva para info@odestech.cn ou use o formulário de consulta.",
+          "Fale com a ODES Technology em Xangai para cotar químicos de refino, IFA e peças de reposição. Escreva para info@odestech.cn ou use o formulário.",
       },
       crumb: "Contato",
       hero: {

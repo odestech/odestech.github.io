@@ -1,6 +1,6 @@
 import { FeatureIcon, IconArrow } from "../components/Icons";
 import { CtaBand, Faq, Picture, SectionHeader } from "../components/ui";
-import type { Dict } from "../content";
+import { HERO_ALT, type Dict } from "../content";
 import { pathFor, type Lang, type PageKey } from "../site";
 import { ProcessSection, SectorCards, ServicesSection } from "./shared";
 
@@ -12,7 +12,7 @@ export default function Home({ lang, t, alt }: { lang: Lang; t: Dict; alt: Dict 
       {/* ── Hero ───────────────────────────────────────────── */}
       <section className="relative min-h-[92svh] flex items-center overflow-hidden pt-16">
         <div className="absolute inset-0" aria-hidden="true">
-          <Picture name="hero" alt="" eager sizes="100vw" className="w-full h-full object-cover opacity-35" />
+          <Picture name="hero" alt={HERO_ALT[lang]} eager sizes="100vw" className="w-full h-full object-cover opacity-35" />
           <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.75) 55%, rgba(235,242,255,0.9) 100%)" }} />
           <div className="absolute inset-0 grid-bg" />
         </div>

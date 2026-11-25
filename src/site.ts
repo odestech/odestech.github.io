@@ -12,7 +12,8 @@ export const LANGS: Lang[] = ["en", "es", "fr", "pt", "zh"];
 
 /**
  * hreflang uses plain "es": Google only accepts ISO 3166-1 alpha-2 regions, so
- * "es-419" (Latin America) is ignored there. The page itself declares es-419.
+ * "es-419" (Latin America) is ignored there. The page's html lang is "es" too:
+ * Ahrefs reports "es-419" as an invalid HTML lang for the same reason.
  * Portuguese is written for Brazil (html lang pt-BR) but uses hreflang "pt",
  * so Portugal and other Portuguese speakers are not sent to the English page.
  */

@@ -10,7 +10,7 @@ import type { Dict } from "./en";
 
 const es: Dict = {
   lang: "es" as Lang,
-  htmlLang: "es-419",
+  htmlLang: "es",
   ogLocale: "es_LA",
   skip: "Saltar al contenido",
   menu: { open: "Abrir menú", close: "Cerrar menú" },
@@ -207,7 +207,7 @@ const es: Dict = {
       meta: {
         title: "Químicos de refinería, API y repuestos desde China | ODES",
         description:
-          "ODES, con sede en Shanghái, abastece catalizadores de refinería, químicos de proceso, API y repuestos de planta de fabricantes chinos calificados, con documentos de exportación.",
+          "Desde Shanghái, ODES abastece catalizadores y químicos de refinería, API y repuestos de fabricantes chinos calificados, con documentos de exportación.",
       },
       hero: {
         eyebrow: "SHANGHÁI · ABASTECIMIENTO Y EXPORTACIÓN DESDE CHINA",
@@ -254,7 +254,7 @@ const es: Dict = {
       meta: {
         title: "Nosotros — Shanghai Odes Technology Co., Ltd. | ODES",
         description:
-          "Shanghai Odes Technology Co., Ltd. es una empresa holding con sede en Shanghái dedicada al comercio, el abastecimiento y la colaboración industrial transfronteriza desde China.",
+          "Shanghai Odes Technology Co., Ltd. es un holding de Shanghái dedicado al comercio, el abastecimiento y la colaboración industrial transfronteriza.",
       },
       crumb: "Nosotros",
       hero: {
@@ -295,7 +295,7 @@ const es: Dict = {
       meta: {
         title: "Químicos de refinería, API y repuestos — Negocio | ODES",
         description:
-          "Dos sectores de abastecimiento: farmacéutica y ciencias de la vida, y catalizadores de refinación, químicos de proceso, materiales funcionales y componentes de planta.",
+          "Dos sectores: farmacéutica y ciencias de la vida; y catalizadores de refinación, químicos de proceso, materiales funcionales y componentes de planta.",
       },
       crumb: "Negocio",
       hero: {
@@ -309,7 +309,7 @@ const es: Dict = {
       meta: {
         title: "Abastecimiento de API e insumos médicos desde China | ODES",
         description:
-          "Principios activos (API), excipientes, insumos médicos y empaque farmacéutico de fabricantes chinos para exportación, con verificación de CoA, GMP y DMF/CEP.",
+          "Principios activos (API), excipientes, insumos médicos y empaque farmacéutico de fabricantes chinos para exportar, con verificación de CoA, GMP y DMF/CEP.",
       },
       crumb: "Farmacéutica y Ciencias de la Vida",
       serviceType: "Abastecimiento y exportación de principios activos, excipientes, insumos médicos y empaque farmacéutico",
@@ -366,7 +366,7 @@ const es: Dict = {
       meta: {
         title: "Catalizadores y químicos de refinería desde China | ODES",
         description:
-          "Catalizadores de hidrotratamiento y FCC, solventes de aminas, químicos para tratamiento de agua, aditivos de combustibles, válvulas, bombas y sellos desde China, con SDS, ONU y EN 10204.",
+          "Catalizadores de hidrotratamiento y FCC, solventes de aminas, tratamiento de agua, aditivos, válvulas, bombas y sellos de China, con SDS, ONU y EN 10204.",
       },
       crumb: "Energía, Químicos y Materiales",
       serviceType: "Abastecimiento y exportación de catalizadores de refinación, químicos de proceso y componentes de planta",
@@ -431,7 +431,7 @@ const es: Dict = {
       meta: {
         title: "Contacto — Cotice químicos de refinería y API | ODES",
         description:
-          "Contacte a ODES Technology en Shanghái para cotizar químicos de refinería, API y repuestos de planta. Escriba a info@odestech.cn o use el formulario de consulta.",
+          "Contacte a ODES Technology en Shanghái para cotizar químicos de refinería, API y repuestos. Escriba a info@odestech.cn o use el formulario de consulta.",
       },
       crumb: "Contacto",
       hero: {

@@ -1,4 +1,5 @@
 import { CtaBand, PageHero, Picture, SectionHeader } from "../components/ui";
+import { HERO_ALT } from "../content";
 import type { PageProps } from "./Home";
 
 export default function About({ lang, t, alt }: PageProps) {
@@ -17,7 +18,7 @@ export default function About({ lang, t, alt }: PageProps) {
             ))}
           </div>
           <div className="rounded-2xl overflow-hidden border border-line reveal">
-            <Picture name="hero" alt={{ en: "Container cranes at a port at dusk with an aircraft overhead", zh: "黄昏时分的港口集装箱起重机与上空的飞机", es: "Grúas portacontenedores en un puerto al atardecer con un avión en vuelo", fr: "Portiques à conteneurs dans un port au crépuscule, avec un avion en vol", pt: "Guindastes de contêineres em um porto ao entardecer, com um avião no céu" }[lang]} sizes="(min-width: 1024px) 600px, 100vw" className="w-full h-64 lg:h-80 object-cover" />
+            <Picture name="hero" alt={HERO_ALT[lang]} sizes="(min-width: 1024px) 600px, 100vw" className="w-full h-64 lg:h-80 object-cover" />
           </div>
         </div>
       </section>

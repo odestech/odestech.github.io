@@ -11,12 +11,12 @@ function Logo({ invert = false }: { invert?: boolean }) {
       <img
         src="/images/logo-64.png"
         srcSet="/images/logo-64.png 1x, /images/logo-128.png 2x"
-        alt=""
+        alt={ORG.brand}
         width={32}
         height={32}
         className={`w-8 h-8 ${invert ? "brightness-0 invert opacity-90" : ""}`}
       />
-      <span className="leading-none">
+      <span className="leading-none" aria-hidden="true">
         <span className={`block text-base font-semibold tracking-tight ${invert ? "text-white/90" : "text-ink"}`}>ODES</span>
         <span className="block text-[10px] font-semibold tracking-[0.15em] text-brand mt-0.5">TECHNOLOGY</span>
       </span>

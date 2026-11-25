@@ -16,7 +16,7 @@ export function SectorCards({ lang, t, alt, id, bg = "white", showBadges = true 
           {s.cards.map((c) => (
             <article key={c.key} className="card card-hover !p-0 overflow-hidden flex flex-col reveal">
               <a href={pathFor(lang, c.key as PageKey)} tabIndex={-1} aria-hidden="true" className="block">
-                <Picture name={c.img} alt="" sizes="(min-width: 1024px) 620px, 100vw" className="w-full h-52 lg:h-60 object-cover" />
+                <Picture name={c.img} alt={c.alt} sizes="(min-width: 1024px) 620px, 100vw" className="w-full h-52 lg:h-60 object-cover" />
               </a>
               <div className="p-7 lg:p-9 flex flex-col flex-1">
                 <p className="badge-pill self-start !text-[10px] tracking-wider">{c.tag}</p>

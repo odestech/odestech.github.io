@@ -8,12 +8,15 @@
  * 2. Old-URL 301s and security headers: Cloudflare does not apply _redirects
  *    or _headers to Function routes, so they are applied here.
  * 3. noindex on *.pages.dev so only www.odestech.cn is indexed.
+ * 4. The apex domain (odestech.cn) 301s to www.odestech.cn, path and query
+ *    kept, so crawlers never see a second copy of every page.
  */
-import { REDIRECTS } from "../scripts/redirects.mjs";
+import { ALIAS_HOSTS, CANONICAL_HOST, REDIRECTS } from "../scripts/redirects.mjs";
 
 const MD_TYPE = "text/markdown; charset=utf-8";
 const CONTENT_SIGNAL = "search=yes, ai-input=yes, ai-train=yes";
 const REDIRECT_MAP = new Map(REDIRECTS);
+const ALIASES = new Set(ALIAS_HOSTS);
 const SECURITY = {
   "X-Content-Type-Options": "nosniff",
   "Referrer-Policy": "strict-origin-when-cross-origin",
@@ -55,8 +58,18 @@ export async function onRequest(context) {
   const url = new URL(request.url);
   const path = url.pathname;
 
+  // Old path and/or alias host -> one 301 straight to the final URL (no chain).
   const target = REDIRECT_MAP.get(path) ?? (path.startsWith("/en/") ? path.slice(3) : undefined);
-  if (target) return Response.redirect(new URL(target, url).toString(), 301);
+  const alias = ALIASES.has(url.hostname);
+  if (target || alias) {
+    const dest = new URL(target ?? path, url);
+    dest.search = url.search;
+    if (alias) {
+      dest.protocol = "https:";
+      dest.host = CANONICAL_HOST;
+    }
+    return Response.redirect(dest.toString(), 301);
+  }
 
   if (request.method !== "GET" && request.method !== "HEAD") return next();
 
