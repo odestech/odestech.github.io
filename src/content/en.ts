@@ -14,7 +14,6 @@ const en = {
   lang: "en" as Lang,
   htmlLang: "en",
   ogLocale: "en_US",
-  langSwitch: { label: "中文", aria: "切换到中文版" },
   skip: "Skip to content",
   menu: { open: "Open menu", close: "Close menu" },
   motto: "Overseas · Dedicated · Excellent · Synergistic",

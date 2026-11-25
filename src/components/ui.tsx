@@ -65,8 +65,8 @@ export function SectionHeader({
       <h2 id={id} className="h-section reveal">
         {title}
       </h2>
-      {alt && (
-        <p className="alt-line reveal" lang={altLang === "zh" ? "zh-CN" : "en"} aria-hidden="true">
+      {alt && alt !== title && (
+        <p className="alt-line reveal" lang={altLang === "zh" ? "zh-CN" : altLang} aria-hidden="true">
           {alt}
         </p>
       )}

@@ -3,7 +3,7 @@
  * Cloudflare Pages serves alongside them.
  *
  *   dist/<path>/index.html   one per route and language (EN at /, ZH at /zh/)
- *   dist/404.html, dist/zh/404.html   Pages serves the nearest 404.html with status 404
+ *   dist/404.html, dist/zh/404.html, dist/es/404.html   Pages serves the nearest 404.html with status 404
  *   dist/sitemap.xml         with hreflang alternates
  *   dist/robots.txt          search and AI crawlers allowed, sitemap linked
  *   dist/llms.txt            short company brief for AI answer engines (llmstxt.org)
@@ -18,7 +18,7 @@ import { fileURLToPath, pathToFileURL } from "node:url";
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const dist = join(root, "dist");
 const ssr = await import(pathToFileURL(join(root, "dist-ssr", "entry-server.js")).href);
-const { render, notFoundRoute, ROUTES, DICTS, ORG, SITE_URL, pathFor } = ssr;
+const { render, notFoundRoute, ROUTES, DICTS, ORG, SITE_URL, pathFor, LANGS, LANG_META } = ssr;
 
 const template = readFileSync(join(dist, "index.html"), "utf8");
 if (!template.includes("<!--app-html-->") || !template.includes("<!--app-head-->")) {
@@ -43,16 +43,15 @@ const write = (rel, content) => {
 for (const route of ROUTES) {
   write(join(route.path, "index.html"), fill(route));
 }
-write("404.html", fill(notFoundRoute("en")));
-write("zh/404.html", fill(notFoundRoute("zh")));
-console.log(`prerendered ${ROUTES.length} pages + 2 not-found pages`);
+for (const l of LANGS) write(l === "en" ? "404.html" : `${l}/404.html`, fill(notFoundRoute(l)));
+console.log(`prerendered ${ROUTES.length} pages + ${LANGS.length} not-found pages`);
 
 // ── sitemap.xml ─────────────────────────────────────────────────────────────
 const today = new Date().toISOString().slice(0, 10);
-const hreflang = (l) => (l === "zh" ? "zh-CN" : "en");
+const hreflang = (l) => LANG_META[l].hreflang;
 const priority = { home: "1.0", business: "0.9", pharma: "0.9", energy: "0.9", contact: "0.8", about: "0.7" };
 const urls = ROUTES.map((r) => {
-  const alts = ["en", "zh"]
+  const alts = LANGS
     .map((l) => `    <xhtml:link rel="alternate" hreflang="${hreflang(l)}" href="${SITE_URL}${pathFor(l, r.key)}"/>`)
     .concat(`    <xhtml:link rel="alternate" hreflang="x-default" href="${SITE_URL}${pathFor("en", r.key)}"/>`)
     .join("\n");
@@ -90,6 +89,7 @@ write(
 // ── llms.txt / llms-full.txt ────────────────────────────────────────────────
 const en = DICTS.en;
 const zh = DICTS.zh;
+const es = DICTS.es;
 const page = (l, k) => `${SITE_URL}${pathFor(l, k)}`;
 const facts = [
   `- Legal name: ${ORG.legalName.en} (${ORG.legalName.zh})`,
@@ -101,7 +101,8 @@ const facts = [
   `- Quotation time: a complete enquiry is normally quoted within one business day`,
   `- Third-party inspection: SGS, Bureau Veritas or TÜV where required`,
   `- Regulatory filings: ODES does not hold DMF/CEP filings; it identifies which manufacturer holds them and confirms in writing`,
-  `- Working languages: English, Chinese`,
+  `- Working languages: English, Chinese (enquiries in Spanish accepted)`,
+  `- Site languages: English (/), Chinese (/zh/), Spanish for Latin America (/es/)`,
   `- Email: ${ORG.email} · Phone: ${ORG.phoneDisplay} · LinkedIn: ${ORG.linkedin}`,
 ];
 write(
@@ -130,6 +131,14 @@ write(
     `- [关于我们](${page("zh", "about")}): ${zh.pages.about.meta.description}`,
     `- [联系我们](${page("zh", "contact")}): ${zh.pages.contact.meta.description}`,
     "",
+    "## Páginas en español (Latinoamérica)",
+    `- [Inicio](${page("es", "home")}): ${es.pages.home.meta.description}`,
+    `- [Negocio](${page("es", "business")}): ${es.pages.business.meta.description}`,
+    `- [Farmacéutica y ciencias de la vida](${page("es", "pharma")}): ${es.pages.pharma.meta.description}`,
+    `- [Energía, químicos y materiales](${page("es", "energy")}): ${es.pages.energy.meta.description}`,
+    `- [Nosotros](${page("es", "about")}): ${es.pages.about.meta.description}`,
+    `- [Contacto](${page("es", "contact")}): ${es.pages.contact.meta.description}`,
+    "",
     "## Optional",
     `- [Full site text](${SITE_URL}/llms-full.txt): every page's content in one Markdown file`,
     "",
@@ -139,7 +148,7 @@ write(
 const md = (t) => {
   const out = [];
   const p = t.pages;
-  out.push(`# ${ORG.brand} — ${t === en ? "full site text" : "网站全文"}`, "");
+  out.push(`# ${ORG.brand} — ${{ en: "full site text", zh: "网站全文", es: "texto completo del sitio" }[t.lang]}`, "");
   out.push(`> ${p.home.meta.description}`, "");
   out.push(`## ${p.about.hero.title}`, "", p.about.hero.lead, "", ...p.about.body.flatMap((b) => [b, ""]));
   out.push(`### ${p.about.details.title}`, "", ...p.about.details.rows.map(([k, v]) => `- ${k}: ${v}`), "");
@@ -168,7 +177,7 @@ const md = (t) => {
   out.push(`## ${p.contact.crumb}`, "", `- ${t.common.labels.email}: ${ORG.email}`, `- ${t.common.labels.phone}: ${ORG.phoneDisplay}`, `- ${t.common.labels.address}: ${ORG.legalName[t.lang]}, ${ORG.address[t.lang].oneLine}`, `- ${t.common.labels.linkedin}: ${ORG.linkedin}`, `- ${page(t.lang, "contact")}`, "");
   return out.join("\n");
 };
-write("llms-full.txt", `${md(en)}\n---\n\n${md(zh)}`);
+write("llms-full.txt", [en, zh, es].map(md).join("\n---\n\n"));
 
 // ── _redirects (Cloudflare Pages) ───────────────────────────────────────────
 write(

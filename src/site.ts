@@ -6,17 +6,27 @@
 
 export const SITE_URL = "https://www.odestech.cn";
 
-export type Lang = "en" | "zh";
-export const LANGS: Lang[] = ["en", "zh"];
+export type Lang = "en" | "zh" | "es";
+export const LANGS: Lang[] = ["en", "zh", "es"];
+
+/**
+ * hreflang uses plain "es": Google only accepts ISO 3166-1 alpha-2 regions, so
+ * "es-419" (Latin America) is ignored there. The page itself declares es-419.
+ */
+export const LANG_META: Record<Lang, { label: string; name: string; hreflang: string; switchAria: string; siteLink: string }> = {
+  en: { label: "EN", name: "English", hreflang: "en", switchAria: "English version", siteLink: "English site" },
+  zh: { label: "中文", name: "中文", hreflang: "zh-CN", switchAria: "中文版", siteLink: "中文网站" },
+  es: { label: "ES", name: "Español", hreflang: "es", switchAria: "Versión en español", siteLink: "Sitio en español" },
+};
 
 export const ORG = {
   brand: "ODES Technology",
   shortName: "ODES",
-  legalName: { en: "Shanghai Odes Technology Co., Ltd.", zh: "上海奥得斯科技有限公司" },
+  legalName: { en: "Shanghai Odes Technology Co., Ltd.", zh: "上海奥得斯科技有限公司", es: "Shanghai Odes Technology Co., Ltd." },
   email: "info@odestech.cn",
   phone: "+86-177-1787-6827",
   phoneDisplay: "+86 177 1787 6827",
-  contactPerson: { en: "Luis (CEO)", zh: "Luis（CEO）" },
+  contactPerson: { en: "Luis (CEO)", zh: "Luis（CEO）", es: "Luis (CEO)" },
   linkedin: "https://www.linkedin.com/company/112375931/",
   formspree: "https://formspree.io/f/xyeyqznk",
   address: {
@@ -25,6 +35,12 @@ export const ORG = {
       locality: "Shanghai",
       region: "Shanghai",
       oneLine: "Room 712-596, Floor 7, No. 400 Zhejiang Middle Rd, Huangpu District, Shanghai 200001, China",
+    },
+    es: {
+      street: "Room 712-596, Floor 7, No. 400 Zhejiang Middle Rd, Huangpu District",
+      locality: "Shanghai",
+      region: "Shanghai",
+      oneLine: "Room 712-596, Floor 7, No. 400 Zhejiang Middle Rd, Huangpu District, Shanghái 200001, China",
     },
     zh: {
       street: "黄浦区浙江中路 400 号 7 楼 712-596 室",
@@ -51,9 +67,9 @@ const PATHS: Record<Exclude<PageKey, "notfound">, string> = {
 };
 
 export function pathFor(lang: Lang, key: PageKey): string {
-  if (key === "notfound") return lang === "zh" ? "/zh/404/" : "/404/";
-  const p = PATHS[key];
-  return lang === "zh" ? `/zh${p}` : p;
+  const prefix = lang === "en" ? "" : `/${lang}`;
+  if (key === "notfound") return `${prefix}/404/`;
+  return `${prefix}${PATHS[key]}`;
 }
 
 export const absUrl = (path: string) => `${SITE_URL}${path}`;
@@ -70,8 +86,13 @@ export function resolveRoute(pathname: string): Route {
   if (!p.endsWith("/")) p += "/";
   const hit = ROUTES.find((r) => r.path === p);
   if (hit) return hit;
-  const lang: Lang = p.startsWith("/zh/") ? "zh" : "en";
+  const lang: Lang = LANGS.find((l) => l !== "en" && p.startsWith(`/${l}/`)) ?? "en";
   return { lang, key: "notfound", path: pathFor(lang, "notfound") };
 }
 
-export const otherLang = (lang: Lang): Lang => (lang === "en" ? "zh" : "en");
+/**
+ * Language whose headings appear as the italic subtitle under each section
+ * heading (the original EN/中文 bilingual design). Spanish pages pair with
+ * themselves, which suppresses the subtitle.
+ */
+export const altLang = (lang: Lang): Lang => (lang === "en" ? "zh" : lang === "zh" ? "en" : lang);

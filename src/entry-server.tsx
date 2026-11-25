@@ -16,4 +16,4 @@ export function render(route: Route) {
 
 export const notFoundRoute = (lang: Lang): Route => ({ lang, key: "notfound", path: pathFor(lang, "notfound") });
 export { DICTS, ROUTES };
-export { ORG, SITE_URL, pathFor } from "./site";
+export { LANGS, LANG_META, ORG, SITE_URL, pathFor } from "./site";

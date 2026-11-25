@@ -25,9 +25,15 @@
 - Contact form posts to the existing Formspree endpoint (React version was a fake alert)
 
 ## Last step
-QA passed: 12 pages hydrate with 0 console errors; 1 <h1> + canonical + hreflang + JSON-LD per page; sitemap valid; form validation and Formspree payload verified (request mocked); mobile width 390px, no horizontal scroll. Committed and pushed to `claude/zen-fermat-elxkps`.
+Phase 2 QA passed: 18 pages + 3 not-found pages; all sampled EN/ZH/ES pages hydrate with 0 console errors; 4 hreflang links per page; ES form submit verified (mocked); desktop header fits at 1100 px; mobile 390 px no overflow. Pushed to `claude/zen-fermat-elxkps`.
 
 ## Next action (Luis)
-Follow `docs/DEPLOY.md`: add CLOUDFLARE_API_TOKEN + CLOUDFLARE_ACCOUNT_ID secrets → re-run workflow → review preview → merge to main → attach custom domain → disable GitHub Pages → check Cloudflare AI-bot settings → submit sitemap to Google/Bing/Baidu.
+Check Cloudflare build settings (docs/DEPLOY.md, "合并到 main 之前") → merge to main → run the post-launch checks.
 
-Updated: 2026-11-25 (all stages done)
+## Phase 2 — Spanish (Latin America) + Cloudflare Git integration (2026-11-25)
+- ✅ 7. Spanish locale at /es/ (3-language routing, switcher, hreflang, JSON-LD, sitemap, llms)
+- ✅ 8. Switch deploy to Cloudflare Git integration (Actions = build check only), update docs
+- ✅ 9. QA + push (branch)
+Decisions: Formspree unchanged; no China network; hreflang "es" (Google does not accept es-419), html lang es-419.
+
+Updated: 2026-11-25

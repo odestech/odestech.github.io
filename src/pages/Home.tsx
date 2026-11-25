@@ -44,7 +44,7 @@ export default function Home({ lang, t, alt }: { lang: Lang; t: Dict; alt: Dict 
           <div className="absolute right-8 top-1/2 -translate-y-1/2 hidden xl:flex flex-col items-center gap-3 hero-in hero-in-3" aria-hidden="true">
             <div className="text-center">
               <div className="text-2xl font-bold text-brand tracking-tight">CN</div>
-              <div className="text-xs font-medium text-muted mt-0.5">{lang === "zh" ? "中国" : "China"}</div>
+              <div className="text-xs font-medium text-muted mt-0.5">{{ en: "China", zh: "中国", es: "China" }[lang]}</div>
             </div>
             <div className="flex flex-col items-center gap-1 text-brand">
               <div className="w-px h-8" style={{ background: "linear-gradient(var(--color-brand), transparent)" }} />
@@ -53,14 +53,14 @@ export default function Home({ lang, t, alt }: { lang: Lang; t: Dict; alt: Dict 
             </div>
             <div className="text-center">
               <div className="text-2xl font-bold text-brand tracking-tight">US</div>
-              <div className="text-xs font-medium text-muted mt-0.5">{lang === "zh" ? "美国" : "United States"}</div>
+              <div className="text-xs font-medium text-muted mt-0.5">{{ en: "United States", zh: "美国", es: "Estados Unidos" }[lang]}</div>
             </div>
           </div>
         </div>
       </section>
 
       {/* ── Facts bar (verifiable figures only) ─────────────── */}
-      <section className="py-14 lg:py-16 bg-brand-pale border-y border-brand/10" aria-label={lang === "zh" ? "关键信息" : "Key facts"}>
+      <section className="py-14 lg:py-16 bg-brand-pale border-y border-brand/10" aria-label={{ en: "Key facts", zh: "关键信息", es: "Datos clave" }[lang]}>
         <div className="container">
           <dl className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-0 lg:divide-x lg:divide-brand/15">
             {t.facts.map((s, i) => (

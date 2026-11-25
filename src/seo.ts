@@ -13,7 +13,7 @@
  *   FAQPage wherever the page shows a FAQ
  */
 import { DICTS } from "./content";
-import { LANGS, ORG, SITE_URL, absUrl, pathFor, type Lang, type PageKey, type Route } from "./site";
+import { LANGS, LANG_META, ORG, SITE_URL, absUrl, pathFor, type Lang, type PageKey, type Route } from "./site";
 
 const esc = (s: string) => s.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
@@ -44,14 +44,14 @@ function meta(lang: Lang, key: PageKey) {
 }
 
 function organization(lang: Lang) {
-  const other: Lang = lang === "en" ? "zh" : "en";
   const a = ORG.address[lang];
+  const otherNames = [...new Set(LANGS.map((l) => ORG.legalName[l]))].filter((n) => n !== ORG.legalName[lang]);
   return {
     "@type": "Organization",
     "@id": `${SITE_URL}/#organization`,
     name: ORG.brand,
     legalName: ORG.legalName[lang],
-    alternateName: [ORG.shortName, ORG.legalName[other]],
+    alternateName: [ORG.shortName, ...otherNames],
     url: `${SITE_URL}/`,
     logo: {
       "@type": "ImageObject",
@@ -131,7 +131,7 @@ function jsonLd(route: Route) {
     name: ORG.brand,
     alternateName: ORG.legalName.zh,
     description: DICTS.en.pages.home.meta.description,
-    inLanguage: ["en", "zh-CN"],
+    inLanguage: LANGS.map((l) => DICTS[l].htmlLang),
     publisher: { "@id": `${SITE_URL}/#organization` },
   });
 
@@ -228,7 +228,7 @@ export function buildHead(route: Route): string {
   if (!isNotFound) {
     tags.push(`<link rel="canonical" href="${url}">`);
     for (const l of LANGS) {
-      tags.push(`<link rel="alternate" hreflang="${l === "zh" ? "zh-CN" : "en"}" href="${absUrl(pathFor(l, key))}">`);
+      tags.push(`<link rel="alternate" hreflang="${LANG_META[l].hreflang}" href="${absUrl(pathFor(l, key))}">`);
     }
     tags.push(`<link rel="alternate" hreflang="x-default" href="${absUrl(pathFor("en", key))}">`);
   }
@@ -244,7 +244,7 @@ export function buildHead(route: Route): string {
     `<meta property="og:image:height" content="630">`,
     `<meta property="og:image:alt" content="${esc(ORG.brand)}">`,
     `<meta property="og:locale" content="${t.ogLocale}">`,
-    `<meta property="og:locale:alternate" content="${DICTS[lang === "en" ? "zh" : "en"].ogLocale}">`,
+    ...LANGS.filter((l) => l !== lang).map((l) => `<meta property="og:locale:alternate" content="${DICTS[l].ogLocale}">`),
     `<meta name="twitter:card" content="summary_large_image">`,
     `<meta name="twitter:title" content="${esc(m.title)}">`,
     `<meta name="twitter:description" content="${esc(m.description)}">`,

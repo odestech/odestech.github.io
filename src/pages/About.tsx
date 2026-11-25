@@ -17,7 +17,7 @@ export default function About({ lang, t, alt }: PageProps) {
             ))}
           </div>
           <div className="rounded-2xl overflow-hidden border border-line reveal">
-            <Picture name="hero" alt={lang === "zh" ? "黄昏时分的港口集装箱起重机与上空的飞机" : "Container cranes at a port at dusk with an aircraft overhead"} sizes="(min-width: 1024px) 600px, 100vw" className="w-full h-64 lg:h-80 object-cover" />
+            <Picture name="hero" alt={{ en: "Container cranes at a port at dusk with an aircraft overhead", zh: "黄昏时分的港口集装箱起重机与上空的飞机", es: "Grúas portacontenedores en un puerto al atardecer con un avión en vuelo" }[lang]} sizes="(min-width: 1024px) 600px, 100vw" className="w-full h-64 lg:h-80 object-cover" />
           </div>
         </div>
       </section>

@@ -1,6 +1,6 @@
 import { useEffect, useState, type ReactNode } from "react";
 import type { Dict } from "../content";
-import { ORG, otherLang, pathFor, type Lang, type PageKey } from "../site";
+import { LANGS, LANG_META, ORG, pathFor, type Lang, type PageKey } from "../site";
 import { IconArrow, IconMail, IconMenu, IconPhone, IconX } from "./Icons";
 
 declare const __BUILD_YEAR__: string;
@@ -21,6 +21,35 @@ function Logo({ invert = false }: { invert?: boolean }) {
         <span className="block text-[10px] font-semibold tracking-[0.15em] text-brand mt-0.5">TECHNOLOGY</span>
       </span>
     </span>
+  );
+}
+
+/** EN · 中文 · ES — links to the same page in each language. */
+function LangSwitch({ lang, page, dark = false }: { lang: Lang; page: PageKey; dark?: boolean }) {
+  const target = page === "notfound" ? "home" : page;
+  return (
+    <ul className={`flex items-center rounded-full p-0.5 text-sm font-medium border ${dark ? "border-white/20" : "border-brand/25"}`}>
+      {LANGS.map((l) => {
+        const cur = l === lang;
+        const m = LANG_META[l];
+        return (
+          <li key={l}>
+            <a
+              href={pathFor(l, target)}
+              hrefLang={m.hreflang}
+              lang={m.hreflang}
+              aria-label={m.switchAria}
+              aria-current={cur ? "true" : undefined}
+              className={`block px-2.5 py-1 rounded-full whitespace-nowrap transition-colors ${
+                cur ? (dark ? "bg-white text-ink" : "bg-brand text-white") : dark ? "text-white/80 hover:text-white" : "text-brand hover:bg-brand-pale"
+              }`}
+            >
+              {m.label}
+            </a>
+          </li>
+        );
+      })}
+    </ul>
   );
 }
 
@@ -78,8 +107,6 @@ export default function Layout({
     return () => window.removeEventListener("keydown", onKey);
   }, [open]);
 
-  const other = otherLang(lang);
-  const switchHref = pathFor(other, page === "notfound" ? "home" : page);
   const contactHref = pathFor(lang, "contact") + "#enquiry";
   const solid = scrolled || open;
 
@@ -103,24 +130,16 @@ export default function Layout({
           <a href={pathFor(lang, "home")} aria-label={`ODES Technology — ${t.common.home}`}>
             <Logo />
           </a>
-          <nav aria-label="Main" className="hidden lg:flex items-center gap-7">
+          <nav aria-label="Main" className="hidden lg:flex items-center gap-5 xl:gap-7">
             {t.nav.map((n) => (
-              <a key={n.key} href={pathFor(lang, n.key as PageKey)} className="nav-link" aria-current={page === n.key ? "page" : undefined}>
+              <a key={n.key} href={pathFor(lang, n.key as PageKey)} className="nav-link whitespace-nowrap" aria-current={page === n.key ? "page" : undefined}>
                 {n.label}
               </a>
             ))}
           </nav>
           <div className="hidden lg:flex items-center gap-3">
-            <a
-              href={switchHref}
-              hrefLang={other === "zh" ? "zh-CN" : "en"}
-              lang={other === "zh" ? "zh-CN" : "en"}
-              aria-label={t.langSwitch.aria}
-              className="text-sm font-medium px-3 py-1.5 rounded-full text-brand border border-brand/30 hover:bg-brand-pale"
-            >
-              {t.langSwitch.label}
-            </a>
-            <a href={contactHref} className="btn-primary !py-2 !text-sm">
+            <LangSwitch lang={lang} page={page} />
+            <a href={contactHref} className="btn-primary !py-2 !text-sm whitespace-nowrap !hidden xl:!inline-flex">
               {t.cta}
             </a>
           </div>
@@ -190,15 +209,7 @@ export default function Layout({
           ))}
         </nav>
         <div className="px-5 pb-10 pt-5 border-t border-white/10 flex items-center justify-between">
-          <a
-            href={switchHref}
-            hrefLang={other === "zh" ? "zh-CN" : "en"}
-            lang={other === "zh" ? "zh-CN" : "en"}
-            aria-label={t.langSwitch.aria}
-            className="text-sm font-medium px-4 py-2 rounded-full text-white border border-white/20"
-          >
-            {t.langSwitch.label}
-          </a>
+          <LangSwitch lang={lang} page={page} dark />
           <a href={contactHref} onClick={() => setOpen(false)} className="btn-primary">
             {t.cta}
           </a>
@@ -245,11 +256,13 @@ export default function Layout({
                     LinkedIn
                   </a>
                 </li>
-                <li>
-                  <a className="hover:text-white" href={switchHref} hrefLang={other === "zh" ? "zh-CN" : "en"} lang={other === "zh" ? "zh-CN" : "en"}>
-                    {other === "zh" ? "中文网站" : "English site"}
-                  </a>
-                </li>
+                {LANGS.filter((l) => l !== lang).map((l) => (
+                  <li key={l}>
+                    <a className="hover:text-white" href={pathFor(l, page === "notfound" ? "home" : page)} hrefLang={LANG_META[l].hreflang} lang={LANG_META[l].hreflang}>
+                      {LANG_META[l].siteLink}
+                    </a>
+                  </li>
+                ))}
               </ul>
             </div>
             <address className="not-italic text-sm space-y-2.5">

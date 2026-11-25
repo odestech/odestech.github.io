@@ -6,12 +6,12 @@ import Contact from "./pages/Contact";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import Sector from "./pages/Sector";
-import { otherLang, type Route } from "./site";
+import { altLang, type Route } from "./site";
 
 export default function App({ route }: { route: Route }) {
   const { lang, key } = route;
   const t = DICTS[lang];
-  const alt = DICTS[otherLang(lang)];
+  const alt = DICTS[altLang(lang)];
   const props = { lang, t, alt };
   let page;
   switch (key) {

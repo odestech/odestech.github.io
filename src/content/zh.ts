@@ -9,7 +9,6 @@ const zh: Dict = {
   lang: "zh" as Lang,
   htmlLang: "zh-CN",
   ogLocale: "zh_CN",
-  langSwitch: { label: "EN", aria: "Switch to English" },
   skip: "跳到正文",
   menu: { open: "打开菜单", close: "关闭菜单" },
   motto: "海外视角 · 专注 · 卓越 · 协同",

@@ -1,50 +1,59 @@
-# 部署指南：Cloudflare Pages（www.odestech.cn）
+# 部署指南：Cloudflare Pages（Git 集成，www.odestech.cn）
 
-本站由 GitHub Actions 构建（Vite + React，构建时预渲染为静态 HTML），推送后自动发布到 Cloudflare Pages。
-`main` 分支 = 正式站；其他分支 = 预览站 `<分支名>.odestech.pages.dev`（已设 noindex，不会被搜索引擎收录）。
+Cloudflare Pages 直接连接本仓库，每次推送由 Cloudflare 自己构建：
+`main` = 正式站；其他分支 = 预览站 `<分支名>.<项目名>.pages.dev`（已设 noindex）。
+GitHub Actions（`.github/workflows/deploy.yml`）只做构建检查，不发布任何东西。
 
-## 一次性配置（按顺序，约 30 分钟）
+站点语言：英文 `/`、中文 `/zh/`、西班牙语（拉美）`/es/`。
 
-| # | 动作 | 在哪里 | 负责人 | 完成标志 |
-|---|------|--------|--------|----------|
-| 1 | 创建 API Token：模板 **Edit Cloudflare Workers** 或自定义权限 **Account → Cloudflare Pages → Edit** | Cloudflare → My Profile → API Tokens | Luis | 得到一串 token（只显示一次） |
-| 2 | 复制 **Account ID** | Cloudflare → 任一域名概览页右侧 / Workers & Pages 页面 | Luis | 32 位 ID |
-| 3 | 添加仓库 Secrets：`CLOUDFLARE_API_TOKEN`、`CLOUDFLARE_ACCOUNT_ID` | GitHub 仓库 → Settings → Secrets and variables → Actions | Luis | 两个 secret 已列出 |
-| 4 | 重新运行最近一次工作流（Actions → Build and deploy → Re-run） | GitHub → Actions | Luis | 日志里出现 `https://xxxx.odestech.pages.dev` |
-| 5 | 在预览地址检查中英文各页、提交一次测试询盘 | 浏览器 | Luis | Formspree 收到邮件 |
-| 6 | 合并到 `main`（生产部署） | GitHub PR | Luis | `odestech.pages.dev` 显示新站 |
-| 7 | 绑定自定义域名 `www.odestech.cn` 和 `odestech.cn` | Workers & Pages → odestech → Custom domains | Luis | 状态 Active |
-| 8 | 根域跳转：`odestech.cn/*` → `https://www.odestech.cn/$1`（301） | 域名 → Rules → Redirect Rules | Luis | 访问根域自动跳到 www |
-| 9 | 关闭 GitHub Pages（第 7 步生效后再做） | GitHub 仓库 → Settings → Pages → Unpublish / Source: None | Luis | 旧站下线 |
+## 合并到 main 之前必须核对（否则构建会失败）
 
-### 第 7 步的两种情况
-- **odestech.cn 的 DNS 已在 Cloudflare**：添加自定义域名时 Cloudflare 自动建记录，几分钟生效。
-- **DNS 还在注册商（阿里云/腾讯云等）**：
-  - 只接 `www`：在注册商处把 `www` 的 CNAME 改为 `odestech.pages.dev`。
-  - 根域 `odestech.cn` 也要接：必须把域名 NS 改到 Cloudflare（Cloudflare 支持 .cn 域名）。改 NS 前先在 Cloudflare 导入现有全部 DNS 记录，**尤其是 MX 邮件记录**，否则 info@odestech.cn 会收不到邮件。
+旧站是 Hugo。如果 Cloudflare 项目还保留 Hugo 的构建设置，新代码合并后会构建失败，线上仍是旧版本。
 
-## 影响 SEO / GEO 的 Cloudflare 开关（必须检查）
+位置：Cloudflare → Workers & Pages → 你的项目 → Settings → Build
+
+| 设置 | 必须是 |
+|------|--------|
+| Framework preset | None（或 Vite） |
+| Build command | `npm run build` |
+| Build output directory | `dist` |
+| Root directory | 留空（仓库根目录） |
+| Production branch | `main` |
+| 环境变量 `HUGO_VERSION` 等 | 删除（不再需要） |
+
+Node 版本由仓库里的 `.node-version`（22）指定，Cloudflare 构建镜像会自动读取。
+
+## 上线后检查
+
+| # | 动作 | 位置 | 完成标志 |
+|---|------|------|----------|
+| 1 | 打开 `/`、`/zh/`、`/es/`，点顶部 EN · 中文 · ES 切换 | 浏览器 | 三种语言同一页面互相跳转 |
+| 2 | 用西语表单提交一条测试询盘 | `/es/contact/` | Formspree 邮件标题含 "(ES)" |
+| 3 | 访问 `/business/industrial/` | 浏览器 | 301 跳到 `/business/energy/` |
+| 4 | 关闭 GitHub Pages（如果还开着） | GitHub → Settings → Pages | 不再有第二个站点 |
+| 5 | 根域跳转 `odestech.cn/*` → `https://www.odestech.cn/$1`（301） | 域名 → Rules → Redirect Rules | 根域跳到 www |
+
+## 影响 SEO / GEO 的 Cloudflare 开关
 
 | 设置 | 位置 | 应设为 | 原因 |
 |------|------|--------|------|
-| Block AI bots / AI Crawl Control | Security → Bots；AI Crawl Control | **允许**（不拦截） | 新域名默认可能拦截 GPTBot、ClaudeBot、PerplexityBot，等于关掉 GEO |
-| Managed robots.txt | AI Crawl Control / Security → Bots | **关闭** | 开启时 Cloudflare 会改写站内 robots.txt |
+| Block AI bots / AI Crawl Control | Security → Bots；AI Crawl Control | 允许 | 拦截 GPTBot、ClaudeBot、PerplexityBot 等于关掉 GEO |
+| Managed robots.txt | AI Crawl Control | 关闭 | 开启时 Cloudflare 会改写站内 robots.txt |
 | Bot Fight Mode | Security → Bots | 关闭，或确认不拦截已验证爬虫 | 防止误伤 Googlebot / Bingbot |
 | Always Use HTTPS | SSL/TLS → Edge Certificates | 开 | canonical 全部是 https |
-| Web Analytics | Workers & Pages → odestech → Metrics | 开 | 免代码统计，不受 Google 在中国不可用影响 |
+| Web Analytics | 项目 → Metrics | 开 | 免代码访问统计 |
 
-## 上线后 48 小时内
+## 搜索引擎提交
 
-1. **Google Search Console**：提交 `https://www.odestech.cn/sitemap.xml`，对首页和两个业务页"请求编入索引"。
-2. **Bing Webmaster Tools**：从 Search Console 导入站点并提交 sitemap。ChatGPT 搜索、Copilot 的检索依赖 Bing 索引，这是 GEO 的关键一步。
-3. **百度搜索资源平台**：提交 `/zh/` 页面（国内采购方搜索中文）。
-4. 用 [Rich Results Test](https://search.google.com/test/rich-results) 检查首页和 `/business/energy/` 的结构化数据无错误。
-5. 访问 `https://www.odestech.cn/business/industrial/`，确认 301 到 `/business/energy/`（旧 Hugo 地址）。
+1. Google Search Console：提交 `https://www.odestech.cn/sitemap.xml`（包含三种语言、互相标注 hreflang）。
+2. Bing Webmaster Tools：导入站点并提交 sitemap。ChatGPT 搜索和 Copilot 依赖 Bing 索引。
+3. 百度搜索资源平台：提交 `/zh/` 页面。
+4. 西语市场的 Google 结果按国家区分，可在 Search Console → 效果 → 国家 查看墨西哥、哥伦比亚、智利等的展示量。
 
-## 已知限制
+## 说明
 
-- Cloudflare 在中国大陆没有 ICP 备案就不能使用其中国网络，大陆访问走海外节点，速度一般但可用；`*.pages.dev` 在大陆部分地区被干扰，以自定义域名为准。
-- 询盘表单走 Formspree（美国），表单里已有告知同意条款；免费版每月 50 条，超量需升级。
+- hreflang 用 `es` 而不是 `es-419`：Google 只认 ISO 3166-1 两位国家码，`es-419` 会被忽略。页面本身的 `lang` 是 `es-419`（拉美西语）。
+- 询盘表单沿用 Formspree，三种语言共用同一个地址；邮件标题分别为 "ODES website enquiry"、"ODES 网站询盘"、"Consulta desde el sitio web de ODES (ES)"。
 
 ## 本地开发
 
@@ -60,4 +69,4 @@ npm run dev
 npm run build
 ```
 
-文案在 `src/content/en.ts` 与 `src/content/zh.ts`；公司信息（地址、电话、邮箱）只在 `src/site.ts` 改一处，页面、JSON-LD、sitemap、llms.txt 会同步更新。
+文案：`src/content/en.ts`、`zh.ts`、`es.ts`；公司信息只在 `src/site.ts` 改一处。
