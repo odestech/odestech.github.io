@@ -43,6 +43,13 @@ Node 版本由仓库里的 `.node-version`（22）指定，Cloudflare 构建镜�
 | Always Use HTTPS | SSL/TLS → Edge Certificates | 开 | canonical 全部是 https |
 | Web Analytics | 项目 → Metrics | 开 | 免代码访问统计 |
 
+## AI 代理（GEO）相关机制
+
+- `robots.txt` 第一组写了 `Content-Signal: search=yes, ai-input=yes, ai-train=yes`（Cloudflare Content Signals Policy）。若不想被用于模型训练，把 `scripts/prerender.mjs` 和 `functions/_middleware.js` 里的 `ai-train` 改为 `no`。
+- 每个页面在构建时额外生成 `index.md`。`functions/_middleware.js` 在请求头 `Accept` 偏好 `text/markdown` 时返回 Markdown（与 Cloudflare 付费版 "Markdown for Agents" 同样的协议），浏览器仍拿到 HTML。
+- Cloudflare 对 Function 路由不执行 `_redirects` / `_headers`，所以旧地址 301 和安全头也在中间件里实现；跳转清单只在 `scripts/redirects.mjs` 维护一处。
+- Function 只在页面地址上运行（`dist/_routes.json` 排除 `/assets/*`、`/images/*`），免费额度为每天 10 万次请求。
+
 ## 搜索引擎提交
 
 1. Google Search Console：提交 `https://www.odestech.cn/sitemap.xml`（包含三种语言、互相标注 hreflang）。

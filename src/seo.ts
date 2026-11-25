@@ -231,6 +231,7 @@ export function buildHead(route: Route): string {
       tags.push(`<link rel="alternate" hreflang="${LANG_META[l].hreflang}" href="${absUrl(pathFor(l, key))}">`);
     }
     tags.push(`<link rel="alternate" hreflang="x-default" href="${absUrl(pathFor("en", key))}">`);
+    tags.push(`<link rel="alternate" type="text/markdown" href="${url}index.md" title="Markdown version for AI agents">`);
   }
 
   tags.push(

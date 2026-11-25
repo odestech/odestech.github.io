@@ -41,6 +41,9 @@ Check Cloudflare build settings (docs/DEPLOY.md, "合并到 main 之前") → me
 - ✅ 14. DKIM TXT `myhd2611._domainkey` added (1024-bit RSA, read-back identical); verified in Tencent Exmail by Luis
 - ⬜ 15. Luis: Redirect Rule apex→www, AI Crawl Control allow, unpublish GitHub Pages, submit sitemaps; DMARC p=quarantine after 2–4 weeks of SPF+DKIM pass
 Finding: the Pages project had NO custom domain — www.odestech.cn is not served by Cloudflare Pages yet.
+## Phase 3 — GEO/SEO hardening on Cloudflare free plan (2026-11-25)
+- ⏳ 16. Content-Signal in robots.txt + per-page Markdown (index.md) + Pages Function for Accept: text/markdown negotiation
+- ⬜ 17. Test middleware locally, build, push, merge, verify via Cloudflare deploy
 Decisions: Formspree unchanged; no China network; hreflang "es" (Google does not accept es-419), html lang es-419.
 
 Updated: 2026-11-25

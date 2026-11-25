@@ -10,10 +10,14 @@
  *   dist/llms-full.txt       the full site text in Markdown, for the same purpose
  *   dist/_redirects          old Hugo URLs -> new ones (Cloudflare Pages syntax)
  *   dist/_headers            caching, security, noindex on *.pages.dev
+ *   dist/<path>/index.md     Markdown version of each page, served to AI agents that send
+ *                            "Accept: text/markdown" (see functions/_middleware.js)
+ *   dist/_routes.json        limits the Pages Function to page URLs (not assets or images)
  */
 import { mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
+import { REDIRECTS } from "./redirects.mjs";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const dist = join(root, "dist");
@@ -46,6 +50,91 @@ for (const route of ROUTES) {
 for (const l of LANGS) write(l === "en" ? "404.html" : `${l}/404.html`, fill(notFoundRoute(l)));
 console.log(`prerendered ${ROUTES.length} pages + ${LANGS.length} not-found pages`);
 
+// ── Markdown version of every page (for AI agents) ──────────────────────────
+// Same content as the HTML, without layout. functions/_middleware.js serves it
+// when a client asks for text/markdown, which is what Cloudflare's paid
+// "Markdown for Agents" does by converting HTML at the edge.
+const L = (lang, key) => `${SITE_URL}${pathFor(lang, key)}`;
+const bullets = (items) => items.map((i) => `- ${i}`);
+const faqMd = (faq) => faq.flatMap((f) => [`### ${f.q}`, "", f.a, ""]);
+const contactMd = (t) => [
+  `## ${t.pages.contact.crumb}`,
+  "",
+  `- ${t.common.labels.email}: ${ORG.email}`,
+  `- ${t.common.labels.phone}: ${ORG.phoneDisplay}`,
+  `- ${t.common.labels.address}: ${ORG.legalName[t.lang]}, ${ORG.address[t.lang].oneLine}`,
+  `- ${t.common.labels.languages}: ${t.common.labels.languagesValue}`,
+  `- ${t.common.labels.linkedin}: ${ORG.linkedin}`,
+  `- ${t.cta}: ${L(t.lang, "contact")}`,
+  "",
+];
+const sectorsMd = (t) => [
+  `## ${t.sectors.title}`,
+  "",
+  t.sectors.sub,
+  "",
+  ...t.sectors.cards.flatMap((c) => [`### ${c.title}`, "", c.desc, "", ...bullets(c.items), "", `${t.common.viewScope}: ${L(t.lang, c.key)}`, ""]),
+  `**${t.sectors.badgesTitle}:** ${t.sectors.badges.join(" · ")}`,
+  "",
+];
+const processMd = (t) => [`## ${t.process.title}`, "", ...t.process.steps.map((s, i) => `${i + 1}. **${s.title}** — ${s.body}`), ""];
+const servicesMd = (t) => [
+  `## ${t.services.title}`,
+  "",
+  t.services.sub,
+  "",
+  ...t.services.items.flatMap((s) => [`### ${s.title}`, "", `${s.headline} ${s.body}`, "", ...bullets(s.bullets), ""]),
+];
+const whyMd = (t) => [`## ${t.why.title}`, "", ...t.why.items.map((w) => `- **${w.title}**: ${w.body}`), ""];
+
+function pageMd(route) {
+  const t = DICTS[route.lang];
+  const p = t.pages[route.key];
+  const head = [`# ${p.meta.title}`, "", `> ${p.meta.description}`, "", `Source: ${SITE_URL}${route.path}`, ""];
+  let body = [];
+  switch (route.key) {
+    case "home": {
+      const h = p.hero;
+      body = [
+        `## ${h.line1} ${h.line2} ${h.line3}`, "", h.sub, "",
+        ...t.facts.map((f) => `- **${f.value} ${f.label}** — ${f.sub}`), "",
+        ...sectorsMd(t), ...processMd(t), ...whyMd(t), ...servicesMd(t),
+        `## ${t.common.faqTitle}`, "", ...faqMd(p.faq), ...contactMd(t),
+      ];
+      break;
+    }
+    case "about":
+      body = [
+        `## ${p.hero.title}`, "", p.hero.lead, "", ...p.body.flatMap((b) => [b, ""]),
+        `## ${p.values.title}`, "", ...p.values.items.map((v) => `- **${v.letter} — ${v.word}**: ${v.desc}`), "",
+        `## ${p.details.title}`, "", ...p.details.rows.map(([k, v]) => `- ${k}: ${v}`), "", ...contactMd(t),
+      ];
+      break;
+    case "business":
+      body = [`## ${p.hero.title}`, "", p.hero.lead, "", ...sectorsMd(t), ...processMd(t), ...servicesMd(t), ...contactMd(t)];
+      break;
+    case "pharma":
+    case "energy":
+      body = [
+        `## ${p.hero.title}`, "", p.hero.lead, "",
+        `## ${p.catalogTitle}`, "", ...p.catalog.flatMap((c) => [`### ${c.title}`, "", c.body, ""]),
+        ...p.blocks.flatMap((b) => [`## ${b.title}`, "", ...(b.intro ? [b.intro, ""] : []), ...bullets(b.items), ...(b.items.length ? [""] : []), ...(b.note ? [b.note, ""] : [])]),
+        `## ${p.enquiry.title}`, "", p.enquiry.intro, "", ...bullets(p.enquiry.items), "",
+        `## ${t.common.faqTitle}`, "", ...faqMd(p.faq), ...contactMd(t),
+      ];
+      break;
+    case "contact":
+      body = [`## ${p.hero.title}`, "", p.hero.lead, "", ...contactMd(t).slice(2), `## ${p.checklistTitle}`, "", ...bullets(p.checklist), ""];
+      break;
+  }
+  return [...head, ...body].join("\n").replace(/\n{3,}/g, "\n\n").trimEnd() + "\n";
+}
+for (const route of ROUTES) write(join(route.path, "index.md"), pageMd(route));
+
+// Run the Pages Function only on page URLs; assets and images stay pure static.
+write("_routes.json", JSON.stringify({ version: 1, include: ["/*"], exclude: ["/assets/*", "/images/*"] }, null, 2) + "\n");
+console.log(`wrote ${ROUTES.length} Markdown page variants and _routes.json`);
+
 // ── sitemap.xml ─────────────────────────────────────────────────────────────
 const today = new Date().toISOString().slice(0, 10);
 const hreflang = (l) => LANG_META[l].hreflang;
@@ -73,10 +162,15 @@ const aiBots = [
   "Google-Extended", "Applebot-Extended", "Bingbot",
   "Bytespider", "Baiduspider",
 ];
+// Content-Signal (Cloudflare Content Signals Policy): search = classic search
+// index, ai-input = use in AI answers / grounding (what GEO needs),
+// ai-train = model training. All three "yes": the site is marketing copy and
+// being known to models is the goal. Change ai-train to "no" to opt out of training.
 write(
   "robots.txt",
   [
     "User-agent: *",
+    "Content-Signal: search=yes, ai-input=yes, ai-train=yes",
     "Allow: /",
     "",
     "# Search and AI answer engines are welcome to read and cite this site.",
@@ -180,25 +274,7 @@ const md = (t) => {
 write("llms-full.txt", [en, zh, es].map(md).join("\n---\n\n"));
 
 // ── _redirects (Cloudflare Pages) ───────────────────────────────────────────
-write(
-  "_redirects",
-  [
-    "# Old Hugo URLs",
-    "/business/industrial/ /business/energy/ 301",
-    "/business/industrial /business/energy/ 301",
-    "/zh/business/industrial/ /zh/business/energy/ 301",
-    "/zh/business/industrial /zh/business/energy/ 301",
-    "/en/sitemap.xml /sitemap.xml 301",
-    "/zh/sitemap.xml /sitemap.xml 301",
-    "/index.xml / 301",
-    "/zh/index.xml /zh/ 301",
-    "/business/index.xml /business/ 301",
-    "/zh/business/index.xml /zh/business/ 301",
-    "/en/ / 301",
-    "/en/* /:splat 301",
-    "",
-  ].join("\n"),
-);
+write("_redirects", ["# Old Hugo URLs (also applied by functions/_middleware.js)", ...REDIRECTS.map(([from, to]) => `${from} ${to} 301`), "/en/* /:splat 301", ""].join("\n"));
 
 // ── _headers (Cloudflare Pages) ─────────────────────────────────────────────
 write(
