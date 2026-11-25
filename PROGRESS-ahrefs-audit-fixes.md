@@ -7,8 +7,8 @@
 - ✅ 2. Diagnose: issue list mapped to Ahrefs issue names + root cause (below)
 - ✅ 3. Code fixes (#2–#8; #1 code part = robots.txt `Disallow: /cdn-cgi/`)
 - ✅ 4. Build + QA: tsc OK; build 30 pages + 5 404s; check:seo 0 problems (old main build: 171); middleware tests 12/12; Playwright 10 pages × 2 viewports: hydrated, 0 console errors, 0 empty alt, no overflow
-- ⏳ 5. Commit + push branch `claude/charming-cori-guh2jj`, verify preview
-- ⬜ 6. Settings outside the repo (Cloudflare, GitHub Pages) — Luis approves
+- ✅ 5. Pushed c2fe379, 50b0851, 7d528da. Preview 27ad2e37 deploy success; crawl of branch preview: 0 broken links, 0 empty alt, 0 long titles/descriptions, html lang es, robots Disallow /cdn-cgi/. Left: noindex (pages.dev only), ZH short by char count (by design), PT hreflang pt vs lang pt-BR (same language), srcset/OG images >100 kB (Ahrefs checks img src only). GitHub build check was already failing on main since run 34 ("manuseio" matched the Manus check) — fixed in 7d528da.
+- ⏳ 6. Luis approves: merge to main (rollback = deployment d647403c) + Email Obfuscation off via API; then live re-crawl
 - ⬜ 7. Report
 
 ## Findings (live crawl 2026-11-25, Ahrefs issue names)
@@ -34,10 +34,10 @@ Checked OK: no 3XX/4XX internal pages (except #1), no redirect chains, canonical
 - Live crawler/analyzer: scratchpad `audit/crawl.py`, `audit/analyze.py` (temporary, not in repo)
 
 ## Last step + result
-- Stage 4 QA passed (see Stages). Cloudflare token: zone settings editable (email_obfuscation), Redirect Rules = not authorized.
+- Preview verified (stage 5). Cloudflare token: zone settings editable (email_obfuscation), Redirect Rules = not authorized.
 
 ## Next action
-Commit + push; check Cloudflare preview build; then ask Luis: (a) Email Obfuscation off via API, (b) merge to main, (c) WebMCP off + GitHub Pages unpublish (dashboard).
+Ask Luis: (a) merge to main, (b) Email Obfuscation off via API. Luis in dashboards: WebMCP off, GitHub Pages unpublish, then re-crawl in Ahrefs.
 
 ## Key decisions
 - Luis offered Google login to Ahrefs: not possible from the cloud container and not used (no password handling; API plan is the blocker anyway). Asked Luis for the CSV export or email text to cross-check.
