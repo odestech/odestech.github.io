@@ -2,7 +2,7 @@
 
 **Goal**: Lighthouse accessibility 100 on `/`, `/zh/`, `/business/energy/` by fixing `color-contrast` (footer / mobile menu) and `label-content-name-mismatch` (header logo link) in `src/components/Layout.tsx`, with no other visual change.
 
-**Status: DONE (stages 1–5) on branch `claude/tender-noether-pnuh0t` (2026-11-26). Not merged to main; waits for Luis's approval.**
+**Status: DONE and LIVE (2026-11-26).** Luis approved both changes (keep switcher 中文, keep round-1 menu colours); main cfdef96 → a3532cf (fast-forward).
 
 ## Stages
 - ✅ 1. Baseline (cfdef96, local `dist/`, Lighthouse 13.6.0 mobile): a11y 96 on all 3 pages; `color-contrast` 7 items, `label-content-name-mismatch` 1
@@ -10,6 +10,7 @@
 - ✅ 3. Verify: `npm run check` OK, `npm test` 12/12, `npm run build` 30 pages + 5 404s, `npm run check:seo` 35 files OK; Lighthouse a11y 100 / 100 / 100, 0 failed audits; screenshots diffed
 - ✅ 4. Commit + push to claude/tender-noether-pnuh0t (2e32f27)
 - ✅ 5. One language per page + no "EN / 中文" service-language claim (Luis, 2026-11-26)
+- ✅ 6. Merged + live: Cloudflare production deployment 7ba26a64 (a3532cf) success, rollback target 20487825 (cfdef96). Live check: /, /zh/, /about/, /contact/, /es/, /business/energy/ 200, new classes present, no alt-line, no working-languages text, non-ZH CJK = switcher only. Lighthouse 13.6.0 mobile on https://www.odestech.cn: a11y 100 on /, /zh/, /business/energy/
 
 ## Stage 5: one language per page
 Removed:
