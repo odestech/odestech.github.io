@@ -4,7 +4,7 @@ import { pathFor } from "../site";
 import type { PageProps } from "./Home";
 
 /** Shared layout for /business/medical/ (pharma) and /business/energy/. */
-export default function Sector({ lang, t, alt, sector }: PageProps & { sector: "pharma" | "energy" }) {
+export default function Sector({ lang, t, sector }: PageProps & { sector: "pharma" | "energy" }) {
   const p = t.pages[sector];
   const card = t.sectors.cards.find((c) => c.key === sector)!;
   const otherKey = sector === "pharma" ? "energy" : "pharma";
@@ -35,7 +35,7 @@ export default function Sector({ lang, t, alt, sector }: PageProps & { sector: "
       {/* ── Catalogue ──────────────────────────────────────── */}
       <section className="py-20 lg:py-28 bg-white" aria-labelledby="catalog">
         <div className="container">
-          <SectionHeader id="catalog" eyebrow={card.tag} title={p.catalogTitle} alt={alt.pages[sector].catalogTitle} altLang={alt.lang} />
+          <SectionHeader id="catalog" eyebrow={card.tag} title={p.catalogTitle} />
           <ol className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
             {p.catalog.map((c, i) => (
               <li key={c.title} className="card card-hover reveal">
@@ -90,7 +90,7 @@ export default function Sector({ lang, t, alt, sector }: PageProps & { sector: "
         </div>
       </section>
 
-      <Faq t={t} items={p.faq} alt={alt.common.faqTitle} altLang={alt.lang} />
+      <Faq t={t} items={p.faq} />
 
       {/* ── Cross-link to the other sector ─────────────────── */}
       <section className="pb-20 bg-white">

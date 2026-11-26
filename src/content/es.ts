@@ -36,8 +36,6 @@ const es: Dict = {
       email: "Correo",
       address: "Dirección",
       linkedin: "LinkedIn",
-      languages: "Idiomas de trabajo",
-      languagesValue: "Inglés y chino; puede escribirnos en español",
     },
     ctaBand: {
       title: "¿Ya tiene la especificación?",
@@ -59,7 +57,7 @@ const es: Dict = {
     { value: "2", label: "Sectores", sub: "Farmacéutica y ciencias de la vida · Energía, químicos y materiales" },
     { value: "1", label: "Día hábil", sub: "Plazo habitual de cotización para una consulta completa" },
     { value: "3", label: "Entidades de inspección", sub: "SGS · Bureau Veritas · TÜV, cuando se requiere" },
-    { value: "EN / 中文", label: "Idiomas de trabajo", sub: "Un contacto asignado por cuenta" },
+    { value: "1", label: "Contacto asignado", sub: "Por cuenta, de la consulta a la entrega" },
   ],
 
   sectors: {
@@ -260,7 +258,7 @@ const es: Dict = {
       hero: {
         eyebrow: "SOBRE ODES",
         title: "Su contraparte en China.",
-        lead: "ODES — Shanghai Odes Technology Co., Ltd. (上海奥得斯科技有限公司) — es una empresa holding enfocada en el comercio y la colaboración industrial transfronteriza desde China.",
+        lead: "ODES — Shanghai Odes Technology Co., Ltd. — es una empresa holding enfocada en el comercio y la colaboración industrial transfronteriza desde China.",
       },
       body: [
         "Desde Shanghái, conectamos la capacidad manufacturera y técnica de China con compradores que necesitan una contraparte en el terreno: alguien que pueda calificar una planta, leer una especificación y entregar los documentos que pedirá el agente de aduanas del importador.",
@@ -280,12 +278,11 @@ const es: Dict = {
         eyebrow: "DATOS DE LA EMPRESA",
         title: "Datos registrales",
         rows: [
-          ["Razón social", "Shanghai Odes Technology Co., Ltd. (上海奥得斯科技有限公司)"],
+          ["Razón social", "Shanghai Odes Technology Co., Ltd."],
           ["Marca", "ODES Technology"],
           ["Domicilio registrado", "Room 712-596, Floor 7, No. 400 Zhejiang Middle Rd, Huangpu District, Shanghái 200001, China"],
           ["Sectores", "Farmacéutica y ciencias de la vida; energía, químicos y materiales"],
           ["Mercados", "América Latina, Estados Unidos y otros mercados exigentes"],
-          ["Idiomas de trabajo", "Inglés y chino; puede escribirnos en español"],
           ["Correo", "info@odestech.cn"],
         ],
       },

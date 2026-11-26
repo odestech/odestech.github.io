@@ -85,10 +85,9 @@ function organization(lang: Lang) {
       email: ORG.email,
       telephone: ORG.phone,
       areaServed: ["US", "CN"],
-      availableLanguage: ["en", "zh"],
+      availableLanguage: LANGS.map((l) => DICTS[l].htmlLang),
     },
     knowsAbout: KNOWS_ABOUT,
-    knowsLanguage: ["en", "zh"],
     sameAs: [ORG.linkedin],
   };
 }

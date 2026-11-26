@@ -34,8 +34,6 @@ const fr: Dict = {
       email: "E-mail",
       address: "Adresse",
       linkedin: "LinkedIn",
-      languages: "Langues de travail",
-      languagesValue: "Anglais et chinois ; vous pouvez nous écrire en français",
     },
     ctaBand: {
       title: "Votre spécification est prête ?",
@@ -57,7 +55,7 @@ const fr: Dict = {
     { value: "2", label: "Secteurs", sub: "Pharmacie et sciences de la vie · Énergie, chimie et matériaux" },
     { value: "1", label: "Jour ouvré", sub: "Délai habituel de devis pour une demande complète" },
     { value: "3", label: "Organismes d'inspection", sub: "SGS · Bureau Veritas · TÜV, selon les exigences" },
-    { value: "EN / 中文", label: "Langues de travail", sub: "Un interlocuteur dédié par compte" },
+    { value: "1", label: "Interlocuteur dédié", sub: "Par compte, de la demande à la livraison" },
   ],
 
   sectors: {
@@ -258,7 +256,7 @@ const fr: Dict = {
       hero: {
         eyebrow: "À PROPOS D'ODES",
         title: "Votre interlocuteur sur place en Chine.",
-        lead: "ODES — Shanghai Odes Technology Co., Ltd. (上海奥得斯科技有限公司) — est une société holding consacrée au négoce et à la coopération industrielle internationale depuis la Chine.",
+        lead: "ODES — Shanghai Odes Technology Co., Ltd. — est une société holding consacrée au négoce et à la coopération industrielle internationale depuis la Chine.",
       },
       body: [
         "Depuis Shanghai, nous mettons les capacités industrielles et techniques de la Chine au service d'acheteurs qui ont besoin d'un interlocuteur sur place : quelqu'un qui sait qualifier une usine, lire une spécification et fournir les documents que demandera le commissionnaire en douane de l'importateur.",
@@ -278,12 +276,11 @@ const fr: Dict = {
         eyebrow: "INFORMATIONS SUR LA SOCIÉTÉ",
         title: "Informations légales",
         rows: [
-          ["Raison sociale", "Shanghai Odes Technology Co., Ltd. (上海奥得斯科技有限公司)"],
+          ["Raison sociale", "Shanghai Odes Technology Co., Ltd."],
           ["Marque", "ODES Technology"],
           ["Siège social", "Room 712-596, Floor 7, No. 400 Zhejiang Middle Rd, Huangpu District, Shanghai 200001, Chine"],
           ["Secteurs", "Pharmacie et sciences de la vie ; énergie, chimie et matériaux"],
           ["Marchés", "Acheteurs hors de Chine, notamment sur les marchés les plus exigeants"],
-          ["Langues de travail", "Anglais et chinois ; vous pouvez nous écrire en français"],
           ["E-mail", "info@odestech.cn"],
         ],
       },

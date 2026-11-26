@@ -2,7 +2,7 @@ import { CtaBand, PageHero, Picture, SectionHeader } from "../components/ui";
 import { HERO_ALT } from "../content";
 import type { PageProps } from "./Home";
 
-export default function About({ lang, t, alt }: PageProps) {
+export default function About({ lang, t }: PageProps) {
   const p = t.pages.about;
   return (
     <>
@@ -25,7 +25,7 @@ export default function About({ lang, t, alt }: PageProps) {
 
       <section className="py-20 lg:py-28 bg-brand-wash" aria-labelledby="values">
         <div className="container">
-          <SectionHeader id="values" eyebrow={p.values.eyebrow} title={p.values.title} alt={alt.pages.about.values.title} altLang={alt.lang} />
+          <SectionHeader id="values" eyebrow={p.values.eyebrow} title={p.values.title} />
           <ul className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {p.values.items.map((v) => (
               <li key={v.letter} className="card !p-6 reveal">
@@ -44,7 +44,7 @@ export default function About({ lang, t, alt }: PageProps) {
 
       <section className="py-20 lg:py-28 bg-white" aria-labelledby="details">
         <div className="container max-w-4xl">
-          <SectionHeader id="details" eyebrow={p.details.eyebrow} title={p.details.title} alt={alt.pages.about.details.title} altLang={alt.lang} />
+          <SectionHeader id="details" eyebrow={p.details.eyebrow} title={p.details.title} />
           <dl className="divide-y divide-line border-y border-line reveal">
             {p.details.rows.map(([k, v]) => (
               <div key={k} className="grid sm:grid-cols-[14rem_1fr] gap-1 sm:gap-6 py-4">

@@ -1,5 +1,5 @@
 import ContactForm from "../components/ContactForm";
-import { IconLang, IconLinkedIn, IconMail, IconPhone, IconPin, IconUser } from "../components/Icons";
+import { IconLinkedIn, IconMail, IconPhone, IconPin, IconUser } from "../components/Icons";
 import { PageHero } from "../components/ui";
 import { ORG } from "../site";
 import type { PageProps } from "./Home";
@@ -12,7 +12,6 @@ export default function Contact({ lang, t }: PageProps) {
     { icon: <IconPhone />, label: L.phone, value: ORG.phoneDisplay, href: `tel:${ORG.phone.replace(/-/g, "")}` },
     { icon: <IconMail />, label: L.email, value: ORG.email, href: `mailto:${ORG.email}` },
     { icon: <IconLinkedIn />, label: L.linkedin, value: "ODES Technology", href: ORG.linkedin },
-    { icon: <IconLang />, label: L.languages, value: L.languagesValue },
     { icon: <IconPin />, label: L.address, value: `${ORG.legalName[lang]}, ${ORG.address[lang].oneLine}` },
   ];
   return (

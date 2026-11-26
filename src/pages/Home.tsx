@@ -4,9 +4,8 @@ import { HERO_ALT, type Dict } from "../content";
 import { pathFor, type Lang, type PageKey } from "../site";
 import { ProcessSection, SectorCards, ServicesSection } from "./shared";
 
-export default function Home({ lang, t, alt }: { lang: Lang; t: Dict; alt: Dict }) {
+export default function Home({ lang, t }: PageProps) {
   const h = t.pages.home.hero;
-  const altLang = alt.lang;
   return (
     <>
       {/* ── Hero ───────────────────────────────────────────── */}
@@ -76,14 +75,14 @@ export default function Home({ lang, t, alt }: { lang: Lang; t: Dict; alt: Dict 
         </div>
       </section>
 
-      <SectorCards lang={lang} t={t} alt={alt} id="sectors" />
-      <ProcessSection t={t} alt={alt} bg="wash" />
+      <SectorCards lang={lang} t={t} id="sectors" />
+      <ProcessSection t={t} bg="wash" />
 
       {/* ── Why ODES ───────────────────────────────────────── */}
       <section className="py-20 lg:py-28 bg-white" aria-labelledby="why">
         <div className="container grid lg:grid-cols-[1fr_2fr] gap-14 lg:gap-20 items-start">
           <div className="lg:sticky lg:top-24">
-            <SectionHeader id="why" eyebrow={t.why.eyebrow} title={t.why.title} alt={alt.why.title} altLang={altLang} sub={t.why.sub} />
+            <SectionHeader id="why" eyebrow={t.why.eyebrow} title={t.why.title} sub={t.why.sub} />
             <div className="reveal -mt-4">
               <div className="text-7xl font-black text-brand/15 tracking-tighter leading-none">{t.why.bigNum}</div>
               <div className="text-xs text-muted mt-1 max-w-[14rem] leading-snug">{t.why.bigLabel}</div>
@@ -103,11 +102,11 @@ export default function Home({ lang, t, alt }: { lang: Lang; t: Dict; alt: Dict 
         </div>
       </section>
 
-      <ServicesSection t={t} alt={alt} bg="wash" />
-      <Faq t={t} items={t.pages.home.faq} alt={alt.common.faqTitle} altLang={altLang} />
+      <ServicesSection t={t} bg="wash" />
+      <Faq t={t} items={t.pages.home.faq} />
       <CtaBand lang={lang} t={t} />
     </>
   );
 }
 
-export type PageProps = { lang: Lang; t: Dict; alt: Dict; page?: PageKey };
+export type PageProps = { lang: Lang; t: Dict; page?: PageKey };

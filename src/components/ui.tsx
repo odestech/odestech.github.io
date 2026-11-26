@@ -38,20 +38,16 @@ export function Picture({
   );
 }
 
-/** Eyebrow + heading + the same heading in the other language, as in the original bilingual design. */
+/** Eyebrow + heading (+ optional intro). One language per page: no second-language subtitle. */
 export function SectionHeader({
   eyebrow,
   title,
-  alt,
-  altLang,
   sub,
   id,
   center = false,
 }: {
   eyebrow: string;
   title: string;
-  alt?: string;
-  altLang?: Lang;
   sub?: string;
   id?: string;
   center?: boolean;
@@ -65,11 +61,6 @@ export function SectionHeader({
       <h2 id={id} className="h-section reveal">
         {title}
       </h2>
-      {alt && alt !== title && (
-        <p className="alt-line reveal" lang={altLang === "zh" ? "zh-CN" : altLang} aria-hidden="true">
-          {alt}
-        </p>
-      )}
       {sub && <p className="mt-4 text-base leading-relaxed text-body reveal">{sub}</p>}
     </div>
   );
@@ -158,11 +149,11 @@ export function PageHero({
   );
 }
 
-export function Faq({ t, items, alt, altLang }: { t: Dict; items: { q: string; a: string }[]; alt?: string; altLang?: Lang }) {
+export function Faq({ t, items }: { t: Dict; items: { q: string; a: string }[] }) {
   return (
     <section className="py-20 lg:py-28 bg-white" aria-labelledby="faq">
       <div className="container grid lg:grid-cols-[1fr_2fr] gap-10 lg:gap-20">
-        <SectionHeader id="faq" eyebrow={t.common.faqEyebrow} title={t.common.faqTitle} alt={alt} altLang={altLang} />
+        <SectionHeader id="faq" eyebrow={t.common.faqEyebrow} title={t.common.faqTitle} />
         <div className="divide-y divide-line border-y border-line">
           {items.map((f, i) => (
             <details key={i} className="faq-item group py-5 reveal" open={i === 0}>

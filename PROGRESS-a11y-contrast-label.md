@@ -2,13 +2,26 @@
 
 **Goal**: Lighthouse accessibility 100 on `/`, `/zh/`, `/business/energy/` by fixing `color-contrast` (footer / mobile menu) and `label-content-name-mismatch` (header logo link) in `src/components/Layout.tsx`, with no other visual change.
 
-**Status: DONE on branch `claude/tender-noether-pnuh0t` (2026-11-26). Not merged to main; waits for Luis's approval.**
+**Status: DONE (stages 1–5) on branch `claude/tender-noether-pnuh0t` (2026-11-26). Not merged to main; waits for Luis's approval.**
 
 ## Stages
 - ✅ 1. Baseline (cfdef96, local `dist/`, Lighthouse 13.6.0 mobile): a11y 96 on all 3 pages; `color-contrast` 7 items, `label-content-name-mismatch` 1
 - ✅ 2. Fix Layout.tsx + one token in index.css
 - ✅ 3. Verify: `npm run check` OK, `npm test` 12/12, `npm run build` 30 pages + 5 404s, `npm run check:seo` 35 files OK; Lighthouse a11y 100 / 100 / 100, 0 failed audits; screenshots diffed
-- ✅ 4. Commit + push to claude/tender-noether-pnuh0t
+- ✅ 4. Commit + push to claude/tender-noether-pnuh0t (2e32f27)
+- ✅ 5. One language per page + no "EN / 中文" service-language claim (Luis, 2026-11-26)
+
+## Stage 5: one language per page
+Removed:
+- Bilingual subtitle under every section heading (`alt-line`: Chinese on EN/ES/FR/PT, English on ZH) and its plumbing (`alt` dict, `altLang`)
+- "(上海奥得斯科技有限公司)" after the legal name in About lead + registered-details row (EN/ES/FR/PT)
+- Every working-languages claim: stat tile "EN / 中文" → "1 · Named counterpart" (existing fact), Contact page row, About details row, why-us and FAQ sentences (EN, ZH), llms.txt line
+- JSON-LD: `knowsLanguage` removed; `availableLanguage` = the 5 site languages (was en, zh)
+Kept on purpose:
+- Language switcher / footer site links in each language's own name (中文, 中文版, 中文网站; English, Español…) — W3C i18n practice, so a Chinese reader on an EN page can find the ZH site
+- JSON-LD `alternateName` and llms.txt legal name with Chinese registered name (machine-readable, not visible; entity matching)
+- ZH pages: brand ODES TECHNOLOGY, email/domain, ISO codes CN/US, standard codes (API, ASME, CAS, SGS, TÜV…)
+Verified: scan of visible text on 28 non-ZH pages → only switcher labels left; check / test 12/12 / build / check:seo OK; Lighthouse a11y 100 on /, /zh/, /business/energy/; no horizontal overflow at 390 / 1440.
 
 ## Changes (contrast on footer/menu background #05070b)
 | Element | Before | After | Ratio before → after |

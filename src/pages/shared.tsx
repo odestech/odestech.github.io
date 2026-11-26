@@ -6,12 +6,12 @@ import { pathFor, type Lang, type PageKey } from "../site";
 const bgClass = (bg: "white" | "wash") => (bg === "wash" ? "bg-brand-wash" : "bg-white");
 
 /** The two sectors as equal-weight cards with photos. */
-export function SectorCards({ lang, t, alt, id, bg = "white", showBadges = true }: { lang: Lang; t: Dict; alt: Dict; id?: string; bg?: "white" | "wash"; showBadges?: boolean }) {
+export function SectorCards({ lang, t, id, bg = "white", showBadges = true }: { lang: Lang; t: Dict; id?: string; bg?: "white" | "wash"; showBadges?: boolean }) {
   const s = t.sectors;
   return (
     <section id={id} className={`py-20 lg:py-28 ${bgClass(bg)}`} aria-labelledby={`${id ?? "sectors"}-h`}>
       <div className="container">
-        <SectionHeader id={`${id ?? "sectors"}-h`} eyebrow={s.eyebrow} title={s.title} alt={alt.sectors.title} altLang={alt.lang} sub={s.sub} />
+        <SectionHeader id={`${id ?? "sectors"}-h`} eyebrow={s.eyebrow} title={s.title} sub={s.sub} />
         <div className="grid lg:grid-cols-2 gap-6">
           {s.cards.map((c) => (
             <article key={c.key} className="card card-hover !p-0 overflow-hidden flex flex-col reveal">
@@ -55,12 +55,12 @@ export function SectorCards({ lang, t, alt, id, bg = "white", showBadges = true 
   );
 }
 
-export function ServicesSection({ t, alt, bg = "white" }: { t: Dict; alt: Dict; bg?: "white" | "wash" }) {
+export function ServicesSection({ t, bg = "white" }: { t: Dict; bg?: "white" | "wash" }) {
   const s = t.services;
   return (
     <section className={`py-20 lg:py-28 ${bgClass(bg)}`} aria-labelledby="services">
       <div className="container">
-        <SectionHeader id="services" eyebrow={s.eyebrow} title={s.title} alt={alt.services.title} altLang={alt.lang} sub={s.sub} />
+        <SectionHeader id="services" eyebrow={s.eyebrow} title={s.title} sub={s.sub} />
         <div className="grid md:grid-cols-2 gap-6">
           {s.items.map((svc) => (
             <article key={svc.title} className="card card-hover reveal">
@@ -86,12 +86,12 @@ export function ServicesSection({ t, alt, bg = "white" }: { t: Dict; alt: Dict; 
   );
 }
 
-export function ProcessSection({ t, alt, bg = "white" }: { t: Dict; alt: Dict; bg?: "white" | "wash" }) {
+export function ProcessSection({ t, bg = "white" }: { t: Dict; bg?: "white" | "wash" }) {
   const p = t.process;
   return (
     <section className={`py-20 lg:py-28 ${bgClass(bg)}`} aria-labelledby="process">
       <div className="container">
-        <SectionHeader id="process" eyebrow={p.eyebrow} title={p.title} alt={alt.process.title} altLang={alt.lang} sub={p.sub} />
+        <SectionHeader id="process" eyebrow={p.eyebrow} title={p.title} sub={p.sub} />
         <ol className="grid sm:grid-cols-2 lg:grid-cols-5 gap-4">
           {p.steps.map((s, i) => (
             <li key={s.title} className="card !p-6 reveal relative">

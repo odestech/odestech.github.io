@@ -38,8 +38,6 @@ const en = {
       email: "Email",
       address: "Address",
       linkedin: "LinkedIn",
-      languages: "Working languages",
-      languagesValue: "English, Chinese",
     },
     ctaBand: {
       title: "Have a specification ready?",
@@ -61,7 +59,7 @@ const en = {
     { value: "2", label: "Sectors", sub: "Pharma & life sciences · Energy, chemicals & materials" },
     { value: "1", label: "Business day", sub: "Normal quotation time for a complete enquiry" },
     { value: "3", label: "Inspection bodies", sub: "SGS · Bureau Veritas · TÜV, where required" },
-    { value: "EN / 中文", label: "Working languages", sub: "One named counterpart per account" },
+    { value: "1", label: "Named counterpart", sub: "Per account, from enquiry to delivery" },
   ],
 
   sectors: {
@@ -198,7 +196,7 @@ const en = {
       { icon: "target", title: "Specification first", body: "Grade, standard and key properties are fixed before a price goes out, so the quotation you compare is for the product you actually need." },
       { icon: "shield", title: "Straight answers on filings", body: "We do not hold manufacturers' regulatory filings. We find out which manufacturer holds which DMF, CEP or certificate, and get it confirmed in writing before quoting." },
       { icon: "briefcase", title: "A named counterpart", body: "Every account has one named contact who follows the order from enquiry to delivery — not a shared inbox." },
-      { icon: "globe", title: "Built for overseas buyers", body: "Documents follow your market's standards, not domestic habits, and we work in English and Chinese." },
+      { icon: "globe", title: "Built for overseas buyers", body: "Documents follow your market's standards, not domestic habits." },
       { icon: "search", title: "Inspected before shipment", body: "Where the buyer or the market requires it, SGS, Bureau Veritas or TÜV inspect the goods before they leave China." },
       { icon: "network", title: "Long-term supply", body: "We build repeat supply arrangements, not one-off trades: the same qualified source and the same documents, batch after batch." },
     ],
@@ -247,7 +245,7 @@ const en = {
         },
         {
           q: "Where is ODES located and how can I contact it?",
-          a: "Shanghai Odes Technology Co., Ltd., Room 712-596, Floor 7, No. 400 Zhejiang Middle Rd, Huangpu District, Shanghai 200001, China. Email info@odestech.cn or call +86 177 1787 6827. The team works in English and Chinese.",
+          a: "Shanghai Odes Technology Co., Ltd., Room 712-596, Floor 7, No. 400 Zhejiang Middle Rd, Huangpu District, Shanghai 200001, China. Email info@odestech.cn or call +86 177 1787 6827.",
         },
       ],
     },
@@ -262,7 +260,7 @@ const en = {
       hero: {
         eyebrow: "ABOUT ODES",
         title: "A counterparty on the ground in China.",
-        lead: "ODES — Shanghai Odes Technology Co., Ltd. (上海奥得斯科技有限公司) — is a holding company focused on China–US trade and cross-border industrial collaboration.",
+        lead: "ODES — Shanghai Odes Technology Co., Ltd. — is a holding company focused on China–US trade and cross-border industrial collaboration.",
       },
       body: [
         "Based in Shanghai and facing the United States and other high-standard overseas markets, we connect China's manufacturing and technical capability with buyers who need a counterparty on the ground: one that can qualify a factory, read a specification, and produce the documents an importer's customs broker will ask for.",
@@ -282,12 +280,11 @@ const en = {
         eyebrow: "COMPANY DETAILS",
         title: "Registered details",
         rows: [
-          ["Registered name", "Shanghai Odes Technology Co., Ltd. (上海奥得斯科技有限公司)"],
+          ["Registered name", "Shanghai Odes Technology Co., Ltd."],
           ["Brand", "ODES Technology"],
           ["Registered office", "Room 712-596, Floor 7, No. 400 Zhejiang Middle Rd, Huangpu District, Shanghai 200001, China"],
           ["Sectors", "Pharmaceuticals and life sciences; energy, chemicals and materials"],
           ["Markets served", "United States and other high-standard overseas markets"],
-          ["Working languages", "English, Chinese"],
           ["Email", "info@odestech.cn"],
         ],
       },

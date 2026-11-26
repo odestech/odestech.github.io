@@ -209,7 +209,6 @@ const facts = [
   `- Quotation time: a complete enquiry is normally quoted within one business day`,
   `- Third-party inspection: SGS, Bureau Veritas or TÜV where required`,
   `- Regulatory filings: ODES does not hold DMF/CEP filings; it identifies which manufacturer holds them and confirms in writing`,
-  `- Working languages: English, Chinese (enquiries in Spanish accepted)`,
   `- Site languages: English (/), Spanish for Latin America (/es/), French (/fr/), Portuguese for Brazil (/pt/), Chinese (/zh/)`,
   `- Email: ${ORG.email} · Phone: ${ORG.phoneDisplay} · LinkedIn: ${ORG.linkedin}`,
 ];

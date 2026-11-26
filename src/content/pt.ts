@@ -35,8 +35,6 @@ const pt: Dict = {
       email: "E-mail",
       address: "Endereço",
       linkedin: "LinkedIn",
-      languages: "Idiomas de trabalho",
-      languagesValue: "Inglês e chinês; você pode nos escrever em português",
     },
     ctaBand: {
       title: "Já tem a especificação?",
@@ -58,7 +56,7 @@ const pt: Dict = {
     { value: "2", label: "Setores", sub: "Farmacêutico e ciências da vida · Energia, química e materiais" },
     { value: "1", label: "Dia útil", sub: "Prazo usual de cotação para uma consulta completa" },
     { value: "3", label: "Empresas de inspeção", sub: "SGS · Bureau Veritas · TÜV, quando exigido" },
-    { value: "EN / 中文", label: "Idiomas de trabalho", sub: "Um contato dedicado por conta" },
+    { value: "1", label: "Contato dedicado", sub: "Por conta, da consulta à entrega" },
   ],
 
   sectors: {
@@ -259,7 +257,7 @@ const pt: Dict = {
       hero: {
         eyebrow: "SOBRE A ODES",
         title: "Seu interlocutor local na China.",
-        lead: "ODES — Shanghai Odes Technology Co., Ltd. (上海奥得斯科技有限公司) — é uma holding voltada ao comércio e à cooperação industrial internacional a partir da China.",
+        lead: "ODES — Shanghai Odes Technology Co., Ltd. — é uma holding voltada ao comércio e à cooperação industrial internacional a partir da China.",
       },
       body: [
         "De Xangai, conectamos a capacidade industrial e técnica da China a compradores que precisam de um interlocutor local: alguém que saiba qualificar uma fábrica, ler uma especificação e entregar os documentos que o despachante aduaneiro do importador vai pedir.",
@@ -279,12 +277,11 @@ const pt: Dict = {
         eyebrow: "DADOS DA EMPRESA",
         title: "Dados cadastrais",
         rows: [
-          ["Razão social", "Shanghai Odes Technology Co., Ltd. (上海奥得斯科技有限公司)"],
+          ["Razão social", "Shanghai Odes Technology Co., Ltd."],
           ["Marca", "ODES Technology"],
           ["Sede", "Room 712-596, Floor 7, No. 400 Zhejiang Middle Rd, Huangpu District, Xangai 200001, China"],
           ["Setores", "Farmacêutico e ciências da vida; energia, química e materiais"],
           ["Mercados", "Brasil, Estados Unidos e outros mercados exigentes"],
-          ["Idiomas de trabalho", "Inglês e chinês; você pode nos escrever em português"],
           ["E-mail", "info@odestech.cn"],
         ],
       },

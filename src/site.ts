@@ -113,4 +113,3 @@ export function resolveRoute(pathname: string): Route {
  * heading (the original EN/中文 bilingual design). ES, FR and PT pages pair
  * with themselves, which suppresses the subtitle.
  */
-export const altLang = (lang: Lang): Lang => (lang === "en" ? "zh" : lang === "zh" ? "en" : lang);
