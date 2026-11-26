@@ -5,20 +5,27 @@ import { IconArrow, IconMail, IconMenu, IconPhone, IconX } from "./Icons";
 
 declare const __BUILD_YEAR__: string;
 
-function Logo({ invert = false }: { invert?: boolean }) {
+/**
+ * `linked`: the logo is the text of the home link, so the visible words form
+ * the accessible name (WCAG 2.5.3) and the image is hidden from it; the alt
+ * stays for crawlers. Elsewhere the image alt names the logo.
+ */
+function Logo({ invert = false, linked = false, hint }: { invert?: boolean; linked?: boolean; hint?: string }) {
   return (
     <span className="flex items-center gap-2.5">
       <img
         src="/images/logo-64.png"
         srcSet="/images/logo-64.png 1x, /images/logo-128.png 2x"
         alt={ORG.brand}
+        aria-hidden={linked ? "true" : undefined}
         width={32}
         height={32}
         className={`w-8 h-8 ${invert ? "brightness-0 invert opacity-90" : ""}`}
       />
-      <span className="leading-none" aria-hidden="true">
-        <span className={`block text-base font-semibold tracking-tight ${invert ? "text-white/90" : "text-ink"}`}>ODES</span>
-        <span className="block text-[10px] font-semibold tracking-[0.15em] text-brand mt-0.5">TECHNOLOGY</span>
+      <span className="leading-none" aria-hidden={linked ? undefined : "true"}>
+        <span className={`block text-base font-semibold tracking-tight ${invert ? "text-white/90" : "text-ink"}`}>ODES</span>{" "}
+        <span className={`block text-[10px] font-semibold tracking-[0.15em] mt-0.5 ${invert ? "text-brand-light" : "text-brand"}`}>TECHNOLOGY</span>
+        {hint && <span className="sr-only"> — {hint}</span>}
       </span>
     </span>
   );
@@ -187,8 +194,8 @@ export default function Layout({
         }}
       >
         <div className="container flex items-center justify-between h-16">
-          <a href={pathFor(lang, "home")} aria-label={`ODES Technology — ${t.common.home}`}>
-            <Logo />
+          <a href={pathFor(lang, "home")}>
+            <Logo linked hint={t.common.home} />
           </a>
           <nav aria-label="Main" className="hidden lg:flex items-center gap-5 xl:gap-7">
             {t.nav.map((n) => (
@@ -254,13 +261,13 @@ export default function Layout({
                 transition: `opacity 400ms cubic-bezier(0.23,1,0.32,1) ${i * 55 + 80}ms, transform 400ms cubic-bezier(0.23,1,0.32,1) ${i * 55 + 80}ms`,
               }}
             >
-              <span className="text-xs font-bold tabular-nums w-7 shrink-0 text-brand">{String(i + 1).padStart(2, "0")}</span>
+              <span className="text-xs font-bold tabular-nums w-7 shrink-0 text-brand-light">{String(i + 1).padStart(2, "0")}</span>
               <span className="flex-1 min-w-0">
                 <span className="flex items-baseline gap-2 mb-0.5">
                   <span className="text-xl font-bold text-white tracking-tight">{n.label}</span>
-                  <span className="text-[9px] font-semibold tracking-widest text-brand/80">{n.sub}</span>
+                  <span className="text-[9px] font-semibold tracking-widest text-brand-light">{n.sub}</span>
                 </span>
-                <span className="block text-xs text-white/40 leading-snug">{n.desc}</span>
+                <span className="block text-xs text-white/50 leading-snug">{n.desc}</span>
               </span>
               <span className="text-brand opacity-60 group-hover:opacity-100">
                 <IconArrow />
@@ -287,10 +294,10 @@ export default function Layout({
             <div>
               <Logo invert />
               <p className="mt-4 text-sm leading-relaxed text-white/55 max-w-xs">{t.footer.tagline}</p>
-              <p className="mt-3 text-xs tracking-wide text-white/35">{t.motto}</p>
+              <p className="mt-3 text-xs tracking-wide text-white/50">{t.motto}</p>
             </div>
             <div>
-              <h2 className="text-xs font-semibold tracking-widest uppercase text-white/40 mb-4">{t.footer.sectors}</h2>
+              <h2 className="text-xs font-semibold tracking-widest uppercase text-white/50 mb-4">{t.footer.sectors}</h2>
               <ul className="space-y-2.5 text-sm">
                 {(["pharma", "energy", "business"] as PageKey[]).map((k) => (
                   <li key={k}>
@@ -302,7 +309,7 @@ export default function Layout({
               </ul>
             </div>
             <div>
-              <h2 className="text-xs font-semibold tracking-widest uppercase text-white/40 mb-4">{t.footer.company}</h2>
+              <h2 className="text-xs font-semibold tracking-widest uppercase text-white/50 mb-4">{t.footer.company}</h2>
               <ul className="space-y-2.5 text-sm">
                 {(["about", "contact"] as PageKey[]).map((k) => (
                   <li key={k}>
@@ -326,7 +333,7 @@ export default function Layout({
               </ul>
             </div>
             <address className="not-italic text-sm space-y-2.5">
-              <h2 className="text-xs font-semibold tracking-widest uppercase text-white/40 mb-4">{t.footer.contact}</h2>
+              <h2 className="text-xs font-semibold tracking-widest uppercase text-white/50 mb-4">{t.footer.contact}</h2>
               <p>{ORG.legalName[lang]}</p>
               <p className="text-white/55 leading-relaxed">{ORG.address[lang].oneLine}</p>
               <p className="flex items-center gap-2">
@@ -343,7 +350,7 @@ export default function Layout({
               </p>
             </address>
           </div>
-          <div className="mt-12 pt-6 border-t border-white/10 text-xs text-white/35 flex flex-col sm:flex-row justify-between gap-2">
+          <div className="mt-12 pt-6 border-t border-white/10 text-xs text-white/50 flex flex-col sm:flex-row justify-between gap-2">
             <p>
               © {__BUILD_YEAR__} {t.footer.rights}
             </p>

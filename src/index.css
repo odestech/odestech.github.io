@@ -8,6 +8,8 @@
 @theme {
   --color-brand: oklch(0.42 0.22 264);
   --color-brand-dark: oklch(0.36 0.22 264);
+  /* Brand blue for small text on ink: 4.9:1 on the footer (WCAG 1.4.3). */
+  --color-brand-light: oklch(0.6 0.19 264);
   --color-brand-pale: oklch(0.95 0.04 264);
   --color-brand-wash: oklch(0.975 0.012 264);
   --color-ink: oklch(0.13 0.01 255);
